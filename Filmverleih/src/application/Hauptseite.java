@@ -89,11 +89,20 @@ public class Hauptseite implements Initializable {
 
 	public void deleteMovie(ActionEvent event) throws Exception {
 
-		// Get selected film index
-		int filmIndex = listView.getSelectionModel().getSelectedIndex();
+		// Get selected film
+		int filmIndex = listView.getSelectionModel().getSelectedIndex(); // This index may be greater than the actual
+																			// count of films in the list
+		if (filmIndex >= listView.getItems().size())
+			return; // FilmIndex is out of bounds
 
-		// Delete the selected film index from the ListView
-		listView.getItems().remove(filmIndex);
+		FilmData selectedFilm = listView.getItems().get(filmIndex);
+
+		// Delete the selected film from the ListView
+		listView.getItems().remove(selectedFilm);
+
+		// Also delete the selected film from the underlying "oldFilmList" in
+		// FilmDataManager
+		FilmDataManager.deleteMovie(selectedFilm);
 
 	}
 

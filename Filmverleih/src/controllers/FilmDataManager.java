@@ -68,26 +68,25 @@ public class FilmDataManager {
 
 		return newFilm;
 	}
-	
 
 	public static List<FilmData> getFilmList() {
 		return oldFilmList;
 	}
-	
+
 	public static void sortFilmListByName() {
 		oldFilmList.sort((f1, f2) -> f1.getTitel().compareTo(f2.getTitel()));
 	}
-	
+
 	public static List<FilmData> filterFilmListGenre(String genre) {
 		List<FilmData> tempList = oldFilmList;
-		List<FilmData> result = tempList.stream().filter(f1 -> f1.getGenre().equals(genre)).collect(Collectors.toList());
+		List<FilmData> result = tempList.stream().filter(f1 -> f1.getGenre().equals(genre))
+				.collect(Collectors.toList());
 		return result;
 	}
-	
-	public static void deleteMovie(List<FilmData> film) {
-	oldFilmList.remove(film);
-	
-		
-}
+
+	public static void deleteMovie(FilmData film) {
+		oldFilmList.remove(film);
+
+	}
 
 }
