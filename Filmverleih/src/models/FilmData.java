@@ -1,6 +1,9 @@
 package models;
 
 import java.io.Serializable;
+import java.util.List;
+
+import javafx.scene.control.SelectionModel;
 
 public class FilmData implements Serializable
 {
@@ -78,10 +81,16 @@ public class FilmData implements Serializable
 	public void setAlter(boolean alter) {
 		this.alter = alter;
 	}
-	@Override 
+	/**@Override 
 	public String toString()
 	{
 		return " ID:" + this.id + " ---- Titel:" + this.titel + " ---- Genre: " + this.genre + " ---- Preis: " + this.preis+ " ---- Alter: " + this.alter; 
+	}
+	**/
+	@Override 
+	public String toString()
+	{
+		return "Titel:" + this.titel; 
 	}
 	
 	@Override
@@ -92,6 +101,11 @@ public class FilmData implements Serializable
 		result = prime * result + ((titel == null) ? 0 : titel.hashCode());
 		return result;
 	}
+
+
+
+
+	
 
 	
 	}

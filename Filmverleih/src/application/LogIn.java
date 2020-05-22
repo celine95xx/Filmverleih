@@ -24,6 +24,9 @@ public class LogIn {
 	private TextField txtNewUserName;
 
 	@FXML
+	private TextField txtAge;
+	
+	@FXML
 	private TextField txtNewUserPassword;
 
 	@FXML
@@ -81,7 +84,7 @@ public class LogIn {
 		{
 			Stage primaryStage1 = new Stage();
 			Parent root1 = FXMLLoader.load(getClass().getResource("/application/Registrieren.fxml"));
-			Scene scene1 = new Scene(root1,400,400);
+			Scene scene1 = new Scene(root1,1280, 720);
 			scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage1.setScene(scene1);
 			primaryStage1.show();
@@ -89,11 +92,11 @@ public class LogIn {
 		
 		public void registrateUser(ActionEvent event) throws Exception
 		{
-			if(UserDataManager.manageUserRegistration(txtNewUserName.getText(), txtNewUserPassword.getText(), txtNewPasswordConfirmed.getText()))
+			if(UserDataManager.manageUserRegistration(txtNewUserName.getText(), txtNewUserPassword.getText(), txtNewPasswordConfirmed.getText(), 0))
 			{
 				Stage primaryStage2 = new Stage();
 				Parent root = FXMLLoader.load(getClass().getResource("/application/Hauptseite.fxml"));
-				Scene scene = new Scene(root,600,300);
+				Scene scene = new Scene(root,1280, 720);
 				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 				primaryStage2.setScene(scene);
 				primaryStage2.show();

@@ -83,5 +83,11 @@ public class FilmDataManager {
 		List<FilmData> result = tempList.stream().filter(f1 -> f1.getGenre().equals(genre)).collect(Collectors.toList());
 		return result;
 	}
+	
+	public static void deleteMovie(List<FilmData> film) {
+	oldFilmList.remove(film);
+	
+		
+}
 
 }

@@ -8,19 +8,28 @@ public class UserData implements Serializable
 {
 	private String name;
 	private String passwort;
+	private int age;
 	
 	private List<Integer> rentedFilms = new ArrayList<Integer>();;
 	private List<Integer> watchlist = new ArrayList<Integer>();;
 	
-	public UserData (String name, String passwort)
+	public UserData (String name, String passwort, int age)
 	{
 		this.name = name;
 		this.passwort = passwort;
+		this.age = age;
 	}
 	
 	public List<Integer> getRentedFilms()
 	{
 		return rentedFilms;
+	}
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 	public String getName() {

@@ -5,6 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -29,16 +32,16 @@ public class UserDataManager
 	
 	
 	//Prüft, ob Registrierung möglich ist
-	public static boolean manageUserRegistration(String name, String password, String passwordConfirmed)
+	public static boolean manageUserRegistration(String name, String password, String passwordConfirmed, int age)
 	{
 		boolean approvedRegistration = false;
 
-		if(checkRegistrationConditions(name, password, passwordConfirmed))
+		if(checkRegistrationConditions(name, password, passwordConfirmed, age))
 		{
 			approvedRegistration = true;
 
 			//List<UserData> oldUserList = loadUser();
-			addUser(name, password);
+			addUser(name, password,age);
 			saveUser(oldUserList);
 
 
@@ -64,9 +67,9 @@ public class UserDataManager
 		return loginSuccessful;
 	}
 
-	public static void addUser(String name, String password)
+	public static void addUser(String name, String password, int age)
 	{
-		oldUserList.add(new UserData(name, password));
+		oldUserList.add(new UserData(name, password, age));
 	}
 
 	public static void saveUser(List<UserData> user)
@@ -108,7 +111,7 @@ public class UserDataManager
 
 	///Prüft, ob Registrierung zulässig ist. Es wird überprüft, ob die beiden eingegebenen Passwörter übereinstimmen,
 	//ob Username zu lang und Sonderzeichen
-	public static boolean checkRegistrationConditions(String name, String password, String passwordConfirmed)
+	public static boolean checkRegistrationConditions(String name, String password, String passwordConfirmed, int age)
 	{
 		boolean registrationPossible = false;
 
@@ -187,5 +190,4 @@ public class UserDataManager
 			}
 		}
 	}
-
 }

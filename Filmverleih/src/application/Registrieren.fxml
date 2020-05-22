@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LogIn">
+<AnchorPane maxHeight=" 720" maxWidth="1280" minHeight="720" minWidth="1280" prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LogIn">
    <children>
       <Label layoutX="76.0" layoutY="14.0" text="Willkommen bei der Registrierung">
          <font>
@@ -16,10 +16,11 @@
       </Label>
       <TextField fx:id="txtVorname" layoutX="33.0" layoutY="64.0" promptText="Vorname" />
       <TextField fx:id="txtNachname" layoutX="206.0" layoutY="64.0" promptText="Nachname" />
-      <PasswordField fx:id="txtNewUserPassword" layoutX="33.0" layoutY="144.0" promptText="Passwort" />
-      <PasswordField fx:id="txtNewPasswordConfirmed" layoutX="33.0" layoutY="188.0" promptText="Passwort bestätigen" />
-      <TextField fx:id="txtNewUserName" layoutX="33.0" layoutY="103.0" promptText="Benutzername" />
+      <PasswordField fx:id="txtNewUserPassword" layoutX="33.0" layoutY="183.0" promptText="Passwort" />
+      <PasswordField fx:id="txtNewPasswordConfirmed" layoutX="33.0" layoutY="221.0" promptText="Passwort bestätigen" />
+      <TextField fx:id="txtNewUserName" layoutX="33.0" layoutY="143.0" promptText="Benutzername" />
       <Label fx:id="lblRegistrationInfo" alignment="CENTER" layoutX="86.0" layoutY="320.0" prefHeight="17.0" prefWidth="228.0" text="sfgsdfg" textAlignment="CENTER" textFill="RED" visible="false" AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="86.0" AnchorPane.topAnchor="320.0" />
       <Button layoutX="154.0" layoutY="285.0" mnemonicParsing="false" onAction="#registrateUser" prefHeight="25.0" prefWidth="82.0" text="Registrieren" />
+      <TextField fx:id="txtAge" layoutX="33.0" layoutY="103.0" promptText="Geburtsdatum" />
    </children>
 </AnchorPane>

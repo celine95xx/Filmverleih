@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Orientation;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
@@ -31,8 +32,6 @@ public class Hauptseite implements Initializable {
 	@FXML
 	private ChoiceBox<String> ChoiceBox;
 
-	ObservableList<FilmData> listViewFilms;
-
 	public void addMovie(ActionEvent event) throws Exception {
 
 		Stage primaryStage = new Stage();
@@ -50,8 +49,8 @@ public class Hauptseite implements Initializable {
 	public void showAllMovies(ActionEvent event) throws Exception {
 		spStackPane.setVisible(true);
 //		listView.getItems().addAll("Harry Potter", "Ich hab Hunger", "Wowi");
-		listViewFilms = FXCollections.observableArrayList(FilmDataManager.getFilmList());
-		listView.setItems(listViewFilms);
+		listView.setItems(FXCollections.observableArrayList(FilmDataManager.getFilmList()));
+		listView.setOrientation(Orientation.HORIZONTAL);
 	}
 
 	public void rentFilm(ActionEvent event) throws Exception {
@@ -86,6 +85,16 @@ public class Hauptseite implements Initializable {
 				listView.setItems(newList);
 			}
 		});
+	}
+
+	public void deleteMovie(ActionEvent event) throws Exception {
+
+		// Get selected film index
+		int filmIndex = listView.getSelectionModel().getSelectedIndex();
+
+		// Delete the selected film index from the ListView
+		listView.getItems().remove(filmIndex);
+
 	}
 
 }
