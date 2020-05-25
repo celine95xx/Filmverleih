@@ -86,6 +86,7 @@ public class FilmDataManager {
 
 	public static void deleteMovie(FilmData film) {
 		oldFilmList.remove(film);
+		saveFilm(oldFilmList);
 
 	}
 

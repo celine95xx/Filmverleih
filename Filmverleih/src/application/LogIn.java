@@ -67,6 +67,7 @@ public class LogIn {
 		{
 			lblLogInInformation.setText("Benutzer nicht registriert.");
 			lblLogInInformation.setVisible(true);
+
 		}
 		else if(!UserDataManager.checkLoginDataCombination(txtUserName.getText(), txtPassword.getText()))
 		{
@@ -122,22 +123,23 @@ public class LogIn {
 			}
 		}
 		
-		public boolean PruefeAnmeldedaten(String name,String passwort) 
-		{
-			boolean richtigeKombination;
-			//hier kommt code hin, der "richtigeKombination" = true macht, wenn die kombi stimmt, und false, wenn sie nicht stimmt
-			if(name.equals("Admin") && passwort.equals("admin")) 
-			{
-				richtigeKombination = true;
-			}
-			else 
-			{
-				richtigeKombination = false;
-			}
-			
-			return richtigeKombination;
-			
-		}
+		//Löschen??
+//		public boolean PruefeAnmeldedaten(String name,String passwort) 
+//		{
+//			boolean richtigeKombination;
+//			//hier kommt code hin, der "richtigeKombination" = true macht, wenn die kombi stimmt, und false, wenn sie nicht stimmt
+//			if(name.equals("Admin") && passwort.equals("admin")) 
+//			{
+//				richtigeKombination = true;
+//			}
+//			else 
+//			{
+//				richtigeKombination = false;
+//			}
+//			
+//			return richtigeKombination;
+//			
+//		}
 	}
 
 
