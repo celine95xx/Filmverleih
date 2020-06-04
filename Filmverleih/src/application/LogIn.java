@@ -2,6 +2,8 @@ package application;
 
 
 
+import java.io.IOException;
+
 import controllers.UserDataManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,10 +12,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class LogIn {
 
+	
+	@FXML
+	private AnchorPane pane;
+	
+	@FXML
+	private Pane contentArea;
+	
 	@FXML
 	private TextField txtVorname;
 
@@ -55,7 +67,7 @@ public class LogIn {
 		if(UserDataManager.manageLogin(txtUserName.getText(), txtPassword.getText()))
 		{
 		//if(txtBenutzername.getText().equals("Admin") && txPasswort.getText().equals("123456")) {
-			lblAnmeldestatus.setText("Anmeldung erfolgreich");
+			//lblAnmeldestatus.setText("Anmeldung erfolgreich");
 			Stage primaryStage = new Stage();
 			Parent root = FXMLLoader.load(getClass().getResource("/application/Hauptseite.fxml"));
 			Scene scene = new Scene(root,1280,720);
@@ -65,14 +77,16 @@ public class LogIn {
 		}
 		else if(!UserDataManager.checkUserInList(txtUserName.getText()))
 		{
-			lblLogInInformation.setText("Benutzer nicht registriert.");
-			lblLogInInformation.setVisible(true);
+			txtUserName.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
+//			lblLogInInformation.setText("Benutzer nicht registriert.");
+//			lblLogInInformation.setVisible(true);
 
 		}
 		else if(!UserDataManager.checkLoginDataCombination(txtUserName.getText(), txtPassword.getText()))
 		{
-			lblLogInInformation.setText("Passwort nicht korrekt.");
-			lblLogInInformation.setVisible(true);
+			txtPassword.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
+//			lblLogInInformation.setText("Passwort nicht korrekt.");
+//			lblLogInInformation.setVisible(true);
 		}
 		else 
 		{
@@ -83,12 +97,16 @@ public class LogIn {
 	
 		public void openRegistrationScene(ActionEvent event) throws Exception
 		{
-			Stage primaryStage1 = new Stage();
-			Parent root1 = FXMLLoader.load(getClass().getResource("/application/Registrieren.fxml"));
-			Scene scene1 = new Scene(root1,1280, 720);
-			scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage1.setScene(scene1);
-			primaryStage1.show();
+			Parent fxml = FXMLLoader.load(getClass().getResource("Registration.fxml"));
+			contentArea.getChildren().removeAll();
+			contentArea.getChildren().setAll(fxml);
+			
+//			Stage primaryStage1 = new Stage();
+//			Parent root1 = FXMLLoader.load(getClass().getResource("/application/Registrieren.fxml"));
+//			Scene scene1 = new Scene(root1,1280, 720);
+//			scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+//			primaryStage1.setScene(scene1);
+//			primaryStage1.show();
 		}
 		
 		public void registrateUser(ActionEvent event) throws Exception
@@ -123,6 +141,18 @@ public class LogIn {
 			}
 		}
 		
+		private void loadUI(String ui)
+		{
+			Parent root = null;
+			try
+			{
+				root = FXMLLoader.load(getClass().getResource(ui+".fxml"));
+			}
+			catch(IOException ex) {}
+
+			
+			
+		}
 		//Löschen??
 //		public boolean PruefeAnmeldedaten(String name,String passwort) 
 //		{

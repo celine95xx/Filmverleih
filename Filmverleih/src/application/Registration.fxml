@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="300.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LogIn">
+   <children>
+      <Label layoutX="60.0" layoutY="37.0" text="Willkommen" textFill="WHITE">
+         <font>
+            <Font name="Radicalis" size="28.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtNewUserName" layoutX="50.0" layoutY="148.0" promptText="Benutzername" style="-fx-background-color: #121212; -fx-border-color: #00A095;" />
+      <DatePicker layoutX="39.0" layoutY="188.0" prefHeight="25.0" prefWidth="175.0" />
+      <PasswordField fx:id="txtNewUserPassword" layoutX="50.0" layoutY="224.0" promptText="Passwort" style="-fx-background-color: #121212; -fx-border-color: #00A095;" />
+      <PasswordField fx:id="txtNewPasswordConfirmed" layoutX="50.0" layoutY="263.0" promptText="Passwort wiederholen" style="-fx-background-color: #121212; -fx-border-color: #00A095;" />
+      <Label layoutX="34.0" layoutY="297.0" text="Du hast schon ein Konto?">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Hyperlink layoutX="158.0" layoutY="294.0" text="Anmelden" textFill="#31b8b4">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Hyperlink>
+      <Button layoutX="89.0" layoutY="361.0" mnemonicParsing="false" onAction="#registrateUser" style="-fx-background-color: #31B8B4;" text="Registrieren" />
+   </children>
+</AnchorPane>
