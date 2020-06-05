@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class LogIn {
 
@@ -70,9 +71,10 @@ public class LogIn {
 			//lblAnmeldestatus.setText("Anmeldung erfolgreich");
 			Stage primaryStage = new Stage();
 			Parent root = FXMLLoader.load(getClass().getResource("/application/Hauptseite.fxml"));
-			Scene scene = new Scene(root,1280,720);
+			Scene scene = new Scene(root,1400,900);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.initStyle(StageStyle.UNDECORATED); //https://stackoverflow.com/questions/35250783/stage-without-bar-javafx
 			primaryStage.show();
 		}
 		else if(!UserDataManager.checkUserInList(txtUserName.getText()))
@@ -109,6 +111,11 @@ public class LogIn {
 //			primaryStage1.show();
 		}
 		
+		public void openLogInScene(ActionEvent event) throws Exception
+		{
+			
+		}
+		
 		public void registrateUser(ActionEvent event) throws Exception
 		{
 			if(UserDataManager.manageUserRegistration(txtNewUserName.getText(), txtNewUserPassword.getText(), txtNewPasswordConfirmed.getText(), 0))
@@ -141,18 +148,7 @@ public class LogIn {
 			}
 		}
 		
-		private void loadUI(String ui)
-		{
-			Parent root = null;
-			try
-			{
-				root = FXMLLoader.load(getClass().getResource(ui+".fxml"));
-			}
-			catch(IOException ex) {}
-
-			
-			
-		}
+		
 		//Löschen??
 //		public boolean PruefeAnmeldedaten(String name,String passwort) 
 //		{

@@ -46,7 +46,8 @@ public class Hauptseite implements Initializable {
 	// https://stackoverflow.com/questions/36629522/convert-arraylist-to-observable-list-for-javafx-program
 	// listView.setItems:
 	// http://www.java2s.com/Tutorials/Java/JavaFX/0640__JavaFX_ListView.htm
-	public void showAllMovies(ActionEvent event) throws Exception {
+	public void showAllMovies(ActionEvent event) throws Exception 
+	{
 		spStackPane.setVisible(true);
 //		listView.getItems().addAll("Harry Potter", "Ich hab Hunger", "Wowi");
 		listView.setItems(FXCollections.observableArrayList(FilmDataManager.getFilmList()));

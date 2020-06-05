@@ -11,19 +11,23 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
 
-public class Main extends Application {
+public class Main extends Application 
+{
 	@Override
-	public void start(Stage primaryStage) {
-		try {
+	public void start(Stage primaryStage) 
+	{
+		try 
+		{
 			Parent root = FXMLLoader.load(getClass().getResource("/application/LogIn.fxml"));
 			Scene scene = new Scene(root,800,600);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.initStyle(StageStyle.UNDECORATED); //https://stackoverflow.com/questions/35250783/stage-without-bar-javafx
 			primaryStage.show();
-		} catch(Exception e) {
+		} 
+		catch(Exception e) 
+		{
 			e.printStackTrace();
-		
 		}
 	}
 	
