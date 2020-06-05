@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1400.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Hauptseite">
    <children>
       <BorderPane prefHeight="1000.0" prefWidth="1400.0">
@@ -21,7 +20,7 @@
                         <Font name="Radicalis" size="35.0" />
                      </font>
                   </Label>
-                  <Button alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showAllMovies" prefHeight="60.0" prefWidth="260.0" style="-fx-background-color: #4B15CB;" text="Filme" textFill="WHITE" translateY="200.0">
+                  <Button alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showAllMovies" prefHeight="60.0" prefWidth="260.0" style="-fx-background-color: #4B15CB;" text="Filme" textFill="WHITE" translateY="200.0" visible="false">
                      <font>
                         <Font size="30.0" />
                      </font>

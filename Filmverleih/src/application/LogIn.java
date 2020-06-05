@@ -5,9 +5,11 @@ package application;
 import java.io.IOException;
 
 import controllers.UserDataManager;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -64,13 +66,19 @@ public class LogIn {
 	
 	public void logIn(ActionEvent event) throws Exception
 	{
-//		if(PruefeAnmeldedaten(txtBenutzername.getText(), txPasswort.getText())) 
+		String maingui;
 		if(UserDataManager.manageLogin(txtUserName.getText(), txtPassword.getText()))
 		{
-		//if(txtBenutzername.getText().equals("Admin") && txPasswort.getText().equals("123456")) {
-			//lblAnmeldestatus.setText("Anmeldung erfolgreich");
+			if(UserDataManager.checkAdminLogIn(txtUserName.getText(), txtPassword.getText()))
+			{
+				maingui = "MainGUI";
+			}
+			else
+			{
+				maingui = "Hauptseite";
+			}
 			Stage primaryStage = new Stage();
-			Parent root = FXMLLoader.load(getClass().getResource("/application/Hauptseite.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/application/" + maingui + ".fxml"));
 			Scene scene = new Scene(root,1400,900);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
@@ -80,19 +88,15 @@ public class LogIn {
 		else if(!UserDataManager.checkUserInList(txtUserName.getText()))
 		{
 			txtUserName.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
-//			lblLogInInformation.setText("Benutzer nicht registriert.");
-//			lblLogInInformation.setVisible(true);
 
 		}
 		else if(!UserDataManager.checkLoginDataCombination(txtUserName.getText(), txtPassword.getText()))
 		{
 			txtPassword.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
-//			lblLogInInformation.setText("Passwort nicht korrekt.");
-//			lblLogInInformation.setVisible(true);
 		}
 		else 
 		{
-			lblAnmeldestatus.setText("Anmeldung fehlgeschlagen");
+			System.out.println("Anmeldung nicht möglich. !!!Prüfen");
 		}
 	}
 	
@@ -100,6 +104,7 @@ public class LogIn {
 		public void openRegistrationScene(ActionEvent event) throws Exception
 		{
 			Parent fxml = FXMLLoader.load(getClass().getResource("Registration.fxml"));
+			ObservableList<Node> old = contentArea.getChildren();
 			contentArea.getChildren().removeAll();
 			contentArea.getChildren().setAll(fxml);
 			

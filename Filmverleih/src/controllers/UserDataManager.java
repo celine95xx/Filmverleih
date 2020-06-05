@@ -28,6 +28,14 @@ public class UserDataManager
 	public static void initializeUserList()
 	{
 		oldUserList = loadUser();
+		if(!checkUserInList("admin"))
+		{
+			addUser("admin", "admin", 20);
+		}
+		saveUser(oldUserList);
+
+		for(UserData e : oldUserList)
+			System.out.println(e.toString());
 	}
 	
 	
@@ -50,6 +58,10 @@ public class UserDataManager
 			for(UserData e : newUserList)
 				System.out.println(e.toString());
 		}
+		else
+		{
+			System.out.println("Registration not possible");
+		}
 		return approvedRegistration;
 	}
 
@@ -58,17 +70,20 @@ public class UserDataManager
 	{
 		oldUserList = loadUser();
 		boolean loginSuccessful = false;
-		if(name.equals("admin") && password.equals("admin"))
+
+		if(checkLoginDataCombination(name, password))
 		{
 			loginSuccessful = true;
 		}
-		else if(checkLoginDataCombination(name, password))
-		{
-			loginSuccessful = true;
-		}
+		
+		List<UserData> newUserList = loadUser();
+
+		for(UserData e : newUserList)
+			System.out.println(e.toString());
 
 		return loginSuccessful;
 	}
+	
 
 	public static void addUser(String name, String password, int age)
 	{
@@ -108,7 +123,7 @@ public class UserDataManager
 		{
 			System.out.println("Laden fehlgeschlagen. Keine Datei gefunden.");
 		}
-
+		
 		return newUser;
 	}
 
@@ -119,9 +134,14 @@ public class UserDataManager
 		boolean registrationPossible = false;
 
 		//Sind Password und PasswordConfirmed gleich? Ist Username zulässig?
-		if(!checkUserInList(name) && password.equals(passwordConfirmed) && validateUserName(name))
+		if(!checkUserInList(name) && password.equals(passwordConfirmed) && validateUserName(name)) //GEBURTSTAG
 		{
 			registrationPossible = true;
+			System.out.println("RegistrationPossible: true");
+		}
+		else
+		{
+			System.out.println("RegistrationPossible: false");
 		}
 
 		return registrationPossible;
@@ -175,11 +195,27 @@ public class UserDataManager
 			{
 				userExists = true;
 				System.out.println("User found in list!");
+				break;
+			}
+			else
+			{
+				System.out.println("This is not the user you search for.");
 			}
 		}
 		
 		return userExists;
 		
+	}
+	
+	public static boolean checkAdminLogIn(String name, String password)
+	{
+		boolean isAdmin = false;
+		if(name.equals("admin") && password.equals("admin")) //Später ändern für andere Passwörter
+		{
+			isAdmin = true;
+		}
+		
+		return isAdmin;
 	}
 
 	public static void rentFilm(String username, int filmID)

@@ -39,6 +39,6 @@
             <Font name="Radicalis" size="35.0" />
          </font>
       </Label>
-      <Button fx:id="logIn" layoutX="107.0" layoutY="546.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="86.0" style="-fx-background-color: #31B8B4;" text="Registrieren" />
+      <Button layoutX="107.0" layoutY="546.0" mnemonicParsing="false" onAction="#registrateUser" prefHeight="40.0" prefWidth="86.0" style="-fx-background-color: #31B8B4;" text="Registrieren" />
    </children>
 </AnchorPane>
