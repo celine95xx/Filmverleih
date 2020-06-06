@@ -24,7 +24,10 @@ public class LogIn {
 
 	
 	@FXML
-	private AnchorPane pane;
+	private AnchorPane pane;	
+	
+	@FXML
+	private Pane sideMenu;
 	
 	@FXML
 	private Pane contentArea;
@@ -66,24 +69,28 @@ public class LogIn {
 	
 	public void logIn(ActionEvent event) throws Exception
 	{
-		String maingui;
+		String guiversion = null; //???ist das ok
+		
 		if(UserDataManager.manageLogin(txtUserName.getText(), txtPassword.getText()))
 		{
 			if(UserDataManager.checkAdminLogIn(txtUserName.getText(), txtPassword.getText()))
 			{
-				maingui = "MainGUI";
+				guiversion = "AdminMainGUI";
 			}
 			else
 			{
-				maingui = "Hauptseite";
+				guiversion = "UserMainGUI";
+				System.out.println("hat geklappt!");
 			}
 			Stage primaryStage = new Stage();
-			Parent root = FXMLLoader.load(getClass().getResource("/application/" + maingui + ".fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/application/" + guiversion + ".fxml"));
 			Scene scene = new Scene(root,1400,900);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.initStyle(StageStyle.UNDECORATED); //https://stackoverflow.com/questions/35250783/stage-without-bar-javafx
 			primaryStage.show();
+			
+			
 		}
 		else if(!UserDataManager.checkUserInList(txtUserName.getText()))
 		{
@@ -98,13 +105,14 @@ public class LogIn {
 		{
 			System.out.println("Anmeldung nicht möglich. !!!Prüfen");
 		}
+		
+	
 	}
 	
 	
 		public void openRegistrationScene(ActionEvent event) throws Exception
 		{
 			Parent fxml = FXMLLoader.load(getClass().getResource("Registration.fxml"));
-			ObservableList<Node> old = contentArea.getChildren();
 			contentArea.getChildren().removeAll();
 			contentArea.getChildren().setAll(fxml);
 			

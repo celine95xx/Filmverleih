@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -18,11 +19,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import models.FilmData;
 
-public class Hauptseite implements Initializable {
+public class Hauptseite implements Initializable 
+{
 	@FXML
 	private ListView<FilmData> listView;
 
@@ -31,9 +36,33 @@ public class Hauptseite implements Initializable {
 
 	@FXML
 	private ChoiceBox<String> ChoiceBox;
+	
 
-	public void addMovie(ActionEvent event) throws Exception {
+	public void setSideMenu (String sidemenu) throws IOException
+	{
+		
+//		Stage primaryStage = new Stage();
+//		Parent root = FXMLLoader.load(getClass().getResource("/application/MainGUI.fxml"));  
+//		Scene scene = new Scene(root,1400,900);
+//		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+//		primaryStage.setScene(scene);
+//		primaryStage.initStyle(StageStyle.UNDECORATED); //https://stackoverflow.com/questions/35250783/stage-without-bar-javafx
+		
+		
+//		if(mainGUI == null)
+//			System.out.println("mainGUI is null");
+//		else
+//			System.out.println("mainGUI is not null");
+//		
+//		if(sideMenu == null)
+//			System.out.println("sideMenu is null");
 
+		//primaryStage.show();
+		
+	}
+	
+	public void addMovie(ActionEvent event) throws Exception 
+	{
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/application/Movies.fxml"));
 		Scene scene = new Scene(root, 1280, 720);
@@ -63,29 +92,29 @@ public class Hauptseite implements Initializable {
 
 	// Is called by JavaFX when this Scene is loaded
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-
-		// Set Items for the Genre ChoiceBox
-		ChoiceBox.setItems(FXCollections.observableArrayList("Alphabetisch", "Fantasy", "Action", "Horror"));
-
-		// Add Listener for ChoiceBox - Listens for ItemChanged Events
-		ChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-			@Override
-			public void changed(ObservableValue<? extends String> ov, String oldvalue, String newValue) {
-
-				ObservableList<FilmData> newList;
-				if (newValue.equals("Alphabetisch")) {
-					// Sort alphabetically ascending
-					FilmDataManager.sortFilmListByName();
-					newList = FXCollections.observableArrayList(FilmDataManager.getFilmList());
-				} else {
-					// Sort by Genre
-					newList = FXCollections.observableArrayList(FilmDataManager.filterFilmListGenre(newValue));
-
-				}
-				listView.setItems(newList);
-			}
-		});
+	public void initialize(URL arg0, ResourceBundle arg1) 
+	{
+//		// Set Items for the Genre ChoiceBox
+//		ChoiceBox.setItems(FXCollections.observableArrayList("Alphabetisch", "Fantasy", "Action", "Horror"));
+//
+//		// Add Listener for ChoiceBox - Listens for ItemChanged Events
+//		ChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+//			@Override
+//			public void changed(ObservableValue<? extends String> ov, String oldvalue, String newValue) {
+//
+//				ObservableList<FilmData> newList;
+//				if (newValue.equals("Alphabetisch")) {
+//					// Sort alphabetically ascending
+//					FilmDataManager.sortFilmListByName();
+//					newList = FXCollections.observableArrayList(FilmDataManager.getFilmList());
+//				} else {
+//					// Sort by Genre
+//					newList = FXCollections.observableArrayList(FilmDataManager.filterFilmListGenre(newValue));
+//
+//				}
+//				listView.setItems(newList);
+//			}
+//		});
 	}
 
 	public void deleteMovie(ActionEvent event) throws Exception {
