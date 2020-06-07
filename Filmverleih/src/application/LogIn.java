@@ -27,16 +27,7 @@ public class LogIn {
 	private AnchorPane pane;	
 	
 	@FXML
-	private Pane sideMenu;
-	
-	@FXML
 	private Pane contentArea;
-	
-	@FXML
-	private TextField txtVorname;
-
-	@FXML
-	private TextField txtNachname;
 
 	@FXML
 	private TextField txtNewUserName;
@@ -73,21 +64,12 @@ public class LogIn {
 		
 		if(UserDataManager.manageLogin(txtUserName.getText(), txtPassword.getText()))
 		{
-			if(UserDataManager.checkAdminLogIn(txtUserName.getText(), txtPassword.getText()))
-			{
-				guiversion = "AdminMainGUI";
-			}
-			else
-			{
-				guiversion = "UserMainGUI";
-				System.out.println("hat geklappt!");
-			}
 			Stage primaryStage = new Stage();
-			Parent root = FXMLLoader.load(getClass().getResource("/application/" + guiversion + ".fxml"));
-			Scene scene = new Scene(root,1400,900);
+			Parent root = FXMLLoader.load(getClass().getResource("/application/MainGUI.fxml"));
+			Scene scene = new Scene(root,1400,1000);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
-			primaryStage.initStyle(StageStyle.UNDECORATED); //https://stackoverflow.com/questions/35250783/stage-without-bar-javafx
+			//primaryStage.initStyle(StageStyle.UNDECORATED); //https://stackoverflow.com/questions/35250783/stage-without-bar-javafx
 			primaryStage.show();
 			
 			

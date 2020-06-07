@@ -9,15 +9,20 @@ public class UserData implements Serializable
 	private String name;
 	private String passwort;
 	private int age;
+	private String id;
+	private boolean isAdmin;
 	
+
 	private List<Integer> rentedFilms = new ArrayList<Integer>();;
 	private List<Integer> watchlist = new ArrayList<Integer>();;
 	
-	public UserData (String name, String passwort, int age)
+	public UserData (String name, String passwort, int age, boolean isAdmin)
 	{
 		this.name = name;
 		this.passwort = passwort;
 		this.age = age;
+		this.id = name+age+passwort;
+		this.isAdmin = isAdmin;
 	}
 	
 	public List<Integer> getRentedFilms()
@@ -48,6 +53,13 @@ public class UserData implements Serializable
 		this.passwort = passwort;
 	}
 	
+	public String getId() {
+		return id;
+	}
+	
+	public boolean isAdmin() {
+		return isAdmin;
+	}
 
 
 	@Override 

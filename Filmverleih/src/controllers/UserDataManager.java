@@ -25,12 +25,14 @@ public class UserDataManager
 
 	private static List<UserData> oldUserList = new ArrayList<UserData>();
 	
+	private static String currentUserId;
+	
 	public static void initializeUserList()
 	{
 		oldUserList = loadUser();
 		if(!checkUserInList("admin"))
 		{
-			addUser("admin", "admin", 20);
+			addUser("admin", "admin", 20, true);
 		}
 		saveUser(oldUserList);
 
@@ -49,7 +51,7 @@ public class UserDataManager
 			approvedRegistration = true;
 
 			//List<UserData> oldUserList = loadUser();
-			addUser(name, password,age);
+			addUser(name, password,age, false);
 			saveUser(oldUserList);
 
 
@@ -74,7 +76,11 @@ public class UserDataManager
 		if(checkLoginDataCombination(name, password))
 		{
 			loginSuccessful = true;
+			currentUserId = getUserID(name);
+			System.out.println(currentUserId);
 		}
+		
+		
 		
 		List<UserData> newUserList = loadUser();
 
@@ -85,14 +91,14 @@ public class UserDataManager
 	}
 	
 
-	public static void addUser(String name, String password, int age)
+	public static void addUser(String name, String password, int age, boolean isAdmin)
 	{
-		oldUserList.add(new UserData(name, password, age));
+		oldUserList.add(new UserData(name, password, age, isAdmin));
 	}
 
 	public static void saveUser(List<UserData> user)
 	{
-		try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("user.save")))
+		try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("user1.save")))
 		{
 			for(UserData e : user)
 				out.writeObject(e);
@@ -108,7 +114,7 @@ public class UserDataManager
 	{
 		List<UserData> newUser = new ArrayList<UserData>();
 
-		try(ObjectInputStream input = new ObjectInputStream(new FileInputStream("user.save")))
+		try(ObjectInputStream input = new ObjectInputStream(new FileInputStream("user1.save")))
 		{
 			while(true)
 			{
@@ -228,6 +234,33 @@ public class UserDataManager
 				u.showRentedFilmList();
 			}
 		}
+	}
+	
+	public static String getUserID(String username)
+	{
+		String userID = null;
+		
+		for(UserData u : oldUserList)
+		{
+			if(u.getName().equals(username))
+			{
+				userID = u.getId();
+			}
+		}
+		return userID;
+	}
+	
+	public static UserData getCurrentUser()
+	{
+		UserData user = null;
+		for(UserData u : oldUserList)
+		{
+			if(u.getId().equals(currentUserId))
+			{
+				user = u;
+			}
+		}
+		return user;
 	}
 	
 
