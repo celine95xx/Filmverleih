@@ -13,12 +13,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
-public class MainGUIController implements Initializable
-{
-	
+public class MainGUIController implements Initializable {
+
 	@FXML
 	private Button btnControlPanel;
-	
+
 	@FXML
 	private Label lblUsername;
 	
@@ -55,12 +54,12 @@ public class MainGUIController implements Initializable
 	public void showAllMovies(ActionEvent event) throws Exception
 	{
 		System.out.println("SHOW ALL MOVIES");
+
 	}
-	
-	public void showProfile(ActionEvent event) throws Exception
-	{
+
+	public void showProfile(ActionEvent event) throws Exception {
 		System.out.println("SHOW PROFILE");
-		
+
 		Parent fxml = FXMLLoader.load(getClass().getResource("UserProfile.fxml"));
 		mainContent.getChildren().removeAll();
 		mainContent.getChildren().setAll(fxml);
@@ -70,6 +69,10 @@ public class MainGUIController implements Initializable
 	public void showControlPanel(ActionEvent event) throws Exception
 	{
 		System.out.println("SHOW CONTROLPANEL");
+		
+		Parent fxml = FXMLLoader.load(getClass().getResource("Control.fxml"));
+		mainContent.getChildren().removeAll();
+		mainContent.getChildren().setAll(fxml);
 	}
 	
 	public void showFilmProfile(ActionEvent event) throws Exception

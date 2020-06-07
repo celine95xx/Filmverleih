@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1140.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Control">
+   <children>
+      <Label fx:id="label" layoutX="51.0" layoutY="48.0" text="Verwaltung" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="45.0" />
+         </font>
+      </Label>
+      <Line endX="100.0" layoutX="164.0" layoutY="103.0" startX="-100.0" stroke="#0cabdf" />
+      <TableView fx:id="movies" layoutX="64.0" layoutY="173.0" prefHeight="627.0" prefWidth="861.0" style="-fx-background-color: #121212;">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="75.0" style="-fx-background-color: #121212;">
+               <graphic>
+                  <Label text="ID" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </TableColumn>
+          <TableColumn fx:id="titel" prefWidth="316.00001525878906" style="-fx-background-color: #121212;">
+               <graphic>
+                  <Label prefHeight="36.0" prefWidth="110.0" text="Filmtitel" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </TableColumn>
+            <TableColumn fx:id="genre" prefWidth="309.5999755859375" style="-fx-background-color: #121212;">
+               <graphic>
+                  <Label text="Genre" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </TableColumn>
+            <TableColumn fx:id="alter" minWidth="5.60003662109375" prefWidth="160.0" style="-fx-background-color: #121212;">
+               <graphic>
+                  <Label text="FSK" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </TableColumn>
+        </columns>
+      </TableView>
+      <TextField fx:id="search" layoutX="64.0" layoutY="138.0" promptText="Suche..." />
+   </children>
+</AnchorPane>
