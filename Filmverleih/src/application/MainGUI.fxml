@@ -1,151 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="mainGUI" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1400.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainGUIController">
    <children>
-      <Pane fx:id="sideMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="260.0" style="-fx-background-color: #4B15CB;">
+      <Pane fx:id="sideMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="260.0" style="-fx-background-color: #4B15CB; -fx-background-image: url('images/gradient_sidemenu.JPG');">
          <children>
-            <Label layoutX="20.0" layoutY="74.0" text="Filmverleih" textFill="WHITE">
+            <Button layoutY="246.0" mnemonicParsing="false" onAction="#showAllMovies" prefHeight="59.0" prefWidth="260.0" style="-fx-background-color: transparent;" text="Filme" textFill="WHITE">
                <font>
-                  <Font size="41.0" />
+                  <Font size="25.0" />
+               </font></Button>
+            <Button layoutY="347.0" mnemonicParsing="false" onAction="#showProfile" prefHeight="59.0" prefWidth="260.0" style="-fx-background-color: transparent;" text="Profil" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font></Button>
+            <Button fx:id="btnControlPanel" layoutY="453.0" mnemonicParsing="false" onAction="#showControlPanel" prefHeight="59.0" prefWidth="260.0" style="-fx-background-color: transparent;" text="Verwaltung" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font></Button>
+            <Button layoutY="30.0" mnemonicParsing="false" onAction="#showWelcomePage" prefHeight="59.0" prefWidth="260.0" style="-fx-background-color: transparent;" text="Filmverleih" textFill="WHITE">
+               <font>
+                  <Font name="Radicalis" size="40.0" />
                </font>
-            </Label>
-            <Button layoutY="246.0" mnemonicParsing="false" onAction="#showAllMovies" prefHeight="59.0" prefWidth="260.0" text="Filme" />
-            <Button layoutY="347.0" mnemonicParsing="false" onAction="#showProfile" prefHeight="59.0" prefWidth="260.0" text="Profil" />
-            <Button fx:id="btnControlPanel" layoutY="453.0" mnemonicParsing="false" onAction="#showControlPanel" prefHeight="59.0" prefWidth="260.0" text="Verwaltung" />
+            </Button>
          </children></Pane>
-      <Pane fx:id="contentArea" layoutX="260.0" prefHeight="1000.0" prefWidth="1140.0">
+      <Pane fx:id="mainContent" layoutX="260.0" prefHeight="1000.0" prefWidth="1140.0">
          <children>
-            <GridPane hgap="6.0" layoutY="210.0" prefHeight="210.0" prefWidth="1140.0" style="-fx-background-color: #121212;">
-              <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="201.0" prefWidth="274.0" style="-fx-background-image: url('images/testpic.JPG'); -fx-background-color: #121212;" text="Button" />
-                  <Button mnemonicParsing="false" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" text="Button" GridPane.columnIndex="1">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" text="Button" GridPane.columnIndex="2">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" text="Button" GridPane.columnIndex="3">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets left="20.0" right="20.0" />
-               </padding>
-            </GridPane>
-            <Label layoutX="40.0" layoutY="4.0" text="Willkommen," textFill="WHITE">
-               <font>
-                  <Font name="Radicalis" size="60.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblUsername" layoutX="345.0" layoutY="55.0" text="[username]" textFill="WHITE">
-               <font>
-                  <Font size="52.0" />
-               </font>
-            </Label>
-            <Label layoutX="20.0" layoutY="160.0" text="Neuerscheinungen" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="35.0" />
-               </font>
-            </Label>
-            <Label layoutX="20.0" layoutY="440.0" text="Beliebt" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-            </Label>
-            <Label layoutX="20.0" layoutY="720.0" text="Empfehlungen" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-            </Label>
-            <GridPane hgap="6.0" layoutY="490.0" prefHeight="210.0" prefWidth="1140.0" style="-fx-background-color: #121212;">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="201.0" prefWidth="274.0" style="-fx-background-image: url('images/testpic.JPG'); -fx-background-color: #121212;" text="Button" />
-                  <Button mnemonicParsing="false" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" text="Button" GridPane.columnIndex="1">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" text="Button" GridPane.columnIndex="2">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" text="Button" GridPane.columnIndex="3">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets left="20.0" right="20.0" />
-               </padding>
-            </GridPane>
-            <GridPane hgap="6.0" layoutY="770.0" prefHeight="210.0" prefWidth="1140.0" style="-fx-background-color: #121212;">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="201.0" prefWidth="274.0" style="-fx-background-image: url('images/testpic.JPG'); -fx-background-color: #121212;" text="Button" />
-                  <Button mnemonicParsing="false" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" text="Button" GridPane.columnIndex="1">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" text="Button" GridPane.columnIndex="2">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" text="Button" GridPane.columnIndex="3">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets left="20.0" right="20.0" />
-               </padding>
-            </GridPane>
-         </children></Pane>
+            <Label layoutX="517.0" layoutY="441.0" text="Label" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

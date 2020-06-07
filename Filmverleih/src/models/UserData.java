@@ -9,6 +9,7 @@ public class UserData implements Serializable
 	private String name;
 	private String passwort;
 	private int age;
+	private String dateOfBirth;
 	private String id;
 	private boolean isAdmin;
 	
@@ -61,11 +62,22 @@ public class UserData implements Serializable
 		return isAdmin;
 	}
 
+	public String getDateOfBirth() 
+	{
+		return dateOfBirth;
+	}
 
+	public void setDateOfBirth(String dateOfBirth) 
+	{
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	
+	
 	@Override 
 	public String toString()
 	{
-		return "Username: " + this.name + " ---- Passwort: " + this.passwort; 
+		return "Username: " + this.name + " ---- Passwort: " + this.passwort + " ----- Geburtstag: " + this.dateOfBirth + " ------ Alter: " + this.age; 
 	}
 	
 	public void showRentedFilmList()

@@ -8,9 +8,9 @@ import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,8 +18,8 @@ import models.UserData;
 
 public class UserDataManager 
 {	
-	private Pattern pattern;
-	private Matcher matcher;
+//	private Pattern pattern;
+//	private Matcher matcher;
 
 	private static Pattern userNamePattern = Pattern.compile("^[a-zA-Z0-9_-]{3,14}$");
 
@@ -38,22 +38,24 @@ public class UserDataManager
 
 		for(UserData e : oldUserList)
 			System.out.println(e.toString());
+
 	}
 	
 	
 	//Prüft, ob Registrierung möglich ist
-	public static boolean manageUserRegistration(String name, String password, String passwordConfirmed, int age)
+	public static boolean manageUserRegistration(String name, String password, String passwordConfirmed, String dateOfBirth)
 	{
 		boolean approvedRegistration = false;
 
-		if(checkRegistrationConditions(name, password, passwordConfirmed, age))
+		if(checkRegistrationConditions(name, password, passwordConfirmed, calculateAge(dateOfBirth)))
 		{
 			approvedRegistration = true;
 
-			//List<UserData> oldUserList = loadUser();
-			addUser(name, password,age, false);
+			addUser(name, password,calculateAge(dateOfBirth), false);
+			currentUserId = getUserID(name);
+			System.out.println(dateOfBirth);
+			getCurrentUser().setDateOfBirth(dateOfBirth);
 			saveUser(oldUserList);
-
 
 			List<UserData> newUserList = loadUser();
 
@@ -140,7 +142,7 @@ public class UserDataManager
 		boolean registrationPossible = false;
 
 		//Sind Password und PasswordConfirmed gleich? Ist Username zulässig?
-		if(!checkUserInList(name) && password.equals(passwordConfirmed) && validateUserName(name)) //GEBURTSTAG
+		if(!checkUserInList(name) && password.equals(passwordConfirmed) && validateUserName(name) && age >= 16) //GEBURTSTAG
 		{
 			registrationPossible = true;
 			System.out.println("RegistrationPossible: true");
@@ -261,6 +263,38 @@ public class UserDataManager
 			}
 		}
 		return user;
+	}
+	
+	//https://stackoverflow.com/questions/21393717/calculating-age-with-current-date-and-birth-date-in-java
+	public static int calculateAge(String dateOfBirth)
+	{
+		String[] parts = dateOfBirth.split("-");
+		int year = Integer.parseInt(parts[0]);
+		int month = Integer.parseInt(parts[1]);
+		int day = Integer.parseInt(parts[2]);
+		
+		LocalDate birthday = LocalDate.of(year, month, day);
+		int age = (int) birthday.until(LocalDate.now(), ChronoUnit.YEARS);
+		System.out.println("Age:" + age);
+		
+		return age;
+	}
+	
+	public static boolean saveUserDataChanges(String name, String password)
+	{
+		boolean dataSuccessfullyChanged = false;
+		
+		if(!checkUserInList(name))
+		{
+			getCurrentUser().setName(name);
+			getCurrentUser().setPasswort(password);
+			
+			saveUser(oldUserList);
+			
+			dataSuccessfullyChanged = true;
+		}
+		
+		return dataSuccessfullyChanged;
 	}
 	
 

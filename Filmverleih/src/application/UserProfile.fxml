@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
@@ -20,7 +22,7 @@
             <Font size="45.0" />
          </font>
       </Label>
-      <Line endX="-30.0" endY="161.0" layoutX="92.0" layoutY="233.0" startX="-30.0" startY="-16.0" stroke="#30c9c4" strokeWidth="3.0" />
+      <Line endX="-30.0" endY="161.0" layoutX="92.0" layoutY="233.0" startX="-30.0" startY="1.6666717529296875" stroke="#30c9c4" strokeWidth="3.0" />
       <Label layoutX="82.0" layoutY="222.0" text="Benutzername:" textFill="WHITE">
          <font>
             <Font size="25.0" />
@@ -31,22 +33,22 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <TextField fx:id="txtUsername" layoutX="272.0" layoutY="212.0" prefHeight="56.0" prefWidth="280.0" promptText="[username]" style="-fx-background-color: #121212; -fx-border-color: #00A095;">
+      <TextField fx:id="txtUsername" disable="true" layoutX="272.0" layoutY="212.0" prefHeight="56.0" prefWidth="280.0" promptText="[username]" style="-fx-background-color: #121212; -fx-border-color: #00A095;">
          <font>
-            <Font size="25.0" />
+            <Font size="20.0" />
          </font>
       </TextField>
-      <TextField layoutX="272.0" layoutY="272.0" prefHeight="26.0" prefWidth="280.0" promptText="01.01.00" style="-fx-background-color: #121212; -fx-border-color: #00A095;">
+      <TextField fx:id="txtBirthday" disable="true" editable="false" layoutX="272.0" layoutY="272.0" prefHeight="26.0" prefWidth="280.0" promptText="yyyy-mm-dd" style="-fx-background-color: #121212; -fx-border-color: #00A095;">
          <font>
-            <Font size="25.0" />
+            <Font size="20.0" />
          </font>
       </TextField>
-      <PasswordField layoutX="272.0" layoutY="332.0" prefHeight="54.0" prefWidth="280.0" style="-fx-background-color: #121212; -fx-border-color: #00A095;" text="Passwort">
+      <PasswordField fx:id="txtPassword" disable="true" layoutX="272.0" layoutY="332.0" prefHeight="54.0" prefWidth="280.0" promptText="Passwort" style="-fx-background-color: #121212; -fx-border-color: #00A095;">
          <font>
-            <Font size="25.0" />
+            <Font size="20.0" />
          </font>
       </PasswordField>
-      <Button layoutX="1026.0" layoutY="206.0" mnemonicParsing="false" opacity="0.07" prefHeight="42.0" prefWidth="78.0" style="-fx-background-color: #FFFFFF;" text="Edit">
+      <Button fx:id="btnEdit" layoutX="1026.0" layoutY="206.0" mnemonicParsing="false" onAction="#editUserData" opacity="0.07" prefHeight="42.0" prefWidth="78.0" style="-fx-background-color: #FFFFFF;" text="Edit">
          <font>
             <Font size="25.0" />
          </font>
@@ -61,5 +63,33 @@
             <Font size="30.0" />
          </font>
       </Label>
+      <Button fx:id="btnSave" layoutX="958.0" layoutY="206.0" mnemonicParsing="false" onAction="#saveUserData" prefHeight="54.0" prefWidth="146.0" style="-fx-background-color: #30c9c4;" text="Speichern" textFill="#121212" visible="false">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <HBox fx:id="boxNewPassword" layoutX="61.0" layoutY="410.0" prefHeight="61.0" prefWidth="885.0" spacing="20.0" visible="false">
+         <children>
+            <Line endX="-30.0" endY="30.0" startX="-30.0" startY="-16.0" stroke="#30c9c4" strokeWidth="3.0" />
+            <Label text="Neues Passwort:" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="txtNewPassword" prefHeight="54.0" prefWidth="280.0" promptText="Neues Passwort" style="-fx-background-color: #121212; -fx-border-color: #00A095;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </PasswordField>
+            <PasswordField fx:id="txtNewPasswordConfirmed" prefHeight="54.0" prefWidth="280.0" promptText="Neues Passwort bestätigen" style="-fx-background-color: #121212; -fx-border-color: #00A095;">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </PasswordField>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
