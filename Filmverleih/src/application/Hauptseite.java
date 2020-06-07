@@ -92,29 +92,29 @@ public class Hauptseite implements Initializable
 
 	// Is called by JavaFX when this Scene is loaded
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) 
-	{
-//		// Set Items for the Genre ChoiceBox
-//		ChoiceBox.setItems(FXCollections.observableArrayList("Alphabetisch", "Fantasy", "Action", "Horror"));
-//
-//		// Add Listener for ChoiceBox - Listens for ItemChanged Events
-//		ChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-//			@Override
-//			public void changed(ObservableValue<? extends String> ov, String oldvalue, String newValue) {
-//
-//				ObservableList<FilmData> newList;
-//				if (newValue.equals("Alphabetisch")) {
-//					// Sort alphabetically ascending
-//					FilmDataManager.sortFilmListByName();
-//					newList = FXCollections.observableArrayList(FilmDataManager.getFilmList());
-//				} else {
-//					// Sort by Genre
-//					newList = FXCollections.observableArrayList(FilmDataManager.filterFilmListGenre(newValue));
-//
-//				}
-//				listView.setItems(newList);
-//			}
-//		});
+	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		// Set Items for the Genre ChoiceBox
+ChoiceBox.setItems(FXCollections.observableArrayList("Alphabetisch", "Fantasy", "Action", "Horror"));
+
+		// Add Listener for ChoiceBox - Listens for ItemChanged Events
+	ChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+		@Override
+		public void changed(ObservableValue<? extends String> ov, String oldvalue, String newValue) {
+
+			ObservableList<FilmData> newList;
+			if (newValue.equals("Alphabetisch")) {
+					// Sort alphabetically ascending
+					FilmDataManager.sortFilmListByName();
+					newList = FXCollections.observableArrayList(FilmDataManager.getFilmList());
+				} else {
+				//	 Sort by Genre
+					newList = FXCollections.observableArrayList(FilmDataManager.filterFilmListGenre(newValue));
+
+				}
+				listView.setItems(newList);
+			}
+		});
 	}
 
 	public void deleteMovie(ActionEvent event) throws Exception {
