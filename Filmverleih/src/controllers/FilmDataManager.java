@@ -12,6 +12,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import models.FilmData;
 import models.UserData;
 
@@ -21,7 +23,7 @@ public class FilmDataManager {
 
 	private static Pattern filmNamePattern = Pattern.compile("^[A-Za-z0-9_-]{3,14}$");
 
-	private static List<FilmData> oldFilmList = new ArrayList<FilmData>();
+	private static ObservableList<FilmData> oldFilmList = FXCollections.observableArrayList();
 
 	public static void initializeFilmList() {
 		oldFilmList = loadFilm();
@@ -50,11 +52,12 @@ public class FilmDataManager {
 			System.out.println("Serialisierung erfolgreich!");
 		} catch (Exception e) {
 			System.out.println("Serialisierung nicht erfolgreich.");
+			e.printStackTrace();
 		}
 	}
 
-	public static List<FilmData> loadFilm() {
-		List<FilmData> newFilm = new ArrayList<FilmData>();
+	public static ObservableList<FilmData> loadFilm() {
+		ObservableList<FilmData> newFilm = FXCollections.observableArrayList();
 
 		try (ObjectInputStream input = new ObjectInputStream(new FileInputStream("film.save"))) {
 			while (true) {
@@ -69,7 +72,7 @@ public class FilmDataManager {
 		return newFilm;
 	}
 
-	public static List<FilmData> getFilmList() {
+	public static ObservableList<FilmData> getFilmList() {
 		return oldFilmList;
 	}
 

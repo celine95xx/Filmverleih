@@ -61,15 +61,7 @@ public class Hauptseite implements Initializable
 		
 	}
 	
-	public void addMovie(ActionEvent event) throws Exception 
-	{
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/application/Movies.fxml"));
-		Scene scene = new Scene(root, 1280, 720);
-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		primaryStage.setScene(scene);
-		primaryStage.show();
-	}
+	
 
 	// ObservableList:
 	// https://stackoverflow.com/questions/36629522/convert-arraylist-to-observable-list-for-javafx-program
@@ -80,7 +72,7 @@ public class Hauptseite implements Initializable
 		spStackPane.setVisible(true);
 //		listView.getItems().addAll("Harry Potter", "Ich hab Hunger", "Wowi");
 		listView.setItems(FXCollections.observableArrayList(FilmDataManager.getFilmList()));
-		listView.setOrientation(Orientation.HORIZONTAL);
+		listView.setOrientation(Orientation.VERTICAL);
 	}
 
 	public void rentFilm(ActionEvent event) throws Exception {

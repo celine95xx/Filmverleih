@@ -9,59 +9,59 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.SelectionModel;
 
 public class FilmData implements Serializable {
-	private SimpleIntegerProperty id;
-	private SimpleStringProperty titel;
-	private SimpleStringProperty genre;
-	private SimpleIntegerProperty preis;
-	private SimpleBooleanProperty alter;
+	private int id;
+	private String titel;
+	private String genre;
+	private int preis;
+	private boolean alter;
 
 	public FilmData(int id, String titel, String genre, int preis, boolean alter) {
-		this.id = new SimpleIntegerProperty(id);
-		this.titel = new SimpleStringProperty(titel);
-		this.genre = new SimpleStringProperty(genre);
-		this.preis = new SimpleIntegerProperty(preis);
-		this.alter = new SimpleBooleanProperty(alter);
+		this.id = id;
+		this.titel = titel;
+		this.genre = genre;
+		this.preis = preis;
+		this.alter = alter;
 	}
 
 	public int getId() {
-		return id.get();
+		return id;
 	}
 
 	public void setId(int id) {
-		this.id.set(id);
+		this.id = id;
 	}
 
 	public String getTitel() {
-		return titel.get();
+		return titel;
 	}
 
 	public void setTitel(String titel) {
-		this.titel.set(titel);
+		this.titel = titel;
 	}
 
 	public String getGenre() {
-		return genre.get();
+		return genre;
 	}
 
 	public void setGenre(String genre) {
-		this.genre.set(genre);
+		this.genre = genre;
 
 	}
 
 	public int getPreis() {
-		return preis.get();
+		return preis;
 	}
 
 	public void setPreis(int preis) {
-		this.preis.set(preis);
+		this.preis = preis;
 	}
 
 	public boolean getAlter() {
-		return alter.get();
+		return alter;
 	}
 
 	public void setAlter(boolean alter) {
-		this.alter.set(alter);
+		this.alter = alter;
 	}
 
 	/**
