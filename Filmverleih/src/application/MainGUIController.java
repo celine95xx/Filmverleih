@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class MainGUIController implements Initializable {
 
@@ -26,6 +27,7 @@ public class MainGUIController implements Initializable {
 	
 	@FXML
 	private Pane mainContent;
+	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) 
@@ -68,8 +70,7 @@ public class MainGUIController implements Initializable {
 	
 	public void showControlPanel(ActionEvent event) throws Exception
 	{
-		System.out.println("SHOW CONTROLPANEL");
-		
+	
 		Parent fxml = FXMLLoader.load(getClass().getResource("Control.fxml"));
 		mainContent.getChildren().removeAll();
 		mainContent.getChildren().setAll(fxml);
@@ -92,7 +93,6 @@ public class MainGUIController implements Initializable {
 
 	public void showWelcomePage(ActionEvent event) throws Exception
 	{
-		
 		System.out.println("Welcome Page!!");
 		Parent fxml = FXMLLoader.load(getClass().getResource("WelcomePage.fxml"));
 		mainContent.getChildren().removeAll();

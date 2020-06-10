@@ -104,11 +104,11 @@ public class UserDataManager
 		{
 			for(UserData e : user)
 				out.writeObject(e);
-			System.out.println("Serialisierung erfolgreich!");
+			//System.out.println("Serialisierung erfolgreich!");
 		}
 		catch(Exception e)
 		{
-			System.out.println("Serialisierung nicht erfolgreich.");
+			//System.out.println("Serialisierung nicht erfolgreich.");
 		}
 	}
 
@@ -125,11 +125,11 @@ public class UserDataManager
 		}
 		catch(EOFException e)
 		{
-			System.out.println("Ende der Datei erreicht! Deserialisierung erfolgreich!");
+			//System.out.println("Ende der Datei erreicht! Deserialisierung erfolgreich!");
 		}
 		catch(Exception e)
 		{
-			System.out.println("Laden fehlgeschlagen. Keine Datei gefunden.");
+			//System.out.println("Laden fehlgeschlagen. Keine Datei gefunden.");
 		}
 		
 		return newUser;

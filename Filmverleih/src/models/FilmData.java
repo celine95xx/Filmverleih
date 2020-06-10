@@ -14,13 +14,18 @@ public class FilmData implements Serializable {
 	private String genre;
 	private int preis;
 	private boolean alter;
+	private String thumbnail;
+	private String description;
 
-	public FilmData(int id, String titel, String genre, int preis, boolean alter) {
+	public FilmData(int id, String titel, String genre, int preis, boolean alter, String thumbnail, String description) 
+	{
 		this.id = id;
 		this.titel = titel;
 		this.genre = genre;
 		this.preis = preis;
 		this.alter = alter;
+		this.thumbnail = thumbnail;
+		this.description = description;
 	}
 
 	public int getId() {
@@ -62,6 +67,23 @@ public class FilmData implements Serializable {
 
 	public void setAlter(boolean alter) {
 		this.alter = alter;
+	}
+	
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	/**

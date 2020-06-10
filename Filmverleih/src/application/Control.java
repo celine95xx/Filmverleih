@@ -1,5 +1,6 @@
 package application;
 
+import java.io.File;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -23,13 +24,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import models.FilmData;
 
 public class Control implements Initializable {
 
 	@FXML
-
 	private Label label;
 	@FXML
 	private TextField search;
@@ -87,7 +89,7 @@ public class Control implements Initializable {
 		// Also delete the selected film from the underlying "oldFilmList" in
 		// FilmDataManager
 		FilmDataManager.deleteMovie(selectedFilm);
-
 	}
+	
 
 }

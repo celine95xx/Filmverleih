@@ -24,14 +24,21 @@ public class FilmDataManager {
 	private static Pattern filmNamePattern = Pattern.compile("^[A-Za-z0-9_-]{3,14}$");
 
 	private static ObservableList<FilmData> oldFilmList = FXCollections.observableArrayList();
+	
+	private static int currentFilmID;
 
 	public static void initializeFilmList() {
 		oldFilmList = loadFilm();
 
+		for (FilmData f : oldFilmList) 
+		{
+			System.out.println(f.toString());
+		}
+
 	}
 
-	public static void manageFilmRegistration(int id, String title, String genre, int price, boolean alter) {
-		addFilm(id, title, genre, price, alter);
+	public static void manageFilmRegistration(int id, String title, String genre, int price, boolean alter, String thumbnail, String description) {
+		addFilm(id, title, genre, price, alter, thumbnail, description);
 		saveFilm(oldFilmList);
 
 		List<FilmData> newFilmList = loadFilm();
@@ -40,8 +47,8 @@ public class FilmDataManager {
 		}
 	}
 
-	public static void addFilm(int id, String titel, String genre, int preis, boolean alter) {
-		oldFilmList.add(new FilmData(id, titel, genre, preis, alter));
+	public static void addFilm(int id, String titel, String genre, int preis, boolean alter, String thumbnail, String description) {
+		oldFilmList.add(new FilmData(id, titel, genre, preis, alter, thumbnail, description));
 
 	}
 
@@ -92,5 +99,41 @@ public class FilmDataManager {
 		saveFilm(oldFilmList);
 
 	}
+	
+	public static List<FilmData> getNewestFilms()
+	{
+		List<FilmData> newestFilms = new ArrayList<FilmData>();
+		
+		for(int i = 0; i < 4; i++)
+		{
+			newestFilms.add(oldFilmList.get(oldFilmList.size() - 1 - i));
+		}
+		
+		return newestFilms;
+	}
+	
+	public static FilmData getFilm()
+	{
+		FilmData currentFilm = null;
+		
+		for(FilmData f : oldFilmList)
+		{
+			if(f.getId() == currentFilmID)
+			{
+				currentFilm = f;
+				break;
+			}
+			else
+			{
+				System.out.println("Method getFilm: Kein Film mit dieser ID vorhanden");
+			}
+		}
+		
+		return currentFilm;
+	}
 
+	public static void setCurrentFilm (int id)
+	{
+		currentFilmID = id;
+	}
 }

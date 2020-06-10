@@ -87,10 +87,10 @@ public class Hauptseite implements Initializable
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		// Set Items for the Genre ChoiceBox
-ChoiceBox.setItems(FXCollections.observableArrayList("Alphabetisch", "Fantasy", "Action", "Horror"));
+		ChoiceBox.setItems(FXCollections.observableArrayList("Alphabetisch", "Fantasy", "Action", "Horror"));
 
 		// Add Listener for ChoiceBox - Listens for ItemChanged Events
-	ChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+		ChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 		@Override
 		public void changed(ObservableValue<? extends String> ov, String oldvalue, String newValue) {
 
