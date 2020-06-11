@@ -15,9 +15,9 @@
             <Insets bottom="20.0" left="60.0" right="20.0" top="30.0" />
          </padding>
          <children>
-            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="81.0" prefWidth="1000.0" spacing="560.0">
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="81.0" prefWidth="1000.0" spacing="130.0">
                <children>
-                  <Label fx:id="txtFilmTitle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="78.0" prefWidth="250.0" text="[filmtitle]" textFill="WHITE">
+                  <Label fx:id="txtFilmTitle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="78.0" prefWidth="658.0" text="[filmtitle]" textFill="WHITE">
                      <font>
                         <Font size="60.0" />
                      </font>
@@ -27,7 +27,7 @@
                   </Label>
                   <HBox prefHeight="81.0" prefWidth="224.0" spacing="5.0">
                      <children>
-                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #30C9C4;" text="Leihen">
+                        <Button fx:id="btnRentFilm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#rentFilm" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #30C9C4;" text="Leihen">
                            <font>
                               <Font size="25.0" />
                            </font>
@@ -69,12 +69,12 @@
                   <Insets left="3.0" />
                </padding>
             </HBox>
-            <Label fx:id="txtDescription" prefHeight="236.0" prefWidth="494.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam consectetur id elit et interdum. Duis tristique velit iaculis, cursus justo eget, sagittis arcu. Pellentesque ultricies tincidunt arcu. Nulla tristique mollis lacus, vitae eleifend mauris hendrerit et. Curabitur orci nisi, vehicula quis velit sit amet, luctus gravida ante. Suspendisse rhoncus fermentum mollis. " textFill="WHITE" wrapText="true">
+            <Label fx:id="txtDescription" alignment="TOP_LEFT" prefHeight="327.0" prefWidth="494.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam consectetur id elit et interdum. Duis tristique velit iaculis, cursus justo eget, sagittis arcu. Pellentesque ultricies tincidunt arcu. Nulla tristique mollis lacus, vitae eleifend mauris hendrerit et. Curabitur orci nisi, vehicula quis velit sit amet, luctus gravida ante. Suspendisse rhoncus fermentum mollis. " textFill="WHITE" wrapText="true">
                <VBox.margin>
                   <Insets left="3.0" top="30.0" />
                </VBox.margin>
                <font>
-                  <Font size="20.0" />
+                  <Font size="18.0" />
                </font>
             </Label>
          </children>

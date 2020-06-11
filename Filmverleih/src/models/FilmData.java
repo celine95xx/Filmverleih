@@ -15,9 +15,10 @@ public class FilmData implements Serializable {
 	private int preis;
 	private boolean alter;
 	private String thumbnail;
+	private String banner;
 	private String description;
 
-	public FilmData(int id, String titel, String genre, int preis, boolean alter, String thumbnail, String description) 
+	public FilmData(int id, String titel, String genre, int preis, boolean alter, String thumbnail, String banner, String description) 
 	{
 		this.id = id;
 		this.titel = titel;
@@ -25,6 +26,7 @@ public class FilmData implements Serializable {
 		this.preis = preis;
 		this.alter = alter;
 		this.thumbnail = thumbnail;
+		this.banner = banner;
 		this.description = description;
 	}
 
@@ -77,6 +79,13 @@ public class FilmData implements Serializable {
 		this.thumbnail = thumbnail;
 	}
 	
+	public String getBanner() {
+		return banner;
+	}
+
+	public void setBanner(String banner) {
+		this.banner = banner;
+	}
 
 	public String getDescription() {
 		return description;

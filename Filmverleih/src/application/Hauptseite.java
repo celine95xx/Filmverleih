@@ -78,7 +78,7 @@ public class Hauptseite implements Initializable
 	public void rentFilm(ActionEvent event) throws Exception {
 		FilmData selectedFilm = (FilmData) listView.getSelectionModel().getSelectedItem();
 		int id = selectedFilm.getId();
-		UserDataManager.rentFilm("celine", id);
+		//UserDataManager.rentFilm("celine", id);
 
 	}
 

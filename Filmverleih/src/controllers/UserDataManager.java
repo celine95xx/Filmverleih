@@ -18,15 +18,15 @@ import models.UserData;
 
 public class UserDataManager 
 {	
-//	private Pattern pattern;
-//	private Matcher matcher;
+	//	private Pattern pattern;
+	//	private Matcher matcher;
 
 	private static Pattern userNamePattern = Pattern.compile("^[a-zA-Z0-9_-]{3,14}$");
 
 	private static List<UserData> oldUserList = new ArrayList<UserData>();
-	
+
 	private static String currentUserId;
-	
+
 	public static void initializeUserList()
 	{
 		oldUserList = loadUser();
@@ -40,8 +40,8 @@ public class UserDataManager
 			System.out.println(e.toString());
 
 	}
-	
-	
+
+
 	//Prüft, ob Registrierung möglich ist
 	public static boolean manageUserRegistration(String name, String password, String passwordConfirmed, String dateOfBirth)
 	{
@@ -80,10 +80,18 @@ public class UserDataManager
 			loginSuccessful = true;
 			currentUserId = getUserID(name);
 			System.out.println(currentUserId);
+
+
+			//			rentFilm(2);
+			//			rentFilm(3);
+			//			rentFilm(4);
+			//			getCurrentUser().getRentedFilms();
+			//			
+			//			saveUser(oldUserList);
 		}
-		
-		
-		
+
+
+
 		List<UserData> newUserList = loadUser();
 
 		for(UserData e : newUserList)
@@ -91,7 +99,7 @@ public class UserDataManager
 
 		return loginSuccessful;
 	}
-	
+
 
 	public static void addUser(String name, String password, int age, boolean isAdmin)
 	{
@@ -131,7 +139,7 @@ public class UserDataManager
 		{
 			//System.out.println("Laden fehlgeschlagen. Keine Datei gefunden.");
 		}
-		
+
 		return newUser;
 	}
 
@@ -189,14 +197,14 @@ public class UserDataManager
 				break;
 			}
 		}
-		
+
 		return combinationCorrect;
 	}
-	
+
 	public static boolean checkUserInList(String name)
 	{
 		boolean userExists = false;
-		
+
 		for(UserData u : oldUserList)
 		{
 			if(u.getName().equals(name))
@@ -210,11 +218,11 @@ public class UserDataManager
 				System.out.println("This is not the user you search for.");
 			}
 		}
-		
+
 		return userExists;
-		
+
 	}
-	
+
 	public static boolean checkAdminLogIn(String name, String password)
 	{
 		boolean isAdmin = false;
@@ -222,26 +230,37 @@ public class UserDataManager
 		{
 			isAdmin = true;
 		}
-		
+
 		return isAdmin;
 	}
 
-	public static void rentFilm(String username, int filmID)
+
+	public static void rentFilm(int filmID)
 	{
-		for(UserData u : oldUserList)
+		getCurrentUser().addRentedFilm(filmID);
+		saveUser(oldUserList);
+	}
+
+	public static boolean checkRentedFilm(int filmID)
+	{
+		boolean isAlreadyRented = false;
+
+		for(Integer i : getCurrentUser().getRentedFilms())
 		{
-			if(u.getName().equals(username))
+			if(i == filmID)
 			{
-				u.getRentedFilms().add(filmID);
-				u.showRentedFilmList();
+				isAlreadyRented = true;
+				break;
 			}
 		}
+
+		return isAlreadyRented;
 	}
-	
+
 	public static String getUserID(String username)
 	{
 		String userID = null;
-		
+
 		for(UserData u : oldUserList)
 		{
 			if(u.getName().equals(username))
@@ -251,7 +270,7 @@ public class UserDataManager
 		}
 		return userID;
 	}
-	
+
 	public static UserData getCurrentUser()
 	{
 		UserData user = null;
@@ -264,7 +283,7 @@ public class UserDataManager
 		}
 		return user;
 	}
-	
+
 	//https://stackoverflow.com/questions/21393717/calculating-age-with-current-date-and-birth-date-in-java
 	public static int calculateAge(String dateOfBirth)
 	{
@@ -272,30 +291,30 @@ public class UserDataManager
 		int year = Integer.parseInt(parts[0]);
 		int month = Integer.parseInt(parts[1]);
 		int day = Integer.parseInt(parts[2]);
-		
+
 		LocalDate birthday = LocalDate.of(year, month, day);
 		int age = (int) birthday.until(LocalDate.now(), ChronoUnit.YEARS);
 		System.out.println("Age:" + age);
-		
+
 		return age;
 	}
-	
+
 	public static boolean saveUserDataChanges(String name, String password)
 	{
 		boolean dataSuccessfullyChanged = false;
-		
+
 		if(!checkUserInList(name))
 		{
 			getCurrentUser().setName(name);
 			getCurrentUser().setPasswort(password);
-			
+
 			saveUser(oldUserList);
-			
+
 			dataSuccessfullyChanged = true;
 		}
-		
+
 		return dataSuccessfullyChanged;
 	}
-	
+
 
 }

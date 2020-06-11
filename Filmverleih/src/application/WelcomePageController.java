@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.sun.prism.paint.Color;
+
 import controllers.FilmDataManager;
 import controllers.UserDataManager;
 import javafx.event.ActionEvent;
@@ -56,26 +58,27 @@ public class WelcomePageController implements Initializable
 
 		for(int i = 0; i < FilmDataManager.getNewestFilms().size(); i++)
 		{
-			buttonList.get(i).setStyle("-fx-background-image: url('/images/"+ FilmDataManager.getNewestFilms().get(i).getThumbnail()+"')");
 			String id = String.valueOf(FilmDataManager.getNewestFilms().get(i).getId());
 			buttonList.get(i).setText(id);
+			buttonList.get(i).setStyle("-fx-background-image: url('/images/"+ FilmDataManager.getNewestFilms().get(i).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
+			buttonList.get(i).setVisible(true);
 		}
 	}
 
 
-public void showFilmProfile (ActionEvent event) throws Exception
-{
-	paneWelcome.getChildren().clear();
+	public void showFilmProfile (ActionEvent event) throws Exception
+	{
+		paneWelcome.getChildren().clear();
 
-	int id = Integer.parseInt(((Button) event.getSource()).getText()); 
-	FilmDataManager.setCurrentFilm(id);
+		int id = Integer.parseInt(((Button) event.getSource()).getText()); 
+		FilmDataManager.setCurrentFilm(id);
 
-	Parent fxml = FXMLLoader.load(getClass().getResource("FilmProfile.fxml"));
-	paneWelcome.getChildren().setAll(fxml);
+		Parent fxml = FXMLLoader.load(getClass().getResource("FilmProfile.fxml"));
+		paneWelcome.getChildren().setAll(fxml);
 
 
-	System.out.println(FilmDataManager.getFilm().getTitel());
-}
+		System.out.println(FilmDataManager.getFilm().getTitel());
+	}
 
 
 }

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import controllers.FilmDataManager;
+
 public class UserData implements Serializable
 {
 	private String name;
@@ -14,8 +16,9 @@ public class UserData implements Serializable
 	private boolean isAdmin;
 	
 
-	private List<Integer> rentedFilms = new ArrayList<Integer>();;
-	private List<Integer> watchlist = new ArrayList<Integer>();;
+	private ArrayList<Integer> rentedFilms = new ArrayList<Integer>();
+	private List<Integer> watchlist = new ArrayList<Integer>();
+	
 	
 	public UserData (String name, String passwort, int age, boolean isAdmin)
 	{
@@ -24,12 +27,42 @@ public class UserData implements Serializable
 		this.age = age;
 		this.id = name+age+passwort;
 		this.isAdmin = isAdmin;
+		
 	}
 	
 	public List<Integer> getRentedFilms()
 	{
 		return rentedFilms;
 	}
+	
+	public void showRentedFilms()
+	{
+		System.out.println("Ausgeliehene Filme: ");
+//		for (Integer i: rentedFilms)
+//		{
+//			System.out.println(i + " --- " + );
+//		}
+		
+		for(int i = 0; i < rentedFilms.size(); i++)
+		{
+			System.out.println("ID: " + rentedFilms.get(i) + " --- " + FilmDataManager.getFilmPerID(rentedFilms.get(i)));
+		}
+	}
+	
+//	public void showRentedFilmList()
+//	{
+//		System.out.println("Liste von User: " + this.name);
+//		for(Integer i : rentedFilms)
+//		{
+//			System.out.println(i);
+//		}
+//	}
+	
+	public void addRentedFilm(int id)
+	{
+		rentedFilms.add(id);
+	}
+	
 	public int getAge() {
 		return age;
 	}
@@ -78,15 +111,6 @@ public class UserData implements Serializable
 	public String toString()
 	{
 		return "Username: " + this.name + " ---- Passwort: " + this.passwort + " ----- Geburtstag: " + this.dateOfBirth + " ------ Alter: " + this.age; 
-	}
-	
-	public void showRentedFilmList()
-	{
-		System.out.println("Liste von User: " + this.name);
-		for(Integer i : rentedFilms)
-		{
-			System.out.println(i);
-		}
 	}
 	
 	@Override

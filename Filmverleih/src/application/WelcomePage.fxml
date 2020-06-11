@@ -47,18 +47,18 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="btnNeuerscheinungen1" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-image: url('images/testpic.JPG'); -fx-background-color: #121212;" />
-            <Button fx:id="btnNeuerscheinungen2" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" GridPane.columnIndex="1">
+            <Button fx:id="btnNeuerscheinungen1" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212;" />
+            <Button fx:id="btnNeuerscheinungen2" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212;" visible="false" GridPane.columnIndex="1">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button fx:id="btnNeuerscheinungen3" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" GridPane.columnIndex="2">
+            <Button fx:id="btnNeuerscheinungen3" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212;" visible="false" GridPane.columnIndex="2">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button fx:id="btnNeuerscheinungen4" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" GridPane.columnIndex="3">
+            <Button fx:id="btnNeuerscheinungen4" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212;" visible="false" GridPane.columnIndex="3">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

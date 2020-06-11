@@ -68,6 +68,13 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="473.0" layoutY="334.0" mnemonicParsing="false" onAction="#searchFile" text="Search" />
+      <Button layoutX="473.0" layoutY="334.0" mnemonicParsing="false" onAction="#searchThumbnail" text="Search" />
+      <TextField fx:id="txtBanner" editable="false" layoutX="710.0" layoutY="333.0" prefHeight="27.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-border-color: #1f97a2;" />
+      <Label layoutX="609.0" layoutY="333.0" text="Thumbnail" textFill="#bfbfbf">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="997.0" layoutY="334.0" mnemonicParsing="false" onAction="#searchBanner" text="Search" />
    </children>
 </AnchorPane>

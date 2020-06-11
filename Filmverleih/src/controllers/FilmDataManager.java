@@ -37,8 +37,9 @@ public class FilmDataManager {
 
 	}
 
-	public static void manageFilmRegistration(int id, String title, String genre, int price, boolean alter, String thumbnail, String description) {
-		addFilm(id, title, genre, price, alter, thumbnail, description);
+	public static void manageFilmRegistration(int id, String title, String genre, int price, boolean alter, String thumbnail, String banner, String description) 
+	{
+		addFilm(id, title, genre, price, alter, thumbnail, banner, description);
 		saveFilm(oldFilmList);
 
 		List<FilmData> newFilmList = loadFilm();
@@ -47,8 +48,9 @@ public class FilmDataManager {
 		}
 	}
 
-	public static void addFilm(int id, String titel, String genre, int preis, boolean alter, String thumbnail, String description) {
-		oldFilmList.add(new FilmData(id, titel, genre, preis, alter, thumbnail, description));
+	public static void addFilm(int id, String titel, String genre, int preis, boolean alter, String thumbnail, String banner, String description) 
+	{
+		oldFilmList.add(new FilmData(id, titel, genre, preis, alter, thumbnail, banner, description));
 
 	}
 
@@ -104,7 +106,7 @@ public class FilmDataManager {
 	{
 		List<FilmData> newestFilms = new ArrayList<FilmData>();
 		
-		for(int i = 0; i < 4; i++)
+		for(int i = 0; i < oldFilmList.size(); i++)
 		{
 			newestFilms.add(oldFilmList.get(oldFilmList.size() - 1 - i));
 		}
@@ -125,7 +127,27 @@ public class FilmDataManager {
 			}
 			else
 			{
-				System.out.println("Method getFilm: Kein Film mit dieser ID vorhanden");
+				//System.out.println("Method getFilm: Kein Film mit dieser ID vorhanden");
+			}
+		}
+		
+		return currentFilm;
+	}
+	
+	public static FilmData getFilmPerID(int id)
+	{
+		FilmData currentFilm = null;
+		
+		for(FilmData f : oldFilmList)
+		{
+			if(f.getId() == id)
+			{
+				currentFilm = f;
+				break;
+			}
+			else
+			{
+				//System.out.println("Method getFilm: Kein Film mit dieser ID vorhanden");
 			}
 		}
 		
