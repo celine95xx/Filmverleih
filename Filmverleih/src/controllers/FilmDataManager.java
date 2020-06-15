@@ -24,9 +24,16 @@ public class FilmDataManager {
 	private static Pattern filmNamePattern = Pattern.compile("^[A-Za-z0-9_-]{3,14}$");
 
 	private static ObservableList<FilmData> oldFilmList = FXCollections.observableArrayList();
+	
+	private static int currentFilmID;
 
 	public static void initializeFilmList() {
 		oldFilmList = loadFilm();
+
+		for (FilmData f : oldFilmList) 
+		{
+			System.out.println(f.toString());
+		}
 
 	}
 
@@ -41,8 +48,9 @@ public class FilmDataManager {
 		return true;
 	}
 
-	public static void addFilm(int id, String titel, String genre, int preis, boolean alter) {
-		oldFilmList.add(new FilmData(id, titel, genre, preis, alter));
+	public static void addFilm(int id, String titel, String genre, int preis, boolean alter, String thumbnail, String banner, String description) 
+	{
+		oldFilmList.add(new FilmData(id, titel, genre, preis, alter, thumbnail, banner, description));
 
 	}
 
@@ -93,5 +101,61 @@ public class FilmDataManager {
 		saveFilm(oldFilmList);
 
 	}
+	
+	public static List<FilmData> getNewestFilms()
+	{
+		List<FilmData> newestFilms = new ArrayList<FilmData>();
+		
+		for(int i = 0; i < oldFilmList.size(); i++)
+		{
+			newestFilms.add(oldFilmList.get(oldFilmList.size() - 1 - i));
+		}
+		
+		return newestFilms;
+	}
+	
+	public static FilmData getFilm()
+	{
+		FilmData currentFilm = null;
+		
+		for(FilmData f : oldFilmList)
+		{
+			if(f.getId() == currentFilmID)
+			{
+				currentFilm = f;
+				break;
+			}
+			else
+			{
+				//System.out.println("Method getFilm: Kein Film mit dieser ID vorhanden");
+			}
+		}
+		
+		return currentFilm;
+	}
+	
+	public static FilmData getFilmPerID(int id)
+	{
+		FilmData currentFilm = null;
+		
+		for(FilmData f : oldFilmList)
+		{
+			if(f.getId() == id)
+			{
+				currentFilm = f;
+				break;
+			}
+			else
+			{
+				//System.out.println("Method getFilm: Kein Film mit dieser ID vorhanden");
+			}
+		}
+		
+		return currentFilm;
+	}
 
+	public static void setCurrentFilm (int id)
+	{
+		currentFilmID = id;
+	}
 }

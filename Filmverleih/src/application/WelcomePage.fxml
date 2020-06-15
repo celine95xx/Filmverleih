@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1140.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WelcomePageController">
+<AnchorPane fx:id="paneWelcome" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1140.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WelcomePageController">
    <children>
       <Label layoutX="40.0" layoutY="4.0" text="Willkommen," textFill="WHITE">
          <font>
@@ -47,18 +47,18 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-image: url('images/testpic.JPG'); -fx-background-color: #121212;" text="Button" />
-            <Button mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" text="Button" GridPane.columnIndex="1">
+            <Button fx:id="btnNeuerscheinungen1" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212;" />
+            <Button fx:id="btnNeuerscheinungen2" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212;" visible="false" GridPane.columnIndex="1">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" text="Button" GridPane.columnIndex="2">
+            <Button fx:id="btnNeuerscheinungen3" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212;" visible="false" GridPane.columnIndex="2">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" text="Button" GridPane.columnIndex="3">
+            <Button fx:id="btnNeuerscheinungen4" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212;" visible="false" GridPane.columnIndex="3">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

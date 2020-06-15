@@ -34,7 +34,8 @@ public class MainGUIController implements Initializable {
 		System.out.println("INITIALIZE");
 
 		Parent fxml = null;
-		try {
+		try 
+		{
 			fxml = FXMLLoader.load(getClass().getResource("WelcomePage.fxml"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -53,12 +54,14 @@ public class MainGUIController implements Initializable {
 
 	public void showAllMovies(ActionEvent event) throws Exception {
 		System.out.println("SHOW ALL MOVIES");
+		Parent fxml = FXMLLoader.load(getClass().getResource("AllFilms.fxml"));
+		mainContent.getChildren().removeAll();
+		mainContent.getChildren().setAll(fxml);
 
 	}
 
-	public void showProfile(ActionEvent event) throws Exception {
-		System.out.println("SHOW PROFILE");
-
+	public void showProfile(ActionEvent event) throws Exception 
+	{
 		Parent fxml = FXMLLoader.load(getClass().getResource("UserProfile.fxml"));
 		mainContent.getChildren().removeAll();
 		mainContent.getChildren().setAll(fxml);
