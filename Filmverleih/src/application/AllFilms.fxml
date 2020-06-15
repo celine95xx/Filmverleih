@@ -63,7 +63,7 @@
             <Font name="System Bold" size="45.0" />
          </font>
       </Label>
-      <Button fx:id="btnNextPage" layoutX="1100.0" layoutY="515.0" mnemonicParsing="false" onAction="#clickThrough" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-image: url('images/arrow-right.PNG'); -fx-opacity: 0.3;" text="next" />
-      <Button fx:id="btnPrevPage" layoutY="515.0" mnemonicParsing="false" onAction="#clickThrough" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-image: url('images/arrow-left.PNG'); -fx-opacity: 0.3;" text="prev" />
+      <Button fx:id="btnNextPage" layoutX="1100.0" layoutY="515.0" mnemonicParsing="false" onAction="#clickThrough" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-image: url('images/arrow-right.PNG'); -fx-opacity: 0.4; -fx-text-fill: transparent;" text="next" />
+      <Button fx:id="btnPrevPage" layoutY="515.0" mnemonicParsing="false" onAction="#clickThrough" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-image: url('images/arrow-left.PNG'); -fx-opacity: 0.4; -fx-text-fill: transparent;" text="prev" />
    </children>
 </AnchorPane>

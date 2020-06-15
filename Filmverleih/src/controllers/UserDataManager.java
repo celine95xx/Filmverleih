@@ -6,11 +6,11 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,6 +26,7 @@ public class UserDataManager
 	private static List<UserData> oldUserList = new ArrayList<UserData>();
 
 	private static String currentUserId;
+	
 
 	public static void initializeUserList()
 	{
@@ -80,14 +81,6 @@ public class UserDataManager
 			loginSuccessful = true;
 			currentUserId = getUserID(name);
 			System.out.println(currentUserId);
-
-
-			//			rentFilm(2);
-			//			rentFilm(3);
-			//			rentFilm(4);
-			//			getCurrentUser().getRentedFilms();
-			//			
-			//			saveUser(oldUserList);
 		}
 
 
@@ -239,6 +232,19 @@ public class UserDataManager
 	{
 		getCurrentUser().addRentedFilm(filmID);
 		saveUser(oldUserList);
+
+		ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(1); //https://stackoverflow.com/questions/10882611/how-to-make-a-delayed-non-blocking-function-call
+		
+		exec.schedule(new Runnable() {
+			public void run() {
+				FilmDataManager.deleteFilmFromRentedList(getCurrentUser(), filmID);
+				System.out.println("Film (" + FilmDataManager.getFilmPerID(filmID).getTitel() + ") wurde aus der RentedFilmList entfernt");
+				saveUser(oldUserList);
+			}
+		}, 10, TimeUnit.SECONDS);
+		
+		exec.shutdown();
+		
 	}
 
 	public static boolean checkRentedFilm(int filmID)
