@@ -30,7 +30,7 @@ public class FilmDataManager {
 
 	}
 
-	public static void manageFilmRegistration(int id, String title, String genre, int price, boolean alter) {
+	public static boolean manageFilmRegistration(int id, String title, String genre, int price, boolean alter) {
 		addFilm(id, title, genre, price, alter);
 		saveFilm(oldFilmList);
 
@@ -38,6 +38,7 @@ public class FilmDataManager {
 		for (FilmData f : newFilmList) {
 			System.out.println(f.toString());
 		}
+		return true;
 	}
 
 	public static void addFilm(int id, String titel, String genre, int preis, boolean alter) {

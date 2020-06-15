@@ -26,8 +26,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.FilmData;
 
-public class Hauptseite implements Initializable 
-{
+public class Hauptseite implements Initializable {
 	@FXML
 	private ListView<FilmData> listView;
 
@@ -36,19 +35,16 @@ public class Hauptseite implements Initializable
 
 	@FXML
 	private ChoiceBox<String> ChoiceBox;
-	
 
-	public void setSideMenu (String sidemenu) throws IOException
-	{
-		
+	public void setSideMenu(String sidemenu) throws IOException {
+
 //		Stage primaryStage = new Stage();
 //		Parent root = FXMLLoader.load(getClass().getResource("/application/MainGUI.fxml"));  
 //		Scene scene = new Scene(root,1400,900);
 //		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 //		primaryStage.setScene(scene);
 //		primaryStage.initStyle(StageStyle.UNDECORATED); //https://stackoverflow.com/questions/35250783/stage-without-bar-javafx
-		
-		
+
 //		if(mainGUI == null)
 //			System.out.println("mainGUI is null");
 //		else
@@ -57,18 +53,15 @@ public class Hauptseite implements Initializable
 //		if(sideMenu == null)
 //			System.out.println("sideMenu is null");
 
-		//primaryStage.show();
-		
+		// primaryStage.show();
+
 	}
-	
-	
 
 	// ObservableList:
 	// https://stackoverflow.com/questions/36629522/convert-arraylist-to-observable-list-for-javafx-program
 	// listView.setItems:
 	// http://www.java2s.com/Tutorials/Java/JavaFX/0640__JavaFX_ListView.htm
-	public void showAllMovies(ActionEvent event) throws Exception 
-	{
+	public void showAllMovies(ActionEvent event) throws Exception {
 		spStackPane.setVisible(true);
 //		listView.getItems().addAll("Harry Potter", "Ich hab Hunger", "Wowi");
 		listView.setItems(FXCollections.observableArrayList(FilmDataManager.getFilmList()));
@@ -87,20 +80,20 @@ public class Hauptseite implements Initializable
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		// Set Items for the Genre ChoiceBox
-ChoiceBox.setItems(FXCollections.observableArrayList("Alphabetisch", "Fantasy", "Action", "Horror"));
+		ChoiceBox.setItems(FXCollections.observableArrayList("Alphabetisch", "Fantasy", "Action", "Horror"));
 
 		// Add Listener for ChoiceBox - Listens for ItemChanged Events
-	ChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-		@Override
-		public void changed(ObservableValue<? extends String> ov, String oldvalue, String newValue) {
+		ChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> ov, String oldvalue, String newValue) {
 
-			ObservableList<FilmData> newList;
-			if (newValue.equals("Alphabetisch")) {
+				ObservableList<FilmData> newList;
+				if (newValue.equals("Alphabetisch")) {
 					// Sort alphabetically ascending
 					FilmDataManager.sortFilmListByName();
 					newList = FXCollections.observableArrayList(FilmDataManager.getFilmList());
 				} else {
-				//	 Sort by Genre
+					// Sort by Genre
 					newList = FXCollections.observableArrayList(FilmDataManager.filterFilmListGenre(newValue));
 
 				}
