@@ -37,8 +37,8 @@ public class FilmDataManager {
 
 	}
 
-	public static boolean manageFilmRegistration(int id, String title, String genre, int price, boolean alter) {
-		addFilm(id, title, genre, price, alter);
+	public static boolean manageFilmRegistration(int id, String title, String genre, int price, boolean alter, String thumbnail, String banner, String description) {
+		addFilm(id, title, genre, price, alter,thumbnail, banner, description);
 		saveFilm(oldFilmList);
 
 		List<FilmData> newFilmList = loadFilm();

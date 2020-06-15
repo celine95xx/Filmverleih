@@ -58,7 +58,7 @@ public class Movies {
 	public void registrateFilm(ActionEvent event) throws Exception 
 	{
 
-	public void registrateFilm(ActionEvent event) throws Exception {
+
 
 		
 		
@@ -72,8 +72,7 @@ public class Movies {
 		// Registrate Film
 		FilmDataManager.manageFilmRegistration(Integer.parseInt(txtID.getText()), txtTitle.getText(), txtGenre.getText(), Integer.parseInt(txtPrice.getText()), cbFSK.isSelected(), txtThumbnail.getText(), txtBanner.getText(), txtDescription.getText());
 
-		FilmDataManager.manageFilmRegistration(Integer.parseInt(txtID.getText()), txtTitle.getText(),
-				txtGenre.getText(), Integer.parseInt(txtPrice.getText()), cbFSK.isSelected());
+		
 		// Close windows afterwards
 				Stage stg = (Stage) cbFSK.getScene().getWindow();
 				stg.close();	
