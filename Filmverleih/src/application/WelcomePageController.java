@@ -49,6 +49,17 @@ public class WelcomePageController implements Initializable
 		// TODO Auto-generated method stub
 		lblUsername.setText(UserDataManager.getCurrentUser().getName() + "!");
 
+		//Number of all films
+		int listsize = 0;
+		if(FilmDataManager.getNewestFilms().size() < 4)
+		{
+			listsize = FilmDataManager.getNewestFilms().size();
+		}
+		else
+		{
+			listsize = 4;
+		}
+		
 		List<Button> buttonList = new ArrayList<Button>();
 		buttonList.add(btnNeuerscheinungen1);
 		buttonList.add(btnNeuerscheinungen2);
@@ -56,7 +67,7 @@ public class WelcomePageController implements Initializable
 		buttonList.add(btnNeuerscheinungen4);
 
 
-		for(int i = 0; i < FilmDataManager.getNewestFilms().size(); i++)
+		for(int i = 0; i < listsize; i++)
 		{
 			String id = String.valueOf(FilmDataManager.getNewestFilms().get(i).getId());
 			buttonList.get(i).setText(id);

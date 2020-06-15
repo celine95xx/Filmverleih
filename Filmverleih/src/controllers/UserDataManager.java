@@ -256,6 +256,28 @@ public class UserDataManager
 
 		return isAlreadyRented;
 	}
+	
+	public static void addFilmToWatchList(int filmID)
+	{
+		getCurrentUser().addToWatchList(filmID);
+		saveUser(oldUserList);
+	}
+	
+	public static boolean checkWatchList(int filmID)
+	{
+		boolean isAlreadyBookmarked = false;
+
+		for(Integer i : getCurrentUser().getWatchList())
+		{
+			if(i == filmID)
+			{
+				isAlreadyBookmarked = true;
+				break;
+			}
+		}
+
+		return isAlreadyBookmarked;
+	}
 
 	public static String getUserID(String username)
 	{

@@ -35,7 +35,7 @@
                               <Insets top="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #121212; -fx-border-color: #30C9C4;" text="Merken" textFill="WHITE">
+                        <Button fx:id="btnAddToWatchList" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addToWatchList" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #121212; -fx-border-color: #30C9C4;" text="Merken" textFill="WHITE">
                            <HBox.margin>
                               <Insets top="20.0" />
                            </HBox.margin>
