@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="paneWelcome" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1140.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WelcomePageController">
+   <children>
+      <Label layoutX="40.0" layoutY="4.0" text="Willkommen," textFill="WHITE">
+         <font>
+            <Font name="Radicalis" size="60.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblUsername" layoutX="345.0" layoutY="55.0" text="[username]" textFill="WHITE">
+         <font>
+            <Font size="52.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="160.0" text="Neuerscheinungen" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="440.0" text="Beliebt" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="720.0" text="Empfehlungen" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <GridPane hgap="6.0" layoutY="210.0" prefHeight="210.0" prefWidth="1140.0" style="-fx-background-color: #121212;">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="btnNeuerscheinungen1" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212;" />
+            <Button fx:id="btnNeuerscheinungen2" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212;" visible="false" GridPane.columnIndex="1">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="btnNeuerscheinungen3" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212;" visible="false" GridPane.columnIndex="2">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="btnNeuerscheinungen4" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212;" visible="false" GridPane.columnIndex="3">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </GridPane>
+      <GridPane hgap="6.0" layoutY="490.0" prefHeight="210.0" prefWidth="1140.0" style="-fx-background-color: #121212;">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-image: url('images/testpic.JPG'); -fx-background-color: #121212;" text="Button" />
+            <Button mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" text="Button" GridPane.columnIndex="1">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" text="Button" GridPane.columnIndex="2">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" text="Button" GridPane.columnIndex="3">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </GridPane>
+      <GridPane hgap="6.0" layoutY="770.0" prefHeight="210.0" prefWidth="1140.0" style="-fx-background-color: #121212;">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="btnRecom1" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-image: url('images/testpic.JPG'); -fx-background-color: #121212;" />
+            <Button fx:id="btnRecom2" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" GridPane.columnIndex="1">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="btnRecom3" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" GridPane.columnIndex="2">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="btnRecom4" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" GridPane.columnIndex="3">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </GridPane>
+   </children>
+</AnchorPane>

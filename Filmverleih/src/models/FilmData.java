@@ -17,6 +17,7 @@ public class FilmData implements Serializable {
 	private String thumbnail;
 	private String banner;
 	private String description;
+	private int rentAmount;
 
 	public FilmData(int id, String titel, String genre, int preis, boolean alter, String thumbnail, String banner, String description) 
 	{
@@ -28,6 +29,21 @@ public class FilmData implements Serializable {
 		this.thumbnail = thumbnail;
 		this.banner = banner;
 		this.description = description;
+	}
+	
+	public void addToRentAmount()
+	{
+		rentAmount = rentAmount + 1;
+	}
+	
+	public int getRentAmount()
+	{
+		return rentAmount;
+	}
+	
+	public void removeFromRentAmount()
+	{
+		rentAmount = rentAmount - 1;
 	}
 
 	public int getId() {

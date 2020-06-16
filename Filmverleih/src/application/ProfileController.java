@@ -247,6 +247,8 @@ public class ProfileController implements Initializable
 		//Save number of rented films and "leftovers"
 		int numberRentedFilms = UserDataManager.getCurrentUser().getRentedFilms().size();
 		int leftovers = UserDataManager.getCurrentUser().getRentedFilms().size()%4;
+		
+		System.out.println("Number of rented Films: " + numberRentedFilms);
 
 		//If there are more films than could be displayed yet, show the next 4 films
 		if(numberRentedFilms >= (rentedFilmPage * 4))

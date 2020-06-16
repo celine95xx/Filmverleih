@@ -111,18 +111,18 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-image: url('images/testpic.JPG'); -fx-background-color: #121212;" text="Button" />
-            <Button mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" text="Button" GridPane.columnIndex="1">
+            <Button fx:id="btnRecom1" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-image: url('images/testpic.JPG'); -fx-background-color: #121212;" />
+            <Button fx:id="btnRecom2" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" GridPane.columnIndex="1">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" text="Button" GridPane.columnIndex="2">
+            <Button fx:id="btnRecom3" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" GridPane.columnIndex="2">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" text="Button" GridPane.columnIndex="3">
+            <Button fx:id="btnRecom4" mnemonicParsing="false" onAction="#showFilmProfile" prefHeight="201.0" prefWidth="274.0" style="-fx-background-color: #121212; -fx-background-image: url('images/testpic.JPG');" GridPane.columnIndex="3">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

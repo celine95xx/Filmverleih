@@ -44,6 +44,10 @@ public class PayWindowController implements Initializable
 		if(UserDataManager.checkLoginDataCombination(UserDataManager.getCurrentUser().getName(), txtPassword.getText()))
 		{
 			UserDataManager.rentFilm(FilmDataManager.getFilm().getId());
+			FilmDataManager.addToRentAmount();
+			
+			System.out.println("Rented Amount of " + FilmDataManager.getFilm().getTitel() +": " + FilmDataManager.getFilm().getRentAmount());
+			
 			UserDataManager.getCurrentUser().showRentedFilms();
 			
 			Stage stage = (Stage) linePassword.getScene().getWindow();

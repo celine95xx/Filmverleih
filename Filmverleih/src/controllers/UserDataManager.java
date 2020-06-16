@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import models.FilmData;
 import models.UserData;
 
 public class UserDataManager 
@@ -26,16 +27,16 @@ public class UserDataManager
 	private static List<UserData> oldUserList = new ArrayList<UserData>();
 
 	private static String currentUserId;
-	
+
 
 	public static void initializeUserList()
 	{
-		oldUserList = loadUser();
+		oldUserList = SaveLoadManager.loadUser();
 		if(!checkUserInList("admin"))
 		{
 			addUser("admin", "admin", 20, true);
 		}
-		saveUser(oldUserList);
+		SaveLoadManager.saveUser(oldUserList);
 
 		for(UserData e : oldUserList)
 			System.out.println(e.toString());
@@ -56,9 +57,9 @@ public class UserDataManager
 			currentUserId = getUserID(name);
 			System.out.println(dateOfBirth);
 			getCurrentUser().setDateOfBirth(dateOfBirth);
-			saveUser(oldUserList);
+			SaveLoadManager.saveUser(oldUserList);
 
-			List<UserData> newUserList = loadUser();
+			List<UserData> newUserList = SaveLoadManager.loadUser();
 
 			for(UserData e : newUserList)
 				System.out.println(e.toString());
@@ -73,19 +74,20 @@ public class UserDataManager
 	//Prüft, ob Login möglich ist über Kombination
 	public static boolean manageLogin(String name, String password)
 	{
-		oldUserList = loadUser();
+		oldUserList = SaveLoadManager.loadUser();
 		boolean loginSuccessful = false;
 
 		if(checkLoginDataCombination(name, password))
 		{
-			loginSuccessful = true;
 			currentUserId = getUserID(name);
+			checkUserFilmLists();
+			loginSuccessful = true;
 			System.out.println(currentUserId);
 		}
 
 
 
-		List<UserData> newUserList = loadUser();
+		List<UserData> newUserList = SaveLoadManager.loadUser();
 
 		for(UserData e : newUserList)
 			System.out.println(e.toString());
@@ -99,42 +101,42 @@ public class UserDataManager
 		oldUserList.add(new UserData(name, password, age, isAdmin));
 	}
 
-	public static void saveUser(List<UserData> user)
-	{
-		try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("user1.save")))
-		{
-			for(UserData e : user)
-				out.writeObject(e);
-			//System.out.println("Serialisierung erfolgreich!");
-		}
-		catch(Exception e)
-		{
-			//System.out.println("Serialisierung nicht erfolgreich.");
-		}
-	}
-
-	public static List<UserData> loadUser()
-	{
-		List<UserData> newUser = new ArrayList<UserData>();
-
-		try(ObjectInputStream input = new ObjectInputStream(new FileInputStream("user1.save")))
-		{
-			while(true)
-			{
-				newUser.add((UserData) input.readObject());
-			}
-		}
-		catch(EOFException e)
-		{
-			//System.out.println("Ende der Datei erreicht! Deserialisierung erfolgreich!");
-		}
-		catch(Exception e)
-		{
-			//System.out.println("Laden fehlgeschlagen. Keine Datei gefunden.");
-		}
-
-		return newUser;
-	}
+	//	public static void saveUser(List<UserData> user)
+	//	{
+	//		try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("user1.save")))
+	//		{
+	//			for(UserData e : user)
+	//				out.writeObject(e);
+	//			//System.out.println("Serialisierung erfolgreich!");
+	//		}
+	//		catch(Exception e)
+	//		{
+	//			//System.out.println("Serialisierung nicht erfolgreich.");
+	//		}
+	//	}
+	//
+	//	public static List<UserData> loadUser()
+	//	{
+	//		List<UserData> newUser = new ArrayList<UserData>();
+	//
+	//		try(ObjectInputStream input = new ObjectInputStream(new FileInputStream("user1.save")))
+	//		{
+	//			while(true)
+	//			{
+	//				newUser.add((UserData) input.readObject());
+	//			}
+	//		}
+	//		catch(EOFException e)
+	//		{
+	//			//System.out.println("Ende der Datei erreicht! Deserialisierung erfolgreich!");
+	//		}
+	//		catch(Exception e)
+	//		{
+	//			//System.out.println("Laden fehlgeschlagen. Keine Datei gefunden.");
+	//		}
+	//
+	//		return newUser;
+	//	}
 
 	///Prüft, ob Registrierung zulässig ist. Es wird überprüft, ob die beiden eingegebenen Passwörter übereinstimmen,
 	//ob Username zu lang und Sonderzeichen
@@ -230,21 +232,21 @@ public class UserDataManager
 
 	public static void rentFilm(int filmID)
 	{
-		getCurrentUser().addRentedFilm(filmID);
-		saveUser(oldUserList);
+		getCurrentUser().addRentedFilm(filmID);	
+		SaveLoadManager.saveUser(oldUserList);
 
 		ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(1); //https://stackoverflow.com/questions/10882611/how-to-make-a-delayed-non-blocking-function-call
-		
+
 		exec.schedule(new Runnable() {
 			public void run() {
 				FilmDataManager.deleteFilmFromRentedList(getCurrentUser(), filmID);
 				System.out.println("Film (" + FilmDataManager.getFilmPerID(filmID).getTitel() + ") wurde aus der RentedFilmList entfernt");
-				saveUser(oldUserList);
+				SaveLoadManager.saveUser(oldUserList);
 			}
-		}, 10, TimeUnit.SECONDS);
-		
+		}, 10, TimeUnit.MINUTES);
+
 		exec.shutdown();
-		
+
 	}
 
 	public static boolean checkRentedFilm(int filmID)
@@ -262,13 +264,13 @@ public class UserDataManager
 
 		return isAlreadyRented;
 	}
-	
+
 	public static void addFilmToWatchList(int filmID)
 	{
 		getCurrentUser().addToWatchList(filmID);
-		saveUser(oldUserList);
+		SaveLoadManager.saveUser(oldUserList);
 	}
-	
+
 	public static boolean checkWatchList(int filmID)
 	{
 		boolean isAlreadyBookmarked = false;
@@ -336,12 +338,96 @@ public class UserDataManager
 			getCurrentUser().setName(name);
 			getCurrentUser().setPasswort(password);
 
-			saveUser(oldUserList);
+			SaveLoadManager.saveUser(oldUserList);
 
 			dataSuccessfullyChanged = true;
 		}
 
 		return dataSuccessfullyChanged;
+	}
+
+	public static void checkUserFilmLists()
+	{
+		//RENTED FILMS
+		boolean rentedFilmAvailable = false;
+		List<Integer> notAvailableRentedFilms = new ArrayList<Integer>();
+
+		if(FilmDataManager.getFilmList().size() == 0 & getCurrentUser().getRentedFilms().size() != 0)
+		{
+			for(int i = 0; i < getCurrentUser().getRentedFilms().size(); i++)
+			{
+				FilmDataManager.deleteFilmFromRentedList(getCurrentUser(), getCurrentUser().getRentedFilms().get(i));
+			}
+		}
+		else
+		{
+			for(int i : getCurrentUser().getRentedFilms())
+			{
+				for(FilmData film : FilmDataManager.getFilmList())
+				{
+					if(film.getId() == i)
+					{
+						rentedFilmAvailable = true;
+						break;
+					}
+				}
+				if(!rentedFilmAvailable)
+				{
+					notAvailableRentedFilms.add(i);
+				}
+
+			}
+
+			for(int i : notAvailableRentedFilms)
+			{
+				FilmDataManager.deleteFilmFromRentedList(getCurrentUser(), i);
+			}
+		}
+		
+		
+		//WATCHLIST
+		boolean watchlistFilmAvailable = false;
+		List<Integer> notAvailableWatchlistFilms = new ArrayList<Integer>();
+
+		if(FilmDataManager.getFilmList().size() == 0)
+		{
+			for(int i = 0; i < getCurrentUser().getWatchList().size(); i++)
+			{
+				FilmDataManager.deleteFilmFromWatchList(getCurrentUser(), getCurrentUser().getWatchList().get(i));
+			}
+		}
+		else
+		{
+			for(int i : getCurrentUser().getWatchList())
+			{
+				for(FilmData film : FilmDataManager.getFilmList())
+				{
+					if(film.getId() == i)
+					{
+						watchlistFilmAvailable = true;
+						break;
+					}
+				}
+				if(!watchlistFilmAvailable)
+				{
+					notAvailableWatchlistFilms.add(i);
+				}
+
+			}
+
+			for(int i : notAvailableWatchlistFilms)
+			{
+				FilmDataManager.deleteFilmFromWatchList(getCurrentUser(), i);
+			}
+		}
+		
+		System.out.println("UDM - checkUserFilmLists - AllFilms Listsize: " + FilmDataManager.getFilmList().size());
+		System.out.println("UDM - checkUserFilmLists - RentedFilms Listsize " + getCurrentUser().getRentedFilms().size());
+		System.out.println("UDM - checkUserFilmLists - WatchList Listsize: " + getCurrentUser().getWatchList().size());
+		
+		
+		SaveLoadManager.saveUser(oldUserList);
+		oldUserList = SaveLoadManager.loadUser();
 	}
 
 
