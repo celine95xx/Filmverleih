@@ -34,8 +34,8 @@ public class Main extends Application
 
 	public static void main(String[] args) 
 	{
-		UserDataManager.initializeUserList();
 		FilmDataManager.initializeFilmList();
+		UserDataManager.initializeUserList();
 		launch(args);
 	}
 }

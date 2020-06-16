@@ -43,37 +43,54 @@ public class WelcomePageController implements Initializable
 	@FXML
 	private Button btnNeuerscheinungen4;
 
+	@FXML
+	private Button btnRecom1;
+
+	@FXML
+	private Button btnRecom2;
+
+	@FXML
+	private Button btnRecom3;
+
+	@FXML
+	private Button btnRecom4;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) 
 	{
 		// TODO Auto-generated method stub
 		lblUsername.setText(UserDataManager.getCurrentUser().getName() + "!");
 
-		//Number of all films
-		int listsize = 0;
-		if(FilmDataManager.getNewestFilms().size() < 4)
-		{
-			listsize = FilmDataManager.getNewestFilms().size();
-		}
-		else
-		{
-			listsize = 4;
-		}
-		
-		List<Button> buttonList = new ArrayList<Button>();
-		buttonList.add(btnNeuerscheinungen1);
-		buttonList.add(btnNeuerscheinungen2);
-		buttonList.add(btnNeuerscheinungen3);
-		buttonList.add(btnNeuerscheinungen4);
+		//		//Number of all films
+		//		int listsize = 0;
+		//		if(FilmDataManager.getNewestFilms().size() < 4)
+		//		{
+		//			listsize = FilmDataManager.getNewestFilms().size();
+		//		}
+		//		else
+		//		{
+		//			listsize = 4;
+		//		}
+		//		
+		//		List<Button> newFilmsButtonList = new ArrayList<Button>();
+		//		newFilmsButtonList.add(btnNeuerscheinungen1);
+		//		newFilmsButtonList.add(btnNeuerscheinungen2);
+		//		newFilmsButtonList.add(btnNeuerscheinungen3);
+		//		newFilmsButtonList.add(btnNeuerscheinungen4);
+		//
+		//
+		//		for(int i = 0; i < listsize; i++)
+		//		{
+		//			String id = String.valueOf(FilmDataManager.getNewestFilms().get(i).getId());
+		//			newFilmsButtonList.get(i).setText(id);
+		//			newFilmsButtonList.get(i).setStyle("-fx-background-image: url('/images/"+ FilmDataManager.getNewestFilms().get(i).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
+		//			newFilmsButtonList.get(i).setVisible(true);
+		//		}
 
 
-		for(int i = 0; i < listsize; i++)
-		{
-			String id = String.valueOf(FilmDataManager.getNewestFilms().get(i).getId());
-			buttonList.get(i).setText(id);
-			buttonList.get(i).setStyle("-fx-background-image: url('/images/"+ FilmDataManager.getNewestFilms().get(i).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
-			buttonList.get(i).setVisible(true);
-		}
+		showNewFilms();
+		System.out.println(FilmDataManager.getRecommendedFilms().size());
+		//showRecommendedFilms();
 	}
 
 
@@ -89,6 +106,67 @@ public class WelcomePageController implements Initializable
 
 
 		System.out.println(FilmDataManager.getFilm().getTitel());
+	}
+
+	public void showNewFilms()
+	{
+		//Number of all films
+		int listsize = 0;
+		if(FilmDataManager.getNewestFilms().size() < 4)
+		{
+			listsize = FilmDataManager.getNewestFilms().size();
+		}
+		else
+		{
+			listsize = 4;
+		}
+
+		List<Button> newFilmsButtonList = new ArrayList<Button>();
+		newFilmsButtonList.add(btnNeuerscheinungen1);
+		newFilmsButtonList.add(btnNeuerscheinungen2);
+		newFilmsButtonList.add(btnNeuerscheinungen3);
+		newFilmsButtonList.add(btnNeuerscheinungen4);
+
+
+		for(int i = 0; i < listsize; i++)
+		{
+			String id = String.valueOf(FilmDataManager.getNewestFilms().get(i).getId());
+			newFilmsButtonList.get(i).setText(id);
+			newFilmsButtonList.get(i).setStyle("-fx-background-image: url('/images/"+ FilmDataManager.getNewestFilms().get(i).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
+			newFilmsButtonList.get(i).setVisible(true);
+		}
+	}
+
+	public void showRecommendedFilms()
+	{
+		int listsize = 0;
+		if(FilmDataManager.getRecommendedFilms().size() < 4)
+		{
+			listsize = FilmDataManager.getRecommendedFilms().size();
+		}
+		else
+		{
+			listsize = 4;
+		}
+
+		List<Button> recomFilmList = new ArrayList<Button>();
+		recomFilmList.add(btnRecom1);
+		recomFilmList.add(btnRecom2);
+		recomFilmList.add(btnRecom3);
+		recomFilmList.add(btnRecom4);
+
+
+		for(int i = 0; i < listsize; i++)
+		{
+			int id = (int) FilmDataManager.getRecommendedFilms().get(i);
+			recomFilmList.get(i).setText(String.valueOf(id));
+			recomFilmList.get(i).setStyle("-fx-background-image: url('/images/"+ FilmDataManager.getFilmPerID(id).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
+			recomFilmList.get(i).setVisible(true);
+		}
+		for(int i = listsize; i < 4; i++)
+		{
+			recomFilmList.get(i).setVisible(false);
+		}
 	}
 
 
