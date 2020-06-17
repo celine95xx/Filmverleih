@@ -31,19 +31,15 @@ public class FilmData implements Serializable {
 		this.description = description;
 	}
 	
-	public void addToRentAmount()
+	
+	public void setRentAmount(int amount)
 	{
-		rentAmount = rentAmount + 1;
+		this.rentAmount = amount;
 	}
 	
 	public int getRentAmount()
 	{
 		return rentAmount;
-	}
-	
-	public void removeFromRentAmount()
-	{
-		rentAmount = rentAmount - 1;
 	}
 
 	public int getId() {
@@ -118,8 +114,7 @@ public class FilmData implements Serializable {
 	 **/
 	@Override
 	public String toString() {
-		return "Titel:" + this.titel;
-	}
+		return "Titel:" + this.titel + " --- Rent Amount: " + this.rentAmount;}
 
 	@Override
 	public int hashCode() {

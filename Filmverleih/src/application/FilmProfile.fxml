@@ -15,7 +15,7 @@
             <Insets bottom="20.0" left="60.0" right="20.0" top="30.0" />
          </padding>
          <children>
-            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="81.0" prefWidth="1000.0" spacing="130.0">
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="81.0" prefWidth="1000.0" spacing="180.0">
                <children>
                   <Label fx:id="txtFilmTitle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="78.0" prefWidth="658.0" text="[filmtitle]" textFill="WHITE">
                      <font>
@@ -35,13 +35,10 @@
                               <Insets top="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnAddToWatchList" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addToWatchList" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #121212; -fx-border-color: #30C9C4;" text="Merken" textFill="WHITE">
+                        <Button fx:id="btnAddToWatchList" mnemonicParsing="false" onAction="#addToWatchList" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #121212; -fx-background-image: url('images/bookmark_border.PNG');">
                            <HBox.margin>
-                              <Insets top="20.0" />
+                              <Insets left="20.0" top="30.0" />
                            </HBox.margin>
-                           <font>
-                              <Font size="25.0" />
-                           </font>
                         </Button>
                      </children>
                   </HBox>

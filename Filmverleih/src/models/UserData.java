@@ -2,7 +2,10 @@ package models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import controllers.FilmDataManager;
 
@@ -18,13 +21,16 @@ public class UserData implements Serializable
 
 	private ArrayList<Integer> rentedFilms = new ArrayList<Integer>();
 	private ArrayList<Integer> watchlist = new ArrayList<Integer>();
+	
+	private HashMap<Integer, String> rentTimes = new HashMap<Integer, String>();
 
 
 	//Konstruktor
-	public UserData (String name, String passwort, int age, boolean isAdmin)
+	public UserData (String name, String passwort, String dateOfBirth, int age, boolean isAdmin)
 	{
 		this.name = name;
 		this.passwort = passwort;
+		this.dateOfBirth = dateOfBirth;
 		this.age = age;
 		this.id = name+age+passwort;
 		this.isAdmin = isAdmin;
@@ -36,6 +42,11 @@ public class UserData implements Serializable
 	{
 		return rentedFilms;
 	}
+	
+	public HashMap<Integer, String> getRentTimes()
+	{
+		return rentTimes;
+	}
 
 	public void showRentedFilms()
 	{
@@ -43,13 +54,18 @@ public class UserData implements Serializable
 
 		for(int i = 0; i < rentedFilms.size(); i++)
 		{
-			System.out.println("ID: " + rentedFilms.get(i) + " --- " + FilmDataManager.getFilmPerID(rentedFilms.get(i)));
+			System.out.println("ID: " + rentedFilms.get(i) + " --- " + FilmDataManager.getFilmPerID(rentedFilms.get(i)) + " --- Ausgeliehen um: " + this.rentTimes.get(FilmDataManager.getFilmPerID(rentedFilms.get(i)).getId()));
 		}
 	}
 
 	public void addRentedFilm(int id)
 	{
 		rentedFilms.add(id);
+	}
+	
+	public void addRentTime(int id, String date)
+	{
+		rentTimes.put(id, date);
 	}
 
 	

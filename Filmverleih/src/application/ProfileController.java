@@ -119,6 +119,8 @@ public class ProfileController implements Initializable
 		txtBirthday.setPromptText(UserDataManager.getCurrentUser().getDateOfBirth());
 		txtPassword.setText(UserDataManager.getCurrentUser().getPasswort());
 		
+		UserDataManager.checkRemainingRentTime();
+		
 
 		//RENTED FILMS
 		rentedList.clear();
