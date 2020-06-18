@@ -28,6 +28,8 @@ public class FilmDataManager {
 	private static ObservableList<FilmData> oldFilmList = FXCollections.observableArrayList();
 	
 	private static ObservableList<FilmData> currentFilmList;
+	
+	private static ObservableList<FilmData> genreFilmList;
 
 	private static List<Integer> recommendedFilms = new ArrayList<Integer>();
 
@@ -48,7 +50,7 @@ public class FilmDataManager {
 		{
 			System.out.println(f.toString());
 		}
-
+	
 	}
 
 	public static boolean manageFilmRegistration(int id, String title, String genre, int price, boolean alter, String thumbnail, String banner, String description ) {
@@ -249,5 +251,10 @@ public class FilmDataManager {
 	public static void updateCurrentFilmList()
 	{
 		currentFilmList = oldFilmList;
+	}
+	
+	public static ObservableList<FilmData> getGenre(){
+		genreFilmList.sort(Comparator.comparing(FilmData::getGenre));
+		return genreFilmList;
 	}
 }
