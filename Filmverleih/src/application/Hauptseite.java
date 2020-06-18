@@ -88,7 +88,8 @@ public class Hauptseite implements Initializable {
 			public void changed(ObservableValue<? extends String> ov, String oldvalue, String newValue) {
 
 				ObservableList<FilmData> newList;
-				if (newValue.equals("Alphabetisch")) {
+				if (newValue.equals("Alphabetisch")) 
+				{ 
 					// Sort alphabetically ascending
 					FilmDataManager.sortFilmListByName();
 					newList = FXCollections.observableArrayList(FilmDataManager.getFilmList());

@@ -5,10 +5,15 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -34,7 +39,7 @@ public class UserDataManager
 		oldUserList = SaveLoadManager.loadUser();
 		if(!checkUserInList("admin"))
 		{
-			addUser("admin", "admin", 20, true);
+			addUser("admin", "admin", "1995-05-23", 20, true);
 		}
 		SaveLoadManager.saveUser(oldUserList);
 
@@ -53,7 +58,7 @@ public class UserDataManager
 		{
 			approvedRegistration = true;
 
-			addUser(name, password,calculateAge(dateOfBirth), false);
+			addUser(name, password, dateOfBirth, calculateAge(dateOfBirth), false);
 			currentUserId = getUserID(name);
 			System.out.println(dateOfBirth);
 			getCurrentUser().setDateOfBirth(dateOfBirth);
@@ -81,6 +86,7 @@ public class UserDataManager
 		{
 			currentUserId = getUserID(name);
 			checkUserFilmLists();
+			checkRemainingRentTime();
 			loginSuccessful = true;
 			System.out.println(currentUserId);
 		}
@@ -96,47 +102,11 @@ public class UserDataManager
 	}
 
 
-	public static void addUser(String name, String password, int age, boolean isAdmin)
+	public static void addUser(String name, String password, String dateOfBirth, int age, boolean isAdmin)
 	{
-		oldUserList.add(new UserData(name, password, age, isAdmin));
+		oldUserList.add(new UserData(name, password, dateOfBirth, age, isAdmin));
 	}
 
-	//	public static void saveUser(List<UserData> user)
-	//	{
-	//		try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("user1.save")))
-	//		{
-	//			for(UserData e : user)
-	//				out.writeObject(e);
-	//			//System.out.println("Serialisierung erfolgreich!");
-	//		}
-	//		catch(Exception e)
-	//		{
-	//			//System.out.println("Serialisierung nicht erfolgreich.");
-	//		}
-	//	}
-	//
-	//	public static List<UserData> loadUser()
-	//	{
-	//		List<UserData> newUser = new ArrayList<UserData>();
-	//
-	//		try(ObjectInputStream input = new ObjectInputStream(new FileInputStream("user1.save")))
-	//		{
-	//			while(true)
-	//			{
-	//				newUser.add((UserData) input.readObject());
-	//			}
-	//		}
-	//		catch(EOFException e)
-	//		{
-	//			//System.out.println("Ende der Datei erreicht! Deserialisierung erfolgreich!");
-	//		}
-	//		catch(Exception e)
-	//		{
-	//			//System.out.println("Laden fehlgeschlagen. Keine Datei gefunden.");
-	//		}
-	//
-	//		return newUser;
-	//	}
 
 	///Prüft, ob Registrierung zulässig ist. Es wird überprüft, ob die beiden eingegebenen Passwörter übereinstimmen,
 	//ob Username zu lang und Sonderzeichen
@@ -232,27 +202,55 @@ public class UserDataManager
 
 	public static void rentFilm(int filmID)
 	{
+		LocalDateTime rentTime = LocalDateTime.now();
 		getCurrentUser().addRentedFilm(filmID);	
+		getCurrentUser().getRentTimes().put(filmID, rentTime.toString());
+
 		SaveLoadManager.saveUser(oldUserList);
 
-		ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(1); //https://stackoverflow.com/questions/10882611/how-to-make-a-delayed-non-blocking-function-call
 
-		exec.schedule(new Runnable() {
-			public void run() {
-				FilmDataManager.deleteFilmFromRentedList(getCurrentUser(), filmID);
-				System.out.println("Film (" + FilmDataManager.getFilmPerID(filmID).getTitel() + ") wurde aus der RentedFilmList entfernt");
-				SaveLoadManager.saveUser(oldUserList);
+	}
+
+	public static void checkRemainingRentTime()
+	{
+		LocalDateTime currentTime = LocalDateTime.now();
+		List<Integer> expiredFilmIds = new ArrayList<Integer>();
+
+		for(Map.Entry<Integer, String> entry : getCurrentUser().getRentTimes().entrySet())
+		{
+			int id = entry.getKey();
+			String stringRentTime = entry.getValue();
+			LocalDateTime rentTime = LocalDateTime.parse(stringRentTime);
+			Duration timeDifference = Duration.between(rentTime, currentTime); //https://mkyong.com/java8/java-8-difference-between-two-localdate-or-localdatetime/
+
+			if(timeDifference.toMinutes() > 1)
+			{
+				expiredFilmIds.add(id);
 			}
-		}, 10, TimeUnit.MINUTES);
+		}
 
-		exec.shutdown();
+		for(int i = 0; i < expiredFilmIds.size(); i++)
+		{
+			int id = expiredFilmIds.get(i);
+			deleteFilmFromRentedList(id);
+		}
 
+	}
+
+	public static void deleteFilmFromRentedList(int filmID)
+	{
+		System.out.println("UDM-deleteFilmFromRentedList: " + FilmDataManager.getFilmPerID(filmID).getTitel() +" wurde aus der Rented Filmlist gelöscht.");
+		getCurrentUser().getRentedFilms().remove(Integer.valueOf(filmID));
+		getCurrentUser().getRentTimes().remove(filmID);
+		getCurrentUser().showRentedFilms();
+		System.out.println("RentList Size: " + getCurrentUser().getRentTimes().size());
 	}
 
 	public static boolean checkRentedFilm(int filmID)
 	{
 		boolean isAlreadyRented = false;
 
+		//:::ArrayList-Version:::
 		for(Integer i : getCurrentUser().getRentedFilms())
 		{
 			if(i == filmID)
@@ -261,7 +259,6 @@ public class UserDataManager
 				break;
 			}
 		}
-
 		return isAlreadyRented;
 	}
 
@@ -285,6 +282,12 @@ public class UserDataManager
 		}
 
 		return isAlreadyBookmarked;
+	}
+
+	public static void deleteFilmFromWatchList(int filmID)
+	{
+		getCurrentUser().getWatchList().removeIf(Integer -> Integer == filmID);
+		getCurrentUser().showWatchList();
 	}
 
 	public static String getUserID(String username)
@@ -328,6 +331,18 @@ public class UserDataManager
 
 		return age;
 	}
+	
+	public static boolean checkIfAdult()
+	{
+		boolean isAdult = false;
+		
+		if(calculateAge(getCurrentUser().getDateOfBirth()) >= 18)
+		{
+			isAdult = true;
+		}
+		
+		return isAdult;
+	}
 
 	public static boolean saveUserDataChanges(String name, String password)
 	{
@@ -356,11 +371,12 @@ public class UserDataManager
 		{
 			for(int i = 0; i < getCurrentUser().getRentedFilms().size(); i++)
 			{
-				FilmDataManager.deleteFilmFromRentedList(getCurrentUser(), getCurrentUser().getRentedFilms().get(i));
+				getCurrentUser().getRentedFilms().clear();
 			}
 		}
 		else
 		{
+			//:::ArrayList-Version:::
 			for(int i : getCurrentUser().getRentedFilms())
 			{
 				for(FilmData film : FilmDataManager.getFilmList())
@@ -380,11 +396,12 @@ public class UserDataManager
 
 			for(int i : notAvailableRentedFilms)
 			{
-				FilmDataManager.deleteFilmFromRentedList(getCurrentUser(), i);
+				//FilmDataManager.deleteFilmFromRentedList(getCurrentUser(), i);
+				deleteFilmFromRentedList(i);
 			}
 		}
-		
-		
+
+
 		//WATCHLIST
 		boolean watchlistFilmAvailable = false;
 		List<Integer> notAvailableWatchlistFilms = new ArrayList<Integer>();
@@ -393,7 +410,7 @@ public class UserDataManager
 		{
 			for(int i = 0; i < getCurrentUser().getWatchList().size(); i++)
 			{
-				FilmDataManager.deleteFilmFromWatchList(getCurrentUser(), getCurrentUser().getWatchList().get(i));
+				deleteFilmFromWatchList(getCurrentUser().getWatchList().get(i));
 			}
 		}
 		else
@@ -417,15 +434,15 @@ public class UserDataManager
 
 			for(int i : notAvailableWatchlistFilms)
 			{
-				FilmDataManager.deleteFilmFromWatchList(getCurrentUser(), i);
+				deleteFilmFromWatchList(i);
 			}
 		}
-		
-		System.out.println("UDM - checkUserFilmLists - AllFilms Listsize: " + FilmDataManager.getFilmList().size());
-		System.out.println("UDM - checkUserFilmLists - RentedFilms Listsize " + getCurrentUser().getRentedFilms().size());
-		System.out.println("UDM - checkUserFilmLists - WatchList Listsize: " + getCurrentUser().getWatchList().size());
-		
-		
+
+		//		System.out.println("UDM - checkUserFilmLists - AllFilms Listsize: " + FilmDataManager.getFilmList().size());
+		//		System.out.println("UDM - checkUserFilmLists - RentedFilms Listsize " + getCurrentUser().getRentedFilms().size());
+		//		System.out.println("UDM - checkUserFilmLists - WatchList Listsize: " + getCurrentUser().getWatchList().size());
+
+
 		SaveLoadManager.saveUser(oldUserList);
 		oldUserList = SaveLoadManager.loadUser();
 	}

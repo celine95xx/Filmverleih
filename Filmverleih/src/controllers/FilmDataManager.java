@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -24,10 +26,14 @@ public class FilmDataManager {
 	private static Pattern filmNamePattern = Pattern.compile("^[A-Za-z0-9_-]{3,14}$");
 
 	private static ObservableList<FilmData> oldFilmList = FXCollections.observableArrayList();
+	
+	private static ObservableList<FilmData> currentFilmList;
 
 	private static List<Integer> recommendedFilms = new ArrayList<Integer>();
 
 	private static int currentFilmID;
+	
+	
 
 	public static void initializeFilmList() 
 	{
@@ -35,6 +41,8 @@ public class FilmDataManager {
 		recommendedFilms = SaveLoadManager.loadRecommendations();
 
 		checkAvailableRecommendations();
+		
+		currentFilmList = FXCollections.observableArrayList(oldFilmList);
 
 		for (FilmData f : oldFilmList) 
 		{
@@ -57,35 +65,10 @@ public class FilmDataManager {
 	public static void addFilm(int id, String titel, String genre, int preis, boolean alter, String thumbnail, String banner, String description) 
 	{
 		oldFilmList.add(new FilmData(id, titel, genre, preis, alter, thumbnail, banner, description));
+		updateCurrentFilmList();
 
 	}
-
-	//	public static void saveFilm(List<FilmData> film) {
-	//		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("film.save"))) {
-	//			for (FilmData e : film)
-	//				out.writeObject(e);
-	//			System.out.println("Serialisierung erfolgreich!");
-	//		} catch (Exception e) {
-	//			System.out.println("Serialisierung nicht erfolgreich.");
-	//			e.printStackTrace();
-	//		}
-	//	}
-	//
-	//	public static ObservableList<FilmData> loadFilm() {
-	//		ObservableList<FilmData> newFilm = FXCollections.observableArrayList();
-	//
-	//		try (ObjectInputStream input = new ObjectInputStream(new FileInputStream("film.save"))) {
-	//			while (true) {
-	//				newFilm.add((FilmData) input.readObject());
-	//			}
-	//		} catch (EOFException e) {
-	//			System.out.println("Ende der Datei erreicht! Deserialisierung erfolgreich!");
-	//		} catch (Exception e) {
-	//			System.out.println("Laden fehlgeschlagen. Keine Datei gefunden.");
-	//		}
-	//
-	//		return newFilm;
-	//	}
+	
 
 	public static ObservableList<FilmData> getFilmList() {
 		return oldFilmList;
@@ -105,6 +88,7 @@ public class FilmDataManager {
 	public static void deleteMovie(FilmData film) 
 	{
 		oldFilmList.remove(film);
+		updateCurrentFilmList();
 		
 		checkAvailableRecommendations();
 		UserDataManager.checkUserFilmLists();
@@ -204,23 +188,19 @@ public class FilmDataManager {
 		currentFilmID = id;
 	}
 
-	public static void deleteFilmFromRentedList(UserData currentUser, int filmID)
-	{
-		currentUser.getRentedFilms().removeIf(Integer -> Integer == filmID);
-		currentUser.showRentedFilms();
-	}
-
-	public static void deleteFilmFromWatchList(UserData currentUser, int filmID)
-	{
-		currentUser.getWatchList().removeIf(Integer -> Integer == filmID);
-		currentUser.showWatchList();
-	}
-
 	public static void addToRentAmount()
 	{
-		getFilm().addToRentAmount();
+		int currentRentAmount = getFilm().getRentAmount();
+		getFilm().setRentAmount(getFilm().getRentAmount() + 1);
 		SaveLoadManager.saveFilm(oldFilmList);
 	}
+	
+//	public static void removeFromRentAmount(int filmID)
+//	{
+//		int currentRentAmount = getFilmPerID(filmID).getRentAmount();
+//		getFilmPerID(filmID).setRentAmount(getFilm().getRentAmount() - 1);
+//		SaveLoadManager.saveFilm(oldFilmList);
+//	}
 
 	public static void checkAvailableRecommendations()
 	{
@@ -258,5 +238,16 @@ public class FilmDataManager {
 				FilmDataManager.deleteFromRecommendation(i);
 			}
 		}
+	}
+	
+	public static ObservableList<FilmData> getPopularFilms()
+	{
+		currentFilmList.sort(Comparator.comparing(FilmData::getRentAmount).reversed());
+		return currentFilmList;
+	}
+	
+	public static void updateCurrentFilmList()
+	{
+		currentFilmList = oldFilmList;
 	}
 }

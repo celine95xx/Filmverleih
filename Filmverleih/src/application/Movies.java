@@ -79,15 +79,22 @@ public class Movies {
 		File sourcefile = fileChooser.showOpenDialog(stage);
 		String filename = sourcefile.getName();	
 		Path sourcepath = Paths.get(sourcefile.getAbsolutePath()); //https://stackoverflow.com/questions/27931444/how-can-i-move-files-to-another-folder-with-java
-		Path targetDirectory = Paths.get("./src/images/" + filename);
-
+		Path targetDirectory = Paths.get("src/images/" + filename);
+		
+		String canonicalPath = sourcefile.getCanonicalPath(); //Canonischer Path vom Bild 
+		System.out.println("Canonical Pathname: " + canonicalPath);
+		
+		String testpath = this.getClass().getResource("/images/add.PNG").getPath();
+		System.out.println("Bild im ImagesOrdner " + testpath);
+		
 		if(sourcefile != null)
 		{
-			System.out.println("Path : " + sourcefile.getAbsolutePath());
+			System.out.println("Absolute Pathname : " + sourcefile.getAbsolutePath());
 		}
 
 		Files.copy(sourcepath, targetDirectory); //https://www.java67.com/2016/09/how-to-copy-file-from-one-location-to-another-in-java.html
 		txtThumbnail.setText(filename);
+
 	}
 
 	public void searchBanner(ActionEvent event) throws Exception
@@ -98,7 +105,7 @@ public class Movies {
 		File sourcefile = fileChooser.showOpenDialog(stage);
 		String filename = sourcefile.getName();	
 		Path sourcepath = Paths.get(sourcefile.getAbsolutePath()); //https://stackoverflow.com/questions/27931444/how-can-i-move-files-to-another-folder-with-java
-		Path targetDirectory = Paths.get("./src/images/" + filename);
+		Path targetDirectory = Paths.get("src/images/" + filename);
 
 		if(sourcefile != null)
 		{

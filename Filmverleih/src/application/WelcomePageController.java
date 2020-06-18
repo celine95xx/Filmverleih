@@ -54,6 +54,18 @@ public class WelcomePageController implements Initializable
 
 	@FXML
 	private Button btnRecom4;
+	
+	@FXML
+	private Button btnPopular1;
+	
+	@FXML
+	private Button btnPopular2;
+	
+	@FXML
+	private Button btnPopular3;
+	
+	@FXML
+	private Button btnPopular4;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) 
@@ -87,10 +99,10 @@ public class WelcomePageController implements Initializable
 		//			newFilmsButtonList.get(i).setVisible(true);
 		//		}
 
-
 		showNewFilms();
 		System.out.println(FilmDataManager.getRecommendedFilms().size());
-		//showRecommendedFilms();
+		showRecommendedFilms();
+		showPopularFilms();
 	}
 
 
@@ -166,6 +178,40 @@ public class WelcomePageController implements Initializable
 		for(int i = listsize; i < 4; i++)
 		{
 			recomFilmList.get(i).setVisible(false);
+		}
+	}
+	
+	public void showPopularFilms()
+	{
+		System.out.println("WPC: showPopularFilms: " +FilmDataManager.getPopularFilms());
+		
+		int listsize = 0;
+		if(FilmDataManager.getPopularFilms().size() < 4)
+		{
+			listsize = FilmDataManager.getPopularFilms().size();
+		}
+		else
+		{
+			listsize = 4;
+		}
+
+		List<Button> popularFilmButtonList = new ArrayList<Button>();
+		popularFilmButtonList.add(btnPopular1);
+		popularFilmButtonList.add(btnPopular2);
+		popularFilmButtonList.add(btnPopular3);
+		popularFilmButtonList.add(btnPopular4);
+
+
+		for(int i = 0; i < listsize; i++)
+		{
+			int id = (int) FilmDataManager.getPopularFilms().get(i).getId();
+			popularFilmButtonList.get(i).setText(String.valueOf(id));
+			popularFilmButtonList.get(i).setStyle("-fx-background-image: url('/images/"+ FilmDataManager.getFilmPerID(id).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
+			popularFilmButtonList.get(i).setVisible(true);
+		}
+		for(int i = listsize; i < 4; i++)
+		{
+			popularFilmButtonList.get(i).setVisible(false);
 		}
 	}
 
