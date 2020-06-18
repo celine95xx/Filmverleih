@@ -29,7 +29,7 @@ public class FilmDataManager {
 	
 	private static ObservableList<FilmData> currentFilmList;
 	
-	private static ObservableList<FilmData> genreFilmList;
+	//private static ObservableList<FilmData> genreFilmList;
 
 	private static List<Integer> recommendedFilms = new ArrayList<Integer>();
 
@@ -44,7 +44,8 @@ public class FilmDataManager {
 
 		checkAvailableRecommendations();
 		
-		currentFilmList = FXCollections.observableArrayList(oldFilmList);
+		currentFilmList = FXCollections.observableArrayList();
+		currentFilmList.addAll(oldFilmList);
 
 		for (FilmData f : oldFilmList) 
 		{
@@ -76,16 +77,18 @@ public class FilmDataManager {
 		return oldFilmList;
 	}
 
-	public static void sortFilmListByName() {
-		oldFilmList.sort((f1, f2) -> f1.getTitel().compareTo(f2.getTitel()));
+	public static void sortFilmListByName() 
+	{
+		updateCurrentFilmList();
+		currentFilmList.sort((f1, f2) -> f2.getTitel().compareTo(f1.getTitel())); //Reverse Order
 	}
 
-	public static List<FilmData> filterFilmListGenre(String genre) {
-		List<FilmData> tempList = oldFilmList;
-		List<FilmData> result = tempList.stream().filter(f1 -> f1.getGenre().equals(genre))
-				.collect(Collectors.toList());
-		return result;
-	}
+//	public static List<FilmData> filterFilmListGenre(String genre) {
+//		List<FilmData> tempList = oldFilmList;
+//		List<FilmData> result = tempList.stream().filter(f1 -> f1.getGenre().equals(genre))
+//				.collect(Collectors.toList());
+//		return result;
+//	}
 
 	public static void deleteMovie(FilmData film) 
 	{
@@ -250,11 +253,37 @@ public class FilmDataManager {
 	
 	public static void updateCurrentFilmList()
 	{
-		currentFilmList = oldFilmList;
+		currentFilmList.clear();
+		currentFilmList.addAll(oldFilmList);
+		System.out.println("FDM - updateCurrentFilmList - currentFilmList Size: " + currentFilmList.size());
+		System.out.println("FDM - updateCurrentFilmList - oldFilmList Size: " + oldFilmList.size());
 	}
 	
-	public static ObservableList<FilmData> getGenre(){
-		genreFilmList.sort(Comparator.comparing(FilmData::getGenre));
-		return genreFilmList;
+	public static ObservableList<FilmData> getCurrentFilmList()
+	{
+		return currentFilmList;
+	}
+	
+//	public static ObservableList<FilmData> getSortedListByGenre(){
+//		currentFilmList.sort(Comparator.comparing(FilmData::getGenre));
+//		return currentFilmList;
+//	}
+	
+	public static void sortFilmListByGenre(String genre)
+	{
+		//currentFilmList.clear();
+		ObservableList<FilmData> temporaryList = FXCollections.observableArrayList();
+		System.out.println("FDM - sortFilmListByGenre - OldFilmList Size:" + oldFilmList.size());
+		for(FilmData film : oldFilmList)
+		{
+			System.out.println("FDM - sortFilmList Genre: " + film.toString());
+			if(film.getGenre().equals(genre))
+			{
+				temporaryList.add(film);
+			}
+		}
+		
+		currentFilmList = temporaryList;
+		//currentFilmList.sort(Comparator.comparing(FilmData::getGenre));
 	}
 }

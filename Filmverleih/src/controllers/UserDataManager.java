@@ -220,7 +220,7 @@ public class UserDataManager
 		{
 			int id = entry.getKey();
 			String stringRentTime = entry.getValue();
-			LocalDateTime rentTime = LocalDateTime.parse(stringRentTime);
+			LocalDateTime rentTime = LocalDateTime.parse(stringRentTime); //https://stackoverflow.com/questions/30788369/coverting-string-to-localtime-with-without-nanoofseconds
 			Duration timeDifference = Duration.between(rentTime, currentTime); //https://mkyong.com/java8/java-8-difference-between-two-localdate-or-localdatetime/
 
 			if(timeDifference.toMinutes() > 1)

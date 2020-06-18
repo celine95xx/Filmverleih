@@ -114,7 +114,7 @@ public class FilmData implements Serializable {
 	 **/
 	@Override
 	public String toString() {
-		return "Titel:" + this.titel + " --- Rent Amount: " + this.rentAmount;}
+		return "Titel:" + this.titel + " Genre: " + this.genre +"--- Rent Amount: " + this.rentAmount;}
 
 	@Override
 	public int hashCode() {
