@@ -1,0 +1,11 @@
+@font-face {
+	src: url("/fonts/Radicalis.ttf");
+}
+
+#FilmverleihSmall{
+	-fx-font-family: 'Radicalis';
+}
+
+#FilmverleihGross{
+	-fx-font-family: 'Radicalis';
+}

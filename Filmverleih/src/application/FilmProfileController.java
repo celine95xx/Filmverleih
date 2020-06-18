@@ -48,7 +48,7 @@ public class FilmProfileController implements Initializable
 		updateScene();
 		txtFilmTitle.setText(FilmDataManager.getFilm().getTitel());
 		txtGenre.setText(FilmDataManager.getFilm().getGenre());
-		filmBanner.setStyle("-fx-background-image: url('/images/"+ FilmDataManager.getFilm().getBanner() + "')");
+		filmBanner.setStyle("-fx-background-image: url('/filmimages/"+ FilmDataManager.getFilm().getBanner() + "')");
 
 		if(FilmDataManager.getFilm().getAlter() == true)
 		{

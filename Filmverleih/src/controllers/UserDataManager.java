@@ -371,7 +371,7 @@ public class UserDataManager
 		{
 			for(int i = 0; i < getCurrentUser().getRentedFilms().size(); i++)
 			{
-				getCurrentUser().getRentedFilms().clear();
+				getCurrentUser().getRentedFilms().clear(); /// ???
 			}
 		}
 		else

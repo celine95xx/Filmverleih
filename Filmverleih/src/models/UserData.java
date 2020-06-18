@@ -21,7 +21,6 @@ public class UserData implements Serializable
 
 	private ArrayList<Integer> rentedFilms = new ArrayList<Integer>();
 	private ArrayList<Integer> watchlist = new ArrayList<Integer>();
-	
 	private HashMap<Integer, String> rentTimes = new HashMap<Integer, String>();
 
 

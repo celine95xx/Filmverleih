@@ -17,12 +17,12 @@
    <children>
       <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" style="-fx-background-image: url('images/testpic.JPG'); -fx-background-color: #4B15CB;">
          <children>
-            <Label alignment="CENTER" text="Der Filmverleih" textFill="WHITE">
+            <Label id="FilmverleihGross" alignment="CENTER" stylesheets="@../styles/CustomFont.css" text="Der Filmverleih" textFill="WHITE">
                <VBox.margin>
                   <Insets top="250.0" />
                </VBox.margin>
                <font>
-                  <Font name="Radicalis" size="35.0" />
+                  <Font size="35.0" />
                </font>
             </Label>
          </children>

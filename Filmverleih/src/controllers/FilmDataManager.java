@@ -54,7 +54,7 @@ public class FilmDataManager {
 	
 	}
 
-	public static boolean manageFilmRegistration(int id, String title, String genre, int price, boolean alter, String thumbnail, String banner, String description ) {
+	public static boolean manageFilmRegistration(int id, String title, String genre, double price, boolean alter, String thumbnail, String banner, String description ) {
 		addFilm(id, title, genre, price, alter, thumbnail, banner, description);
 		SaveLoadManager.saveFilm(oldFilmList);
 
@@ -65,7 +65,7 @@ public class FilmDataManager {
 		return true;
 	}
 
-	public static void addFilm(int id, String titel, String genre, int preis, boolean alter, String thumbnail, String banner, String description) 
+	public static void addFilm(int id, String titel, String genre, double preis, boolean alter, String thumbnail, String banner, String description) 
 	{
 		oldFilmList.add(new FilmData(id, titel, genre, preis, alter, thumbnail, banner, description));
 		updateCurrentFilmList();
@@ -214,10 +214,7 @@ public class FilmDataManager {
 
 		if(FilmDataManager.getFilmList().size() == 0)
 		{
-			for(int i : getRecommendedFilms())
-			{
-				FilmDataManager.deleteFromRecommendation(i);
-			}
+			getRecommendedFilms().clear();
 		}
 		else
 		{
@@ -243,6 +240,41 @@ public class FilmDataManager {
 				FilmDataManager.deleteFromRecommendation(i);
 			}
 		}
+		
+//		boolean recommendedFilmAvailable = false;
+//		List<Integer> notAvailableWatchlistFilms = new ArrayList<Integer>();
+//
+//		if(FilmDataManager.getFilmList().size() == 0)
+//		{
+//			for(int i : getRecommendedFilms())
+//			{
+//				FilmDataManager.deleteFromRecommendation(i);
+//			}
+//		}
+//		else
+//		{
+//			for(int i : getRecommendedFilms())
+//			{
+//				for(FilmData film : FilmDataManager.getFilmList())
+//				{
+//					if(film.getId() == i)
+//					{
+//						recommendedFilmAvailable = true;
+//						break;
+//					}
+//				}
+//				if(!recommendedFilmAvailable)
+//				{
+//					notAvailableWatchlistFilms.add(i);
+//				}
+//
+//			}
+//
+//			for(int i : notAvailableWatchlistFilms)
+//			{
+//				FilmDataManager.deleteFromRecommendation(i);
+//			}
+//		}
 	}
 	
 	public static ObservableList<FilmData> getPopularFilms()

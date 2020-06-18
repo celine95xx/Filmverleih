@@ -1,9 +1,11 @@
 package application;
 
 import java.io.File;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ResourceBundle;
 
 import controllers.FilmDataManager;
 import javafx.beans.value.ChangeListener;
@@ -11,21 +13,28 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import models.FilmData;
 
-public class Movies {
+public class Movies implements Initializable
+{
 	@FXML
 	private TextField txtID;
 
@@ -51,9 +60,18 @@ public class Movies {
 	private CheckBox cbFSK;
 
 	@FXML
+	private ChoiceBox<String> cbGenre;
+
+	@FXML
 	private AnchorPane anchorPane;
 
 
+	public void initialize(URL arg0, ResourceBundle arg1) 
+	{
+		cbGenre.setItems(FXCollections.observableArrayList("Action", "Animation", "Drama", "Fantasy", "Horror", "Krimi", "Komödie"));
+		cbGenre.getSelectionModel().selectFirst();
+	}
+	
 	public void registrateFilm(ActionEvent event) throws Exception 
 	{
 		if(txtTitle.getText() == null || txtTitle.getText().equals("")) 
@@ -61,14 +79,20 @@ public class Movies {
 			txtTitle.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
 			return;
 		}
+		
 
 		// Registrate Film
-		FilmDataManager.manageFilmRegistration(Integer.parseInt(txtID.getText()), txtTitle.getText(), txtGenre.getText(), Integer.parseInt(txtPrice.getText()), cbFSK.isSelected(), txtThumbnail.getText(), txtBanner.getText(), txtDescription.getText());
-		
+		FilmDataManager.manageFilmRegistration(Integer.parseInt(txtID.getText()), txtTitle.getText(), cbGenre.getSelectionModel().getSelectedItem(), Double.parseDouble(txtPrice.getText()), cbFSK.isSelected(), txtThumbnail.getText(), txtBanner.getText(), txtDescription.getText());
+
 		// Close windows afterwards
 		Stage stg = (Stage) cbFSK.getScene().getWindow();
 		stg.close();	
 
+	}
+
+	public void handleNewWindow()
+	{
+		System.out.println("Movies: New Window shown!");
 	}
 
 	public void searchThumbnail(ActionEvent event) throws Exception
@@ -79,14 +103,14 @@ public class Movies {
 		File sourcefile = fileChooser.showOpenDialog(stage);
 		String filename = sourcefile.getName();	
 		Path sourcepath = Paths.get(sourcefile.getAbsolutePath()); //https://stackoverflow.com/questions/27931444/how-can-i-move-files-to-another-folder-with-java
-		Path targetDirectory = Paths.get("src/images/" + filename);
-		
-		String canonicalPath = sourcefile.getCanonicalPath(); //Canonischer Path vom Bild 
-		System.out.println("Canonical Pathname: " + canonicalPath);
-		
-		String testpath = this.getClass().getResource("/images/add.PNG").getPath();
-		System.out.println("Bild im ImagesOrdner " + testpath);
-		
+		Path targetDirectory = Paths.get("src/filmimages/" + filename);
+
+//		String canonicalPath = sourcefile.getCanonicalPath(); //Canonischer Path vom Bild 
+//		System.out.println("Canonical Pathname: " + canonicalPath);
+//
+//		String testpath = this.getClass().getResource("/images/add.PNG").getPath();
+//		System.out.println("Bild im ImagesOrdner " + testpath);
+
 		if(sourcefile != null)
 		{
 			System.out.println("Absolute Pathname : " + sourcefile.getAbsolutePath());
@@ -105,7 +129,7 @@ public class Movies {
 		File sourcefile = fileChooser.showOpenDialog(stage);
 		String filename = sourcefile.getName();	
 		Path sourcepath = Paths.get(sourcefile.getAbsolutePath()); //https://stackoverflow.com/questions/27931444/how-can-i-move-files-to-another-folder-with-java
-		Path targetDirectory = Paths.get("src/images/" + filename);
+		Path targetDirectory = Paths.get("src/filmimages/" + filename);
 
 		if(sourcefile != null)
 		{

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
+import com.sun.glass.events.WindowEvent;
+
 import controllers.FilmDataManager;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -15,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -90,7 +93,8 @@ public class Control implements Initializable {
 
 	}
 
-	public void addMovie(ActionEvent event) throws Exception {
+	public void addMovie(ActionEvent event) throws Exception 
+	{
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/application/Movies.fxml"));
 		Scene scene = new Scene(root, 1280, 720);
@@ -158,23 +162,23 @@ public class Control implements Initializable {
 	{
 		int numberRecommendations = FilmDataManager.getRecommendedFilms().size();
 
-			if(numberRecommendations <= 4)
+		if(numberRecommendations <= 4)
+		{
+			for(int i = 0; i < numberRecommendations; i++)
 			{
-				for(int i = 0; i < numberRecommendations; i++)
-				{
-					recomLabelList.get(i).setText(FilmDataManager.getFilmPerID(FilmDataManager.getRecommendedFilms().get(i)).getTitel());
-				}
+				recomLabelList.get(i).setText(FilmDataManager.getFilmPerID(FilmDataManager.getRecommendedFilms().get(i)).getTitel());
+			}
 
-				for(int i = numberRecommendations; i < 4; i++)
-				{
-					recomLabelList.get(i).setText("-");
-				}
-			}
-			if(numberRecommendations == 4)
+			for(int i = numberRecommendations; i < 4; i++)
 			{
-				btnRecom.setDisable(true);
-				//btnRecom.setStyle("-fx-background-color: #121212; -fx-background-image: url('images/star_white.PNG')");
+				recomLabelList.get(i).setText("-");
 			}
+		}
+		if(numberRecommendations == 4)
+		{
+			btnRecom.setDisable(true);
+			//btnRecom.setStyle("-fx-background-color: #121212; -fx-background-image: url('images/star_white.PNG')");
+		}
 	}
 
 
@@ -187,7 +191,7 @@ public class Control implements Initializable {
 			return; // FilmIndex is out of bounds
 
 		int selectedFilmID = movies.getItems().get(filmIndex).getId();
-		
+
 		if(FilmDataManager.checkFilmInRecommendations(selectedFilmID))
 		{
 			btnRecom.setStyle("-fx-background-color: #121212; -fx-background-image: url('images/star_white.PNG')");
@@ -198,12 +202,12 @@ public class Control implements Initializable {
 			btnRecom.setStyle("-fx-background-color: #121212; -fx-background-image: url('images/star_border.PNG')");
 		}
 	}
-	
+
 	public void mouseEnter(MouseEvent event)
 	{
 		lblRecom3.setTextFill(Color.BLUEVIOLET);
 	}
-	
+
 	public void mouseExit(MouseEvent event)
 	{
 		lblRecom3.setTextFill(Color.WHITE);

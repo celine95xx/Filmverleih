@@ -21,14 +21,14 @@
                   <Font name="System Bold" size="45.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="37.0" layoutY="182.0" prefHeight="66.0" prefWidth="210.0" text="[filmtitel]" textFill="WHITE">
+            <Label fx:id="lblTitle" alignment="TOP_LEFT" layoutX="37.0" layoutY="182.0" prefHeight="66.0" prefWidth="210.0" text="[filmtitel]" textFill="WHITE" wrapText="true">
                <font>
-                  <Font size="25.0" />
+                  <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="293.0" layoutY="179.0" text="x,xx €" textFill="#30c9c4">
+            <Label fx:id="lblPrice" layoutX="314.0" layoutY="182.0" prefHeight="25.0" prefWidth="49.0" text="x,xx €" textFill="#30c9c4">
                <font>
-                  <Font size="25.0" />
+                  <Font size="20.0" />
                </font>
             </Label>
             <PasswordField fx:id="txtPassword" alignment="TOP_LEFT" layoutX="47.0" layoutY="325.0" prefHeight="25.0" prefWidth="306.0" promptText="Passwort" style="-fx-background-color: #121212;" />

@@ -144,7 +144,7 @@ public class WelcomePageController implements Initializable
 		{
 			String id = String.valueOf(FilmDataManager.getNewestFilms().get(i).getId());
 			newFilmsButtonList.get(i).setText(id);
-			newFilmsButtonList.get(i).setStyle("-fx-background-image: url('/images/"+ FilmDataManager.getNewestFilms().get(i).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
+			newFilmsButtonList.get(i).setStyle("-fx-background-image: url('/filmimages/"+ FilmDataManager.getNewestFilms().get(i).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
 			newFilmsButtonList.get(i).setVisible(true);
 		}
 	}
@@ -172,7 +172,7 @@ public class WelcomePageController implements Initializable
 		{
 			int id = (int) FilmDataManager.getRecommendedFilms().get(i);
 			recomFilmList.get(i).setText(String.valueOf(id));
-			recomFilmList.get(i).setStyle("-fx-background-image: url('/images/"+ FilmDataManager.getFilmPerID(id).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
+			recomFilmList.get(i).setStyle("-fx-background-image: url('/filmimages/"+ FilmDataManager.getFilmPerID(id).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
 			recomFilmList.get(i).setVisible(true);
 		}
 		for(int i = listsize; i < 4; i++)
@@ -206,7 +206,7 @@ public class WelcomePageController implements Initializable
 		{
 			int id = (int) FilmDataManager.getPopularFilms().get(i).getId();
 			popularFilmButtonList.get(i).setText(String.valueOf(id));
-			popularFilmButtonList.get(i).setStyle("-fx-background-image: url('/images/"+ FilmDataManager.getFilmPerID(id).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
+			popularFilmButtonList.get(i).setStyle("-fx-background-image: url('/filmimages/"+ FilmDataManager.getFilmPerID(id).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
 			popularFilmButtonList.get(i).setVisible(true);
 		}
 		for(int i = listsize; i < 4; i++)

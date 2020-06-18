@@ -68,7 +68,7 @@ public class AllFilmsController implements Initializable
 		allFilms.add(btnFilm16);
 		
 		// Set Items for the Genre ChoiceBox
-		filter.setItems(FXCollections.observableArrayList("Alle", "Alphabetisch", "Fantasy", "Action", "Horror"));
+		filter.setItems(FXCollections.observableArrayList("Alle", "Alphabetisch", "Action", "Animation", "Drama", "Fantasy", "Horror", "Krimi", "Komödie"));
 		filter.getSelectionModel().selectFirst();
 		FilmDataManager.updateCurrentFilmList();
 		showFilms();
@@ -218,7 +218,7 @@ public class AllFilmsController implements Initializable
 			{
 				int id = FilmDataManager.getCurrentFilmList().get((numberAllFilms - 16*(page - 1) -1 - i)).getId();
 				allFilms.get(i).setText(String.valueOf(id));
-				allFilms.get(i).setStyle("-fx-background-image: url('/images/"+ FilmDataManager.getFilmPerID(id).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
+				allFilms.get(i).setStyle("-fx-background-image: url('/filmimages/"+ FilmDataManager.getFilmPerID(id).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
 				allFilms.get(i).setVisible(true);
 
 				System.out.println(FilmDataManager.getFilmPerID(id).getTitel());
@@ -237,7 +237,7 @@ public class AllFilmsController implements Initializable
 			{
 				int id = FilmDataManager.getCurrentFilmList().get((numberAllFilms - 16*(page - 1) -1 - i)).getId();
 				allFilms.get(i).setText(String.valueOf(id));
-				allFilms.get(i).setStyle("-fx-background-image: url('/images/"+ FilmDataManager.getFilmPerID(id).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
+				allFilms.get(i).setStyle("-fx-background-image: url('/filmimages/"+ FilmDataManager.getFilmPerID(id).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
 				allFilms.get(i).setVisible(true);
 
 				System.out.println(FilmDataManager.getFilmPerID(id).getTitel());

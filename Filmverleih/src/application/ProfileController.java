@@ -259,7 +259,7 @@ public class ProfileController implements Initializable
 			{
 				int id = UserDataManager.getCurrentUser().getRentedFilms().get((UserDataManager.getCurrentUser().getRentedFilms().size() - 4*(rentedFilmPage - 1) -1 - i));
 				rentedList.get(i).setText(String.valueOf(id));
-				rentedList.get(i).setStyle("-fx-background-image: url('/images/"+ FilmDataManager.getFilmPerID(id).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
+				rentedList.get(i).setStyle("-fx-background-image: url('/filmimages/"+ FilmDataManager.getFilmPerID(id).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
 				rentedList.get(i).setVisible(true);
 
 				System.out.println(FilmDataManager.getFilmPerID(id).getTitel());
@@ -278,7 +278,7 @@ public class ProfileController implements Initializable
 			{
 				int id = UserDataManager.getCurrentUser().getRentedFilms().get((UserDataManager.getCurrentUser().getRentedFilms().size() - 4*(rentedFilmPage - 1) -1 - i));
 				rentedList.get(i).setText(String.valueOf(id));
-				rentedList.get(i).setStyle("-fx-background-image: url('/images/"+ FilmDataManager.getFilmPerID(id).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
+				rentedList.get(i).setStyle("-fx-background-image: url('/filmimages/"+ FilmDataManager.getFilmPerID(id).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
 				rentedList.get(i).setVisible(true);
 
 				System.out.println(FilmDataManager.getFilmPerID(id).getTitel());
@@ -332,7 +332,7 @@ public class ProfileController implements Initializable
 			{
 				int id = UserDataManager.getCurrentUser().getWatchList().get((UserDataManager.getCurrentUser().getWatchList().size() - 4*(watchlistPage - 1) -1 - i));
 				watchList.get(i).setText(String.valueOf(id));
-				watchList.get(i).setStyle("-fx-background-image: url('/images/"+ FilmDataManager.getFilmPerID(id).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
+				watchList.get(i).setStyle("-fx-background-image: url('/filmimages/"+ FilmDataManager.getFilmPerID(id).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
 				watchList.get(i).setVisible(true);
 				
 				btnWatchlistNext.setVisible(true);
@@ -350,7 +350,7 @@ public class ProfileController implements Initializable
 			{
 				int id = UserDataManager.getCurrentUser().getWatchList().get((UserDataManager.getCurrentUser().getWatchList().size() - 4*(watchlistPage - 1) -1 - i));
 				watchList.get(i).setText(String.valueOf(id));
-				watchList.get(i).setStyle("-fx-background-image: url('/images/"+ FilmDataManager.getFilmPerID(id).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
+				watchList.get(i).setStyle("-fx-background-image: url('/filmimages/"+ FilmDataManager.getFilmPerID(id).getThumbnail()+"'); -fx-text-fill: transparent; -fx-background-color: #121212");
 				watchList.get(i).setVisible(true);
 
 				//System.out.println(FilmDataManager.getFilmPerID(id).getTitel());

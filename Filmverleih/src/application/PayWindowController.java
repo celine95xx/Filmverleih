@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -26,6 +27,12 @@ public class PayWindowController implements Initializable
 	private AnchorPane panePayWindow;
 	
 	@FXML
+	private Label lblTitle;
+	
+	@FXML
+	private Label lblPrice;
+	
+	@FXML
 	private PasswordField txtPassword;
 	
 	@FXML
@@ -36,6 +43,8 @@ public class PayWindowController implements Initializable
 	public void initialize(URL arg0, ResourceBundle arg1) 
 	{
 		panePayWindow.setStyle("-fx-background-color: #121212; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 24, 0, 0, 0)");
+		lblTitle.setText(FilmDataManager.getFilm().getTitel());
+		lblPrice.setText(Double.toString(FilmDataManager.getFilm().getPreis())+"€");
 		
 	}
 	
