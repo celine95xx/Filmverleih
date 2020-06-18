@@ -34,7 +34,7 @@
                   <Image url="@/images/movie_white.PNG" />
                </image>
             </ImageView>
-            <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="23.0" layoutY="461.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgControlPanel" fitHeight="36.0" fitWidth="36.0" layoutX="23.0" layoutY="461.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@/images/build_white.PNG" />
                </image>

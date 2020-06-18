@@ -66,6 +66,6 @@
       </Label>
       <Button fx:id="btnNextPage" layoutX="1100.0" layoutY="515.0" mnemonicParsing="false" onAction="#clickThrough" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-image: url('images/arrow-right.PNG'); -fx-opacity: 0.4; -fx-text-fill: transparent;" text="next" />
       <Button fx:id="btnPrevPage" layoutY="515.0" mnemonicParsing="false" onAction="#clickThrough" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-image: url('images/arrow-left.PNG'); -fx-opacity: 0.4; -fx-text-fill: transparent;" text="prev" />
-      <ChoiceBox fx:id="filter" layoutX="950.0" layoutY="79.0" prefWidth="150.0" style="-fx-background-color: #121212;" />
+      <ChoiceBox fx:id="filter" layoutX="950.0" layoutY="79.0" prefWidth="150.0" style="-fx-background-color: #181818;" stylesheets="@../styles/DropDown.css" />
    </children>
 </AnchorPane>

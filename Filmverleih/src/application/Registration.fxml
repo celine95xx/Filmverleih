@@ -7,16 +7,17 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="300.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LogIn">
    <children>
-      <TextField fx:id="txtNewUserName" layoutX="60.0" layoutY="200.0" promptText="Benutzername" style="-fx-background-color: #121212; -fx-border-color: #00A095;">
+      <TextField fx:id="txtNewUserName" layoutX="60.0" layoutY="200.0" promptText="Benutzername" style="-fx-background-color: #FFFFFF;">
          <font>
             <Font size="14.0" />
          </font></TextField>
       <DatePicker layoutX="60.0" layoutY="244.0" prefHeight="25.0" prefWidth="175.0" />
-      <PasswordField fx:id="txtNewUserPassword" layoutX="60.0" layoutY="283.0" promptText="Passwort" style="-fx-background-color: #121212; -fx-border-color: #00A095;">
+      <PasswordField fx:id="txtNewUserPassword" layoutX="60.0" layoutY="283.0" promptText="Passwort" style="-fx-background-color: #121212;">
          <font>
             <Font size="14.0" />
          </font></PasswordField>
@@ -40,5 +41,6 @@
          </font>
       </Label>
       <Button layoutX="107.0" layoutY="546.0" mnemonicParsing="false" onAction="#registrateUser" prefHeight="40.0" prefWidth="86.0" style="-fx-background-color: #31B8B4;" text="Registrieren" />
+      <Line fx:id="lineUserName" endX="74.0" layoutX="161.0" layoutY="230.0" startX="-101.0" stroke="#31b8b4" />
    </children>
 </AnchorPane>

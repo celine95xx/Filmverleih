@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -22,6 +23,9 @@ public class MainGUIController implements Initializable {
 
 	@FXML
 	private Label lblUsername;
+	
+	@FXML
+	private ImageView imgControlPanel;
 
 	@FXML
 	private Pane contentArea;
@@ -44,8 +48,10 @@ public class MainGUIController implements Initializable {
 		mainContent.getChildren().removeAll();
 		mainContent.getChildren().setAll(fxml);
 
-		if (!UserDataManager.getCurrentUser().isAdmin()) {
+		if (!UserDataManager.getCurrentUser().isAdmin()) 
+		{
 			btnControlPanel.setVisible(false);
+			imgControlPanel.setVisible(false);
 		}
 
 //		lblUsername.setText(UserDataManager.getCurrentUser().getName() + "!");
