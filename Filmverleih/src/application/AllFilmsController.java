@@ -7,13 +7,19 @@ import java.util.ResourceBundle;
 
 import controllers.FilmDataManager;
 import controllers.UserDataManager;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.AnchorPane;
+import models.FilmData;
 
 public class AllFilmsController implements Initializable
 {
@@ -28,6 +34,8 @@ public class AllFilmsController implements Initializable
 
 	@FXML
 	private Button btnPrevPage;
+	@FXML
+	private ChoiceBox filter;
 
 	private static int page;
 
@@ -154,6 +162,32 @@ public class AllFilmsController implements Initializable
 			btnNextPage.setVisible(false);
 		}
 	}
+	public void initialize1(URL arg0, ResourceBundle arg1) {
+
+		// Set Items for the Genre ChoiceBox
+		filter.setItems(FXCollections.observableArrayList("Alphabetisch", "Fantasy", "Action", "Horror"));
+
+		// Add Listener for ChoiceBox - Listens for ItemChanged Events
+		filter.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> ov, String oldvalue, String newValue) {
+
+				ObservableList<FilmData> newList;
+				if (newValue.equals("Alphabetisch")) 
+				{ 
+					// Sort alphabetically ascending
+					FilmDataManager.sortFilmListByName();
+					newList = FXCollections.observableArrayList(FilmDataManager.getFilmList());
+				} else {
+					// Sort by Genre
+					newList = FXCollections.observableArrayList(FilmDataManager.getGenre());
+
+				}
+				allFilms.add(newList);
+			}
+		});
+	}
+
 
 
 

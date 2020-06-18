@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -65,5 +66,6 @@
       </Label>
       <Button fx:id="btnNextPage" layoutX="1100.0" layoutY="515.0" mnemonicParsing="false" onAction="#clickThrough" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-image: url('images/arrow-right.PNG'); -fx-opacity: 0.4; -fx-text-fill: transparent;" text="next" />
       <Button fx:id="btnPrevPage" layoutY="515.0" mnemonicParsing="false" onAction="#clickThrough" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: transparent; -fx-background-image: url('images/arrow-left.PNG'); -fx-opacity: 0.4; -fx-text-fill: transparent;" text="prev" />
+      <ChoiceBox fx:id="filter" layoutX="949.0" layoutY="111.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
