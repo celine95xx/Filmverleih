@@ -149,7 +149,6 @@ public class ProfileController implements Initializable {
 		}
 
 		boxNewPassword.setVisible(true);
-
 		btnEdit.setVisible(false);
 		btnSave.setVisible(true);
 	}
@@ -157,30 +156,68 @@ public class ProfileController implements Initializable {
 	public void saveUserData(ActionEvent event) throws Exception {
 		String changedUsername = txtUsername.getText();
 		String changedPassword = txtNewPassword.getText();
+		String changedPasswordConfirmed = txtNewPasswordConfirmed.getText();
 
-		if (!UserDataManager.validateUserName(changedUsername)) {
-			System.out.println("Changed Username invalid!");
-			changedUsername = UserDataManager.getCurrentUser().getName();
-			txtUsername.setText(changedUsername);
-		}
-		// Send Data to UserDataManager
-		else if (txtNewPassword.getText().equals(txtNewPasswordConfirmed.getText())) {
-			if (!UserDataManager.saveUserDataChanges(txtUsername.getText(), txtNewPassword.getText())) {
-				System.out.println("Username already taken");
-				txtUsername.setText(UserDataManager.getCurrentUser().getName());
+		//Username change
+		if(!changedUsername.equals(UserDataManager.getCurrentUser().getName())) //Wenn Name im Textfeld ungleich Username prüfe...
+		{
+			if (!UserDataManager.validateUserName(changedUsername)) { //Wenn neuer Username invalid (wegen der Zeichen), bleibt der alte Name gleich
+				System.out.println("Changed Username invalid!");
+				changedUsername = UserDataManager.getCurrentUser().getName();
+				txtUsername.setText(changedUsername);
 			}
-		} else {
-			System.out.println("Neue Passwörter stimmen nicht überein");
+			else {
+				if(UserDataManager.saveNewUserName(changedUsername))
+				{
+					System.out.println("PC - saveUserData: Username wurde geändert!");
+				}
+				else {
+					System.out.println("PC - saveUserData: Username schon vergeben");
+				}
+
+			}
 		}
 
-		// Change GUI elements
-		txtUsername.setDisable(true);
+		if(!changedPassword.equals(UserDataManager.getCurrentUser().getPasswort()) || !changedPasswordConfirmed.equals(UserDataManager.getCurrentUser().getPasswort()))
+		{
+			if(!changedPassword.equals(changedPasswordConfirmed))
+			{
+				System.out.println("PC - saveUserData: Passwörter stimmen nicht überein");
+			}
+			else
+			{
+				if(!changedPassword.equals(""))
+				{
+					UserDataManager.saveNewPassword(changedPassword);
+					txtNewPassword.setText(null);
+					txtNewPasswordConfirmed.setText(null);
+				}
+			}
+			
+		}
+
+			//		// Send valid data to UserDataManager
+			//		else if (txtNewPassword.getText().equals(txtNewPasswordConfirmed.getText())) {
+			//			if (!UserDataManager.saveUserDataChanges(txtUsername.getText(), txtNewPassword.getText())) {
+			//				System.out.println("Username already taken");
+			//				txtUsername.setText(UserDataManager.getCurrentUser().getName());
+			//			}
+			//		} 
+			//		else {
+			//			System.out.println("Neue Passwörter stimmen nicht überein");
+			//		}
+
+
+
+			// Change GUI elements
+			txtUsername.setDisable(true);
 		btnSave.setVisible(false);
 		boxNewPassword.setVisible(false);
 
 		btnEdit.setStyle("-fx-background-color: #FFFFFF");
 		btnEdit.setOpacity(0.07);
 		btnEdit.setVisible(true);
+
 	}
 
 	public void showFilmProfile(ActionEvent event) throws Exception {
@@ -228,9 +265,9 @@ public class ProfileController implements Initializable {
 						(UserDataManager.getCurrentUser().getRentedFilms().size() - 4 * (rentedFilmPage - 1) - 1 - i));
 				rentedList.get(i).setText(String.valueOf(id));
 				rentedList.get(i)
-						.setStyle("-fx-background-image: url('/filmimages/"
-								+ FilmDataManager.getFilmPerID(id).getThumbnail()
-								+ "'); -fx-text-fill: transparent; -fx-background-color: #121212");
+				.setStyle("-fx-background-image: url('/filmimages/"
+						+ FilmDataManager.getFilmPerID(id).getThumbnail()
+						+ "'); -fx-text-fill: transparent; -fx-background-color: #121212");
 				rentedList.get(i).setVisible(true);
 
 				System.out.println(FilmDataManager.getFilmPerID(id).getTitel());
@@ -248,9 +285,9 @@ public class ProfileController implements Initializable {
 						(UserDataManager.getCurrentUser().getRentedFilms().size() - 4 * (rentedFilmPage - 1) - 1 - i));
 				rentedList.get(i).setText(String.valueOf(id));
 				rentedList.get(i)
-						.setStyle("-fx-background-image: url('/filmimages/"
-								+ FilmDataManager.getFilmPerID(id).getThumbnail()
-								+ "'); -fx-text-fill: transparent; -fx-background-color: #121212");
+				.setStyle("-fx-background-image: url('/filmimages/"
+						+ FilmDataManager.getFilmPerID(id).getThumbnail()
+						+ "'); -fx-text-fill: transparent; -fx-background-color: #121212");
 				rentedList.get(i).setVisible(true);
 
 				System.out.println(FilmDataManager.getFilmPerID(id).getTitel());
@@ -294,9 +331,9 @@ public class ProfileController implements Initializable {
 						(UserDataManager.getCurrentUser().getWatchList().size() - 4 * (watchlistPage - 1) - 1 - i));
 				watchList.get(i).setText(String.valueOf(id));
 				watchList.get(i)
-						.setStyle("-fx-background-image: url('/filmimages/"
-								+ FilmDataManager.getFilmPerID(id).getThumbnail()
-								+ "'); -fx-text-fill: transparent; -fx-background-color: #121212");
+				.setStyle("-fx-background-image: url('/filmimages/"
+						+ FilmDataManager.getFilmPerID(id).getThumbnail()
+						+ "'); -fx-text-fill: transparent; -fx-background-color: #121212");
 				watchList.get(i).setVisible(true);
 
 				btnWatchlistNext.setVisible(true);
@@ -313,9 +350,9 @@ public class ProfileController implements Initializable {
 						(UserDataManager.getCurrentUser().getWatchList().size() - 4 * (watchlistPage - 1) - 1 - i));
 				watchList.get(i).setText(String.valueOf(id));
 				watchList.get(i)
-						.setStyle("-fx-background-image: url('/filmimages/"
-								+ FilmDataManager.getFilmPerID(id).getThumbnail()
-								+ "'); -fx-text-fill: transparent; -fx-background-color: #121212");
+				.setStyle("-fx-background-image: url('/filmimages/"
+						+ FilmDataManager.getFilmPerID(id).getThumbnail()
+						+ "'); -fx-text-fill: transparent; -fx-background-color: #121212");
 				watchList.get(i).setVisible(true);
 
 				// System.out.println(FilmDataManager.getFilmPerID(id).getTitel());

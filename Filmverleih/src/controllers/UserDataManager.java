@@ -310,19 +310,45 @@ public class UserDataManager {
 		return isAdult;
 	}
 
-	public static boolean saveUserDataChanges(String name, String password) {
-		boolean dataSuccessfullyChanged = false;
+//	public static boolean saveUserDataChanges(String name, String password) {
+//		boolean dataSuccessfullyChanged = false;
+//
+//		if (!checkUserInList(name)) {
+//			getCurrentUser().setName(name);
+//			getCurrentUser().setPasswort(password);
+//
+//			SaveLoadManager.saveUser(oldUserList);
+//
+//			dataSuccessfullyChanged = true;
+//		}
+//
+//		return dataSuccessfullyChanged;
+//	}
+	
+	public static boolean saveNewUserName(String newUserName) {
+		boolean nameSuccessfullyChanged = false;
 
-		if (!checkUserInList(name)) {
-			getCurrentUser().setName(name);
-			getCurrentUser().setPasswort(password);
-
+		if (!checkUserInList(newUserName)) {
+			getCurrentUser().setName(newUserName);
 			SaveLoadManager.saveUser(oldUserList);
 
-			dataSuccessfullyChanged = true;
+			nameSuccessfullyChanged = true;
 		}
 
-		return dataSuccessfullyChanged;
+		return nameSuccessfullyChanged; 
+	}
+	
+	public static boolean saveNewPassword(String newPassword) {
+		boolean passwordSuccessfullyChanged = false;
+
+		if (!checkUserInList(newPassword)) {
+			getCurrentUser().setPasswort(newPassword);
+			SaveLoadManager.saveUser(oldUserList);
+
+			passwordSuccessfullyChanged = true;
+		}
+
+		return passwordSuccessfullyChanged; 
 	}
 
 	public static void checkUserFilmLists() {

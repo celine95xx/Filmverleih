@@ -48,7 +48,7 @@
 				<Font size="18.0" />
 			</font>
 		</Label>
-		<TextArea fx:id="txtDescription" layoutX="85.0" layoutY="458.0" prefHeight="220.0" prefWidth="330.0" style="-fx-border-color: #1f97a2; -fx-background-color: #121212;" />
+		<TextArea fx:id="txtDescription" layoutX="85.0" layoutY="458.0" prefHeight="220.0" prefWidth="330.0" promptText="Filmbeschreibung" style="-fx-border-color: #1f97a2;" wrapText="true" />
 		<Label layoutX="85.0" layoutY="422.0" text="Filmbeschreibung" textFill="#bfbfbf">
 			<font>
 				<Font size="18.0" />
@@ -68,8 +68,8 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="406.0" layoutY="347.0" mnemonicParsing="false" onAction="#searchThumbnail" text="Suchen" />
-      <Button layoutX="879.0" layoutY="347.0" mnemonicParsing="false" onAction="#searchBanner" text="Suchen" />
+      <Button layoutX="406.0" layoutY="347.0" mnemonicParsing="false" onAction="#searchThumbnail" stylesheets="@../styles/Buttons.css" text="Suchen" />
+      <Button layoutX="879.0" layoutY="347.0" mnemonicParsing="false" onAction="#searchBanner" stylesheets="@../styles/Buttons.css" text="Suchen" />
       <ChoiceBox fx:id="cbGenre" layoutX="164.0" layoutY="244.0" prefHeight="18.0" prefWidth="150.0" style="-fx-background-color: #181818;" />
       <ChoiceBox fx:id="cbFsk" layoutX="621.0" layoutY="244.0" prefHeight="18.0" prefWidth="150.0" style="-fx-background-color: #181818;" />
       <Line endX="188.0" layoutX="690.0" layoutY="373.0" startX="-124.0" stroke="#1f97a2" />
