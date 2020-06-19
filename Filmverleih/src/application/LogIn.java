@@ -33,7 +33,7 @@ public class LogIn {
 
 	@FXML
 	private TextField txtNewUserPassword;
-	
+
 	@FXML
 	private TextField txtBirthday;
 
@@ -54,7 +54,7 @@ public class LogIn {
 
 	@FXML
 	private Line lineNewUserName;
-	
+
 	@FXML
 	private Line lineBirthday;
 
@@ -75,7 +75,7 @@ public class LogIn {
 
 	@FXML
 	private Button errorBirthday;
-	
+
 	@FXML
 	private Button errorNewPassword;
 
@@ -84,6 +84,9 @@ public class LogIn {
 
 	@FXML
 	private Button errorPassword;
+
+	@FXML
+	private Button close;
 
 	public void logIn(ActionEvent event) throws Exception {
 		// Reset warnings
@@ -136,8 +139,11 @@ public class LogIn {
 		lineNewPassword.setStroke(Color.web("#30C9C4"));
 		lineNewPasswordConfirmed.setStroke(Color.web("#30C9C4"));
 
-		//String date = datePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); //https://stackoverflow.com/questions/33789307/how-to-convert-datepicker-value-to-string
-		if(!UserDataManager.validateUserName(txtNewUserName.getText())) //Username invalid (because of number or type of characters)
+		// String date =
+		// datePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		// //https://stackoverflow.com/questions/33789307/how-to-convert-datepicker-value-to-string
+		if (!UserDataManager.validateUserName(txtNewUserName.getText())) // Username invalid (because of number or type
+																			// of characters)
 		{
 			lineNewUserName.setStroke(Color.web("#DC1378"));
 			errorNewUserName.setVisible(true);
@@ -148,15 +154,11 @@ public class LogIn {
 			lineNewUserName.setStroke(Color.web("#DC1378"));
 			errorNewUserName.setVisible(true);
 			errorNewUserName.setTooltip(new Tooltip("Benutzername bereits vergeben."));
-		}
-		else if(!UserDataManager.checkValidBirthday(txtBirthday.getText()))
-		{
+		} else if (!UserDataManager.checkValidBirthday(txtBirthday.getText())) {
 			lineBirthday.setStroke(Color.web("#DC1378"));
 			errorBirthday.setVisible(true);
 			errorBirthday.setTooltip(new Tooltip("Ung\u00FCltiges Geburtsdatum."));
-		}
-		else if(!txtNewUserPassword.getText().contentEquals(txtNewPasswordConfirmed.getText()))
-		{
+		} else if (!txtNewUserPassword.getText().contentEquals(txtNewPasswordConfirmed.getText())) {
 			lineNewPassword.setStroke(Color.web("#DC1378"));
 			lineNewPasswordConfirmed.setStroke(Color.web("#DC1378"));
 			errorNewPassword.setVisible(true);
@@ -166,15 +168,12 @@ public class LogIn {
 			lineNewPasswordConfirmed.setStroke(Color.web("#DC1378"));
 			errorNewPassword.setVisible(true);
 			errorNewPassword.setTooltip(new Tooltip("Ung\u00FCltiges Passwort."));
-		}
-		else if(UserDataManager.calculateAge(txtBirthday.getText()) < 16)
-		{
+		} else if (UserDataManager.calculateAge(txtBirthday.getText()) < 16) {
 			lineBirthday.setStroke(Color.web("#DC1378"));
 			errorBirthday.setVisible(true);
 			errorBirthday.setTooltip(new Tooltip("F\u00FCr die Registrierung musst du mindestens 16 Jahre alt sein."));
-		}
-		else if(UserDataManager.manageUserRegistration(txtNewUserName.getText(), txtNewUserPassword.getText(), txtNewPasswordConfirmed.getText(), txtBirthday.getText()))
-		{
+		} else if (UserDataManager.manageUserRegistration(txtNewUserName.getText(), txtNewUserPassword.getText(),
+				txtNewPasswordConfirmed.getText(), txtBirthday.getText())) {
 			Stage primaryStage2 = new Stage();
 			Parent root = FXMLLoader.load(getClass().getResource("/application/MainGUI.fxml"));
 			Scene scene = new Scene(root, 1400, 1000);
@@ -184,4 +183,10 @@ public class LogIn {
 		}
 	}
 
+	public void close(ActionEvent event) throws Exception {
+		// Close windows afterwards
+				Stage stg = (Stage) close.getScene().getWindow();
+				stg.close();
+
+	}
 }
