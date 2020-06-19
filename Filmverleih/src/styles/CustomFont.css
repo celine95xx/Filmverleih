@@ -4,6 +4,8 @@
 
 #FilmverleihSmall{
 	-fx-font-family: 'Radicalis';
+	-fx-font-size: 40px;
+	
 }
 
 #FilmverleihGross{

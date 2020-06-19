@@ -47,7 +47,7 @@
                   </Label>
                </graphic>
             </TableColumn>
-            <TableColumn fx:id="alter" minWidth="5.60003662109375" prefWidth="160.0" style="-fx-background-color: #121212;">
+            <TableColumn fx:id="fsk" minWidth="5.60003662109375" prefWidth="160.0" style="-fx-background-color: #121212;">
                <graphic>
                   <Label text="FSK" textFill="WHITE">
                      <font>
@@ -61,15 +61,7 @@
       <TextField fx:id="search" layoutX="64.0" layoutY="137.0" prefHeight="25.0" prefWidth="201.0" promptText="Suche..." />
       <Button layoutX="1036.0" layoutY="389.0" mnemonicParsing="false" onAction="#addMovie" prefHeight="42.0" prefWidth="44.0" style="-fx-background-color: #121212; -fx-background-image: url('images/add.PNG');" textFill="WHITE" />
       <Button layoutX="1033.0" layoutY="445.0" mnemonicParsing="false" onAction="#deleteMovie" prefHeight="42.0" prefWidth="44.0" style="-fx-background-color: #121212; -fx-background-image: url('images/delete.PNG');" textFill="WHITE" />
-      <VBox layoutX="570.0" layoutY="650.0" prefHeight="350.0" prefWidth="500.0">
-         <children>
-            <Label text="Beliebt" textFill="WHITE">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
+      <VBox layoutX="570.0" layoutY="650.0" prefHeight="350.0" prefWidth="500.0" />
       <AnchorPane layoutX="64.0" layoutY="650.0" prefHeight="350.0" prefWidth="500.0">
          <children>
             <Label layoutX="44.0" text="Empfehlungen" textFill="WHITE">

@@ -49,13 +49,14 @@ public class FilmProfileController implements Initializable
 		txtFilmTitle.setText(FilmDataManager.getFilm().getTitel());
 		txtGenre.setText(FilmDataManager.getFilm().getGenre());
 		filmBanner.setStyle("-fx-background-image: url('/filmimages/"+ FilmDataManager.getFilm().getBanner() + "')");
+		txtAge.setText(Integer.toString(FilmDataManager.getFilm().getFsk()));
 
-		if(FilmDataManager.getFilm().getAlter() == true)
-		{
-			txtAge.setText("FSK 18");
-		}
+//		if(FilmDataManager.getFilm().getAlter() == true)
+//		{
+//			txtAge.setText("FSK 18");
+//		}
 
-		if(FilmDataManager.getFilm().getAlter() == true & !UserDataManager.checkIfAdult())
+		if(FilmDataManager.getFilm().getFsk() == 18 & !UserDataManager.checkIfAdult())
 		{
 			btnRentFilm.setStyle("-fx-background-color: #DC1378; -fx-font: 16 system");
 			btnRentFilm.setText("Nicht verfügbar");

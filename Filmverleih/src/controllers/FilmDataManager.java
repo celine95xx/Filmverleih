@@ -54,8 +54,8 @@ public class FilmDataManager {
 	
 	}
 
-	public static boolean manageFilmRegistration(int id, String title, String genre, double price, boolean alter, String thumbnail, String banner, String description ) {
-		addFilm(id, title, genre, price, alter, thumbnail, banner, description);
+	public static boolean manageFilmRegistration(int id, String title, String genre, double price, int fsk, String thumbnail, String banner, String description ) {
+		addFilm(id, title, genre, price, fsk, thumbnail, banner, description);
 		SaveLoadManager.saveFilm(oldFilmList);
 
 		List<FilmData> newFilmList = SaveLoadManager.loadFilm(); // 1111
@@ -65,9 +65,9 @@ public class FilmDataManager {
 		return true;
 	}
 
-	public static void addFilm(int id, String titel, String genre, double preis, boolean alter, String thumbnail, String banner, String description) 
+	public static void addFilm(int id, String titel, String genre, double preis, int fsk, String thumbnail, String banner, String description) 
 	{
-		oldFilmList.add(new FilmData(id, titel, genre, preis, alter, thumbnail, banner, description));
+		oldFilmList.add(new FilmData(id, titel, genre, preis, fsk, thumbnail, banner, description));
 		updateCurrentFilmList();
 
 	}

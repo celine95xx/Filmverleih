@@ -5,6 +5,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
 
 import controllers.FilmDataManager;
@@ -57,10 +58,10 @@ public class Movies implements Initializable
 	private TextArea txtDescription;
 
 	@FXML
-	private CheckBox cbFSK;
-
-	@FXML
 	private ChoiceBox<String> cbGenre;
+	
+	@FXML
+	private ChoiceBox<Integer> cbFsk;
 
 	@FXML
 	private AnchorPane anchorPane;
@@ -70,6 +71,9 @@ public class Movies implements Initializable
 	{
 		cbGenre.setItems(FXCollections.observableArrayList("Action", "Animation", "Drama", "Fantasy", "Horror", "Krimi", "Komödie"));
 		cbGenre.getSelectionModel().selectFirst();
+		
+		cbFsk.setItems(FXCollections.observableArrayList(0, 6, 12, 16, 18));
+		cbFsk.getSelectionModel().selectFirst();
 	}
 	
 	public void registrateFilm(ActionEvent event) throws Exception 
@@ -82,10 +86,10 @@ public class Movies implements Initializable
 		
 
 		// Registrate Film
-		FilmDataManager.manageFilmRegistration(Integer.parseInt(txtID.getText()), txtTitle.getText(), cbGenre.getSelectionModel().getSelectedItem(), Double.parseDouble(txtPrice.getText()), cbFSK.isSelected(), txtThumbnail.getText(), txtBanner.getText(), txtDescription.getText());
+		FilmDataManager.manageFilmRegistration(Integer.parseInt(txtID.getText()), txtTitle.getText(), cbGenre.getSelectionModel().getSelectedItem(), Double.parseDouble(txtPrice.getText()), cbFsk.getSelectionModel().getSelectedItem(), txtThumbnail.getText(), txtBanner.getText(), txtDescription.getText());
 
 		// Close windows afterwards
-		Stage stg = (Stage) cbFSK.getScene().getWindow();
+		Stage stg = (Stage) cbFsk.getScene().getWindow();
 		stg.close();	
 
 	}
@@ -116,7 +120,7 @@ public class Movies implements Initializable
 			System.out.println("Absolute Pathname : " + sourcefile.getAbsolutePath());
 		}
 
-		Files.copy(sourcepath, targetDirectory); //https://www.java67.com/2016/09/how-to-copy-file-from-one-location-to-another-in-java.html
+		Files.copy(sourcepath, targetDirectory, StandardCopyOption.REPLACE_EXISTING); //https://www.java67.com/2016/09/how-to-copy-file-from-one-location-to-another-in-java.html
 		txtThumbnail.setText(filename);
 
 	}
@@ -136,7 +140,7 @@ public class Movies implements Initializable
 			System.out.println("Path : " + sourcefile.getAbsolutePath());
 		}
 
-		Files.copy(sourcepath, targetDirectory); //https://www.java67.com/2016/09/how-to-copy-file-from-one-location-to-another-in-java.html
+		Files.copy(sourcepath, targetDirectory, StandardCopyOption.REPLACE_EXISTING); //https://www.java67.com/2016/09/how-to-copy-file-from-one-location-to-another-in-java.html
 		txtBanner.setText(filename);
 	}
 }

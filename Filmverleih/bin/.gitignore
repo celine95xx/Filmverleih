@@ -1,7 +1,5 @@
-/styles/
-/application/
-/images/
-/models/
 /controllers/
+/models/
+/application/
 /filmimages/
-/fonts/
+/styles/

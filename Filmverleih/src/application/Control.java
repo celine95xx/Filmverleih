@@ -52,7 +52,7 @@ public class Control implements Initializable {
 	@FXML
 	private TableColumn<FilmData, String> genre;
 	@FXML
-	private TableColumn<FilmData, String> alter;
+	private TableColumn<FilmData, String> fsk;
 	@FXML
 	private Label lblRecom1, lblRecom2, lblRecom3, lblRecom4;
 	@FXML
@@ -78,7 +78,7 @@ public class Control implements Initializable {
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		titel.setCellValueFactory(new PropertyValueFactory<>("titel"));
 		genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
-		alter.setCellValueFactory(new PropertyValueFactory<>("alter"));
+		fsk.setCellValueFactory(new PropertyValueFactory<>("fsk"));
 
 		movies.itemsProperty().bind(dataListProperty);
 
