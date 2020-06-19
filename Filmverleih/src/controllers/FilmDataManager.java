@@ -147,6 +147,22 @@ public class FilmDataManager {
 	public static void setCurrentFilm(int id) {
 		currentFilmID = id;
 	}
+	
+	public static boolean checkFilmId(String stringId)
+	{
+		boolean isValidId = true;
+		
+		try {
+			int num = Integer.parseInt(stringId);
+		}
+		catch(NumberFormatException e)
+		{
+			isValidId = false;
+		}
+		
+		
+		return isValidId;
+	}
 
 	public static void addToRentAmount() {
 		int currentRentAmount = getFilm().getRentAmount();

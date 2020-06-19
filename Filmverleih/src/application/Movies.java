@@ -17,6 +17,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -50,6 +52,21 @@ public class Movies implements Initializable {
 
 	@FXML
 	private AnchorPane anchorPane;
+	
+	@FXML
+	private Line lineID;
+	
+	@FXML
+	private Line lineTitle;
+	
+	@FXML
+	private Line lineThumbnail;
+	
+	@FXML
+	private Line lineBanner;
+	
+	@FXML
+	private Line linePrice;
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		cbGenre.setItems(FXCollections.observableArrayList("Action", "Animation", "Drama", "Fantasy", "Horror", "Krimi",
@@ -58,28 +75,36 @@ public class Movies implements Initializable {
 
 		cbFsk.setItems(FXCollections.observableArrayList(0, 6, 12, 16, 18));
 		cbFsk.getSelectionModel().selectFirst();
+		
 	}
 
-	public void registrateFilm(ActionEvent event) throws Exception {
+	public void registrateFilm(ActionEvent event) throws Exception 
+	{
 		if (txtTitle.getText() == null || txtTitle.getText().equals("")) {
-			txtTitle.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
+			lineTitle.setStroke(Color.web("#DC1378"));
+			//txtTitle.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
 			return;
 		}
 
-		if (txtID.getText() == null || txtID.getText().equals("")) {
-			txtID.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
+		if (txtID.getText() == null || txtID.getText().equals("") || !FilmDataManager.checkFilmId(txtID.getText()) || FilmDataManager.getFilmPerID(Integer.parseInt(txtID.getText())) != null) {
+			//txtID.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
+			lineID.setStroke(Color.web("#DC1378"));
 			return;
 		}
 		if (txtPrice.getText() == null || txtPrice.getText().equals("")) {
-			txtPrice.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
+			//txtPrice.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
+			linePrice.setStroke(Color.web("#DC1378"));
 			return;
 		}
 		if (txtBanner.getText() == null || txtBanner.getText().equals("")) {
 			txtBanner.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
+			lineBanner.setStroke(Color.web("#DC1378"));
 			return;
 		}
 		if (txtThumbnail.getText() == null || txtThumbnail.getText().equals("")) {
-			txtThumbnail.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
+			//txtThumbnail.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
+			lineThumbnail.setStroke(Color.web("#DC1378"));
+			
 			return;
 		}
 		if (txtDescription.getText() == null || txtDescription.getText().equals("")) {

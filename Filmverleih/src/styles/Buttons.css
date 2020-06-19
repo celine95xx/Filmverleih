@@ -7,3 +7,14 @@
 	-fx-background-color: #30C9C4;
 	-fx-text-fill: #121212;
 }
+
+.text-area {
+	-fx-border-color: #30C9C4;
+	-fx-background-color: #181818;
+	-fx-region-color: #181818;
+}
+
+.text-area .content{
+	-fx-background-color: #181818;
+	-fx-region-color: #181818;
+}

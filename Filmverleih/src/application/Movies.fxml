@@ -9,69 +9,68 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight=" 720" maxWidth="1280" minHeight="720" minWidth="1280" prefHeight="720" prefWidth="1280" style="-fx-background-color: #121212;" stylesheets="@../styles/DropDown.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Movies">
+<AnchorPane fx:id="anchorPane" maxHeight=" 720" maxWidth="1280" minHeight="720" minWidth="973.0" prefHeight="720" prefWidth="973.0" style="-fx-background-color: #121212;" stylesheets="@../styles/DropDown.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Movies">
 	<children>
 		<Label layoutX="74.0" layoutY="30.0" text="Film hinzufügen" textFill="WHITE">
 			<font>
 				<Font name="System Bold" size="36.0" />
 			</font>
 		</Label>
-		<TextField fx:id="txtID" layoutX="74.0" layoutY="123.0" promptText="ID" style="-fx-background-color: #121212;">
+		<TextField fx:id="txtID" layoutX="74.0" layoutY="123.0" prefHeight="39.0" prefWidth="322.0" promptText="ID" style="-fx-background-color: #121212;">
 			<font>
-				<Font size="18.0" />
+				<Font size="16.0" />
 			</font>
 		</TextField>
 		<TextField fx:id="txtTitle" layoutX="74.0" layoutY="175.0" promptText="Filmtitel" style="-fx-background-color: #121212;">
 			<font>
-				<Font size="18.0" />
+				<Font size="16.0" />
 			</font>
 		</TextField>
-		<Button layoutX="1192.0" layoutY="638.0" mnemonicParsing="false" onAction="#registrateFilm" prefHeight="39.0" prefWidth="34.0" style="-fx-background-color: #121212; -fx-background-image: url('images/accept_white.PNG');" textFill="#bfbfbf">
+		<Button layoutX="907.0" layoutY="659.0" mnemonicParsing="false" onAction="#registrateFilm" prefHeight="39.0" prefWidth="34.0" style="-fx-background-color: #121212; -fx-background-image: url('images/accept_white.PNG');" textFill="#bfbfbf">
 			<font>
 				<Font name="System Bold" size="12.0" />
 			</font>
 		</Button>
-		<TextField fx:id="txtPrice" layoutX="163.0" layoutY="292.0" style="-fx-background-color: #121212; -fx-border-color: #1f97a2;" />
-		<Line endX="186.79998779296875" layoutX="206.0" layoutY="204.0" startX="-120.00001525878906" startY="7.62939453125E-6" stroke="#1f97a2" />
+		<TextField fx:id="txtPrice" layoutX="74.0" layoutY="292.0" prefHeight="27.0" prefWidth="308.0" promptText="Preis" style="-fx-background-color: #121212;">
+         <font>
+            <Font size="16.0" />
+         </font></TextField>
+		<Line fx:id="lineTitle" endX="186.79998779296875" layoutX="206.0" layoutY="206.0" startX="-120.00001525878906" startY="7.62939453125E-6" stroke="#30c9c4" />
 		<Label layoutX="85.0" layoutY="243.0" text="Genre" textFill="#bfbfbf">
 			<font>
-				<Font size="18.0" />
-			</font>
-		</Label>
-		<Label layoutX="85.0" layoutY="292.0" text="Preis" textFill="#bfbfbf">
-			<font>
-				<Font size="18.0" />
+				<Font size="16.0" />
 			</font>
 		</Label>
 		<Label layoutX="566.0" layoutY="243.0" text="FSK" textFill="#bfbfbf">
 			<font>
-				<Font size="18.0" />
+				<Font size="16.0" />
 			</font>
 		</Label>
-		<TextArea fx:id="txtDescription" layoutX="85.0" layoutY="458.0" prefHeight="220.0" prefWidth="330.0" promptText="Filmbeschreibung" style="-fx-border-color: #1f97a2;" wrapText="true" />
-		<Label layoutX="85.0" layoutY="422.0" text="Filmbeschreibung" textFill="#bfbfbf">
+		<TextArea fx:id="txtDescription" layoutX="85.0" layoutY="458.0" prefHeight="220.0" prefWidth="330.0" stylesheets="@../styles/Buttons.css" wrapText="true" />
+		<Label layoutX="85.0" layoutY="425.0" text="Filmbeschreibung" textFill="#bfbfbf">
 			<font>
 				<Font size="18.0" />
 			</font>
 		</Label>
-		<Line endX="94.0" endY="7.62939453125E-6" layoutX="206.0" layoutY="446.0" startX="-120.00001525878906" startY="7.62939453125E-6" stroke="#1f97a2" />
       <TextField fx:id="txtThumbnail" layoutX="173.0" layoutY="348.0" prefHeight="25.0" prefWidth="260.0" style="-fx-background-color: #121212;" />
       <Label layoutX="81.0" layoutY="347.0" text="Thumbnail" textFill="#bfbfbf">
          <font>
-            <Font size="18.0" />
+            <Font size="16.0" />
          </font>
       </Label>
-      <Line endX="188.0" layoutX="205.0" layoutY="374.0" startX="-124.0" stroke="#1f97a2" />
+      <Line fx:id="lineThumbnail" endX="188.0" layoutX="206.0" layoutY="372.0" startX="-124.0" stroke="#30c9c4" />
       <TextField fx:id="txtBanner" layoutX="631.0" layoutY="347.0" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: #121212;" />
       <Label layoutX="565.0" layoutY="346.0" text="Banner" textFill="#bfbfbf">
          <font>
-            <Font size="18.0" />
+            <Font size="16.0" />
          </font>
       </Label>
       <Button layoutX="406.0" layoutY="347.0" mnemonicParsing="false" onAction="#searchThumbnail" stylesheets="@../styles/Buttons.css" text="Suchen" />
-      <Button layoutX="879.0" layoutY="347.0" mnemonicParsing="false" onAction="#searchBanner" stylesheets="@../styles/Buttons.css" text="Suchen" />
+      <Button layoutX="886.0" layoutY="346.0" mnemonicParsing="false" onAction="#searchBanner" stylesheets="@../styles/Buttons.css" text="Suchen" />
       <ChoiceBox fx:id="cbGenre" layoutX="164.0" layoutY="244.0" prefHeight="18.0" prefWidth="150.0" style="-fx-background-color: #181818;" />
       <ChoiceBox fx:id="cbFsk" layoutX="621.0" layoutY="244.0" prefHeight="18.0" prefWidth="150.0" style="-fx-background-color: #181818;" />
-      <Line endX="188.0" layoutX="690.0" layoutY="373.0" startX="-124.0" stroke="#1f97a2" />
+      <Line fx:id="lineBanner" endX="188.0" layoutX="690.0" layoutY="373.0" startX="-124.0" stroke="#30c9c4" />
+      <Line fx:id="lineID" endX="186.79998779296875" layoutX="206.0" layoutY="155.0" startX="-120.00001525878906" startY="7.62939453125E-6" stroke="#30c9c4" />
+      <Line fx:id="linePrice" endX="188.0" layoutX="206.0" layoutY="323.0" startX="-124.0" stroke="#30c9c4" />
 	</children>
 </AnchorPane>
