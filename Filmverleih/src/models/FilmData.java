@@ -1,12 +1,6 @@
 package models;
 
 import java.io.Serializable;
-import java.util.List;
-
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.SelectionModel;
 
 public class FilmData implements Serializable {
 	private int id;
@@ -19,8 +13,8 @@ public class FilmData implements Serializable {
 	private String description;
 	private int rentAmount;
 
-	public FilmData(int id, String titel, String genre, double preis, int fsk, String thumbnail, String banner, String description) 
-	{
+	public FilmData(int id, String titel, String genre, double preis, int fsk, String thumbnail, String banner,
+			String description) {
 		this.id = id;
 		this.titel = titel;
 		this.genre = genre;
@@ -30,15 +24,12 @@ public class FilmData implements Serializable {
 		this.banner = banner;
 		this.description = description;
 	}
-	
-	
-	public void setRentAmount(int amount)
-	{
+
+	public void setRentAmount(int amount) {
 		this.rentAmount = amount;
 	}
-	
-	public int getRentAmount()
-	{
+
+	public int getRentAmount() {
 		return rentAmount;
 	}
 
@@ -82,7 +73,7 @@ public class FilmData implements Serializable {
 	public void setFsk(int fsk) {
 		this.fsk = fsk;
 	}
-	
+
 	public String getThumbnail() {
 		return thumbnail;
 	}
@@ -90,7 +81,7 @@ public class FilmData implements Serializable {
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
-	
+
 	public String getBanner() {
 		return banner;
 	}
@@ -107,14 +98,10 @@ public class FilmData implements Serializable {
 		this.description = description;
 	}
 
-	/**
-	 * @Override public String toString() { return " ID:" + this.id + " ---- Titel:"
-	 *           + this.titel + " ---- Genre: " + this.genre + " ---- Preis: " +
-	 *           this.preis+ " ---- Alter: " + this.alter; }
-	 **/
 	@Override
 	public String toString() {
-		return "Titel:" + this.titel + " Genre: " + this.genre +"--- Rent Amount: " + this.rentAmount;}
+		return "Titel:" + this.titel + " Genre: " + this.genre + "--- Rent Amount: " + this.rentAmount;
+	}
 
 	@Override
 	public int hashCode() {

@@ -1,23 +1,13 @@
 package controllers;
 
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.FilmData;
-import models.UserData;
 
 public class FilmDataManager {
 	private Pattern pattern;
@@ -26,35 +16,30 @@ public class FilmDataManager {
 	private static Pattern filmNamePattern = Pattern.compile("^[A-Za-z0-9_-]{3,14}$");
 
 	private static ObservableList<FilmData> oldFilmList = FXCollections.observableArrayList();
-	
+
 	private static ObservableList<FilmData> currentFilmList;
-	
-	//private static ObservableList<FilmData> genreFilmList;
 
 	private static List<Integer> recommendedFilms = new ArrayList<Integer>();
 
 	private static int currentFilmID;
-	
-	
 
-	public static void initializeFilmList() 
-	{
+	public static void initializeFilmList() {
 		oldFilmList = SaveLoadManager.loadFilm();
 		recommendedFilms = SaveLoadManager.loadRecommendations();
 
 		checkAvailableRecommendations();
-		
+
 		currentFilmList = FXCollections.observableArrayList();
 		currentFilmList.addAll(oldFilmList);
 
-		for (FilmData f : oldFilmList) 
-		{
+		for (FilmData f : oldFilmList) {
 			System.out.println(f.toString());
 		}
-	
+
 	}
 
-	public static boolean manageFilmRegistration(int id, String title, String genre, double price, int fsk, String thumbnail, String banner, String description ) {
+	public static boolean manageFilmRegistration(int id, String title, String genre, double price, int fsk,
+			String thumbnail, String banner, String description) {
 		addFilm(id, title, genre, price, fsk, thumbnail, banner, description);
 		SaveLoadManager.saveFilm(oldFilmList);
 
@@ -65,75 +50,57 @@ public class FilmDataManager {
 		return true;
 	}
 
-	public static void addFilm(int id, String titel, String genre, double preis, int fsk, String thumbnail, String banner, String description) 
-	{
+	public static void addFilm(int id, String titel, String genre, double preis, int fsk, String thumbnail,
+			String banner, String description) {
 		oldFilmList.add(new FilmData(id, titel, genre, preis, fsk, thumbnail, banner, description));
 		updateCurrentFilmList();
 
 	}
-	
 
 	public static ObservableList<FilmData> getFilmList() {
 		return oldFilmList;
 	}
 
-	public static void sortFilmListByName() 
-	{
+	public static void sortFilmListByName() {
 		updateCurrentFilmList();
-		currentFilmList.sort((f1, f2) -> f2.getTitel().compareTo(f1.getTitel())); //Reverse Order
+		currentFilmList.sort((f1, f2) -> f2.getTitel().compareTo(f1.getTitel())); // Reverse Order
 	}
 
-//	public static List<FilmData> filterFilmListGenre(String genre) {
-//		List<FilmData> tempList = oldFilmList;
-//		List<FilmData> result = tempList.stream().filter(f1 -> f1.getGenre().equals(genre))
-//				.collect(Collectors.toList());
-//		return result;
-//	}
-
-	public static void deleteMovie(FilmData film) 
-	{
+	public static void deleteMovie(FilmData film) {
 		oldFilmList.remove(film);
 		updateCurrentFilmList();
-		
+
 		checkAvailableRecommendations();
 		UserDataManager.checkUserFilmLists();
-		
+
 		SaveLoadManager.saveFilm(oldFilmList);
-		
 
 	}
 
-	public static List<FilmData> getNewestFilms()
-	{
+	public static List<FilmData> getNewestFilms() {
 		List<FilmData> newestFilms = new ArrayList<FilmData>();
 
-		for(int i = 0; i < oldFilmList.size(); i++)
-		{
+		for (int i = 0; i < oldFilmList.size(); i++) {
 			newestFilms.add(oldFilmList.get(oldFilmList.size() - 1 - i));
 		}
 
 		return newestFilms;
 	}
 
-	public static List<Integer> getRecommendedFilms()
-	{
+	public static List<Integer> getRecommendedFilms() {
 		return recommendedFilms;
 	}
 
-	public static void addRecommendedFilm(int filmID)
-	{
+	public static void addRecommendedFilm(int filmID) {
 		recommendedFilms.add(filmID);
 		SaveLoadManager.saveRecommendations(recommendedFilms);
 	}
 
-	public static boolean checkFilmInRecommendations(int filmID)
-	{
+	public static boolean checkFilmInRecommendations(int filmID) {
 		boolean isRecommended = false;
 
-		for(Integer i : recommendedFilms)
-		{
-			if(i == filmID)
-			{
+		for (Integer i : recommendedFilms) {
+			if (i == filmID) {
 				isRecommended = true;
 				break;
 			}
@@ -142,180 +109,106 @@ public class FilmDataManager {
 		return isRecommended;
 	}
 
-	public static void deleteFromRecommendation(int filmID)
-	{
+	public static void deleteFromRecommendation(int filmID) {
 		recommendedFilms.removeIf(Integer -> Integer == filmID);
 		SaveLoadManager.saveRecommendations(recommendedFilms);
 	}
 
-	public static FilmData getFilm()
-	{
+	public static FilmData getFilm() {
 		FilmData currentFilm = null;
 
-		for(FilmData f : oldFilmList)
-		{
-			if(f.getId() == currentFilmID)
-			{
+		for (FilmData f : oldFilmList) {
+			if (f.getId() == currentFilmID) {
 				currentFilm = f;
 				break;
-			}
-			else
-			{
-				//System.out.println("Method getFilm: Kein Film mit dieser ID vorhanden");
+			} else {
+
 			}
 		}
 
 		return currentFilm;
 	}
 
-	public static FilmData getFilmPerID(int id)
-	{
+	public static FilmData getFilmPerID(int id) {
 		FilmData currentFilm = null;
 
-		for(FilmData f : oldFilmList)
-		{
-			if(f.getId() == id)
-			{
+		for (FilmData f : oldFilmList) {
+			if (f.getId() == id) {
 				currentFilm = f;
 				break;
-			}
-			else
-			{
-				//System.out.println("Method getFilm: Kein Film mit dieser ID vorhanden");
+			} else {
+
 			}
 		}
 
 		return currentFilm;
 	}
 
-	public static void setCurrentFilm (int id)
-	{
+	public static void setCurrentFilm(int id) {
 		currentFilmID = id;
 	}
 
-	public static void addToRentAmount()
-	{
+	public static void addToRentAmount() {
 		int currentRentAmount = getFilm().getRentAmount();
 		getFilm().setRentAmount(getFilm().getRentAmount() + 1);
 		SaveLoadManager.saveFilm(oldFilmList);
 	}
-	
-//	public static void removeFromRentAmount(int filmID)
-//	{
-//		int currentRentAmount = getFilmPerID(filmID).getRentAmount();
-//		getFilmPerID(filmID).setRentAmount(getFilm().getRentAmount() - 1);
-//		SaveLoadManager.saveFilm(oldFilmList);
-//	}
 
-	public static void checkAvailableRecommendations()
-	{
+	public static void checkAvailableRecommendations() {
 		boolean recommendedFilmAvailable = false;
 		List<Integer> notAvailableWatchlistFilms = new ArrayList<Integer>();
 
-		if(FilmDataManager.getFilmList().size() == 0)
-		{
+		if (FilmDataManager.getFilmList().size() == 0) {
 			getRecommendedFilms().clear();
-		}
-		else
-		{
-			for(int i : getRecommendedFilms())
-			{
-				for(FilmData film : FilmDataManager.getFilmList())
-				{
-					if(film.getId() == i)
-					{
+		} else {
+			for (int i : getRecommendedFilms()) {
+				for (FilmData film : FilmDataManager.getFilmList()) {
+					if (film.getId() == i) {
 						recommendedFilmAvailable = true;
 						break;
 					}
 				}
-				if(!recommendedFilmAvailable)
-				{
+				if (!recommendedFilmAvailable) {
 					notAvailableWatchlistFilms.add(i);
 				}
 
 			}
 
-			for(int i : notAvailableWatchlistFilms)
-			{
+			for (int i : notAvailableWatchlistFilms) {
 				FilmDataManager.deleteFromRecommendation(i);
 			}
 		}
-		
-//		boolean recommendedFilmAvailable = false;
-//		List<Integer> notAvailableWatchlistFilms = new ArrayList<Integer>();
-//
-//		if(FilmDataManager.getFilmList().size() == 0)
-//		{
-//			for(int i : getRecommendedFilms())
-//			{
-//				FilmDataManager.deleteFromRecommendation(i);
-//			}
-//		}
-//		else
-//		{
-//			for(int i : getRecommendedFilms())
-//			{
-//				for(FilmData film : FilmDataManager.getFilmList())
-//				{
-//					if(film.getId() == i)
-//					{
-//						recommendedFilmAvailable = true;
-//						break;
-//					}
-//				}
-//				if(!recommendedFilmAvailable)
-//				{
-//					notAvailableWatchlistFilms.add(i);
-//				}
-//
-//			}
-//
-//			for(int i : notAvailableWatchlistFilms)
-//			{
-//				FilmDataManager.deleteFromRecommendation(i);
-//			}
-//		}
+
 	}
-	
-	public static ObservableList<FilmData> getPopularFilms()
-	{
+
+	public static ObservableList<FilmData> getPopularFilms() {
 		currentFilmList.sort(Comparator.comparing(FilmData::getRentAmount).reversed());
 		return currentFilmList;
 	}
-	
-	public static void updateCurrentFilmList()
-	{
+
+	public static void updateCurrentFilmList() {
 		currentFilmList.clear();
 		currentFilmList.addAll(oldFilmList);
 		System.out.println("FDM - updateCurrentFilmList - currentFilmList Size: " + currentFilmList.size());
 		System.out.println("FDM - updateCurrentFilmList - oldFilmList Size: " + oldFilmList.size());
 	}
-	
-	public static ObservableList<FilmData> getCurrentFilmList()
-	{
+
+	public static ObservableList<FilmData> getCurrentFilmList() {
 		return currentFilmList;
 	}
-	
-//	public static ObservableList<FilmData> getSortedListByGenre(){
-//		currentFilmList.sort(Comparator.comparing(FilmData::getGenre));
-//		return currentFilmList;
-//	}
-	
-	public static void sortFilmListByGenre(String genre)
-	{
-		//currentFilmList.clear();
+
+	public static void sortFilmListByGenre(String genre) {
+
 		ObservableList<FilmData> temporaryList = FXCollections.observableArrayList();
 		System.out.println("FDM - sortFilmListByGenre - OldFilmList Size:" + oldFilmList.size());
-		for(FilmData film : oldFilmList)
-		{
+		for (FilmData film : oldFilmList) {
 			System.out.println("FDM - sortFilmList Genre: " + film.toString());
-			if(film.getGenre().equals(genre))
-			{
+			if (film.getGenre().equals(genre)) {
 				temporaryList.add(film);
 			}
 		}
-		
+
 		currentFilmList = temporaryList;
-		//currentFilmList.sort(Comparator.comparing(FilmData::getGenre));
+
 	}
 }

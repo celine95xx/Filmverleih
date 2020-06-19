@@ -9,12 +9,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 public class MainGUIController implements Initializable {
 
@@ -23,7 +21,7 @@ public class MainGUIController implements Initializable {
 
 	@FXML
 	private Label lblUsername;
-	
+
 	@FXML
 	private ImageView imgControlPanel;
 
@@ -38,8 +36,7 @@ public class MainGUIController implements Initializable {
 		System.out.println("INITIALIZE");
 
 		Parent fxml = null;
-		try 
-		{
+		try {
 			fxml = FXMLLoader.load(getClass().getResource("WelcomePage.fxml"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -48,13 +45,10 @@ public class MainGUIController implements Initializable {
 		mainContent.getChildren().removeAll();
 		mainContent.getChildren().setAll(fxml);
 
-		if (!UserDataManager.getCurrentUser().isAdmin()) 
-		{
+		if (!UserDataManager.getCurrentUser().isAdmin()) {
 			btnControlPanel.setVisible(false);
 			imgControlPanel.setVisible(false);
 		}
-
-//		lblUsername.setText(UserDataManager.getCurrentUser().getName() + "!");
 
 	}
 
@@ -66,8 +60,7 @@ public class MainGUIController implements Initializable {
 
 	}
 
-	public void showProfile(ActionEvent event) throws Exception 
-	{
+	public void showProfile(ActionEvent event) throws Exception {
 		Parent fxml = FXMLLoader.load(getClass().getResource("UserProfile.fxml"));
 		mainContent.getChildren().removeAll();
 		mainContent.getChildren().setAll(fxml);

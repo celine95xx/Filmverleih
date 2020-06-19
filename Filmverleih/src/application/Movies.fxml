@@ -11,7 +11,7 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight=" 720" maxWidth="1280" minHeight="720" minWidth="1280" prefHeight="720" prefWidth="1280" style="-fx-background-color: #121212;" stylesheets="@../styles/DropDown.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Movies">
 	<children>
-		<Label layoutX="74.0" layoutY="14.0" text="Film hinzufügen" textFill="WHITE">
+		<Label layoutX="74.0" layoutY="30.0" text="Film hinzufügen" textFill="WHITE">
 			<font>
 				<Font name="System Bold" size="36.0" />
 			</font>
@@ -26,14 +26,12 @@
 				<Font size="18.0" />
 			</font>
 		</TextField>
-		<Button layoutX="1159.0" layoutY="664.0" mnemonicParsing="false" onAction="#registrateFilm" prefHeight="27.0" prefWidth="88.0" style="-fx-background-color: #121212; -fx-border-color: #1f97a2;" text="Hinzufügen" textFill="#bfbfbf">
+		<Button layoutX="1192.0" layoutY="638.0" mnemonicParsing="false" onAction="#registrateFilm" prefHeight="39.0" prefWidth="34.0" style="-fx-background-color: #121212; -fx-background-image: url('images/accept_white.PNG');" textFill="#bfbfbf">
 			<font>
 				<Font name="System Bold" size="12.0" />
 			</font>
 		</Button>
 		<TextField fx:id="txtPrice" layoutX="163.0" layoutY="292.0" style="-fx-background-color: #121212; -fx-border-color: #1f97a2;" />
-		<Line endX="94.0" endY="7.62939453125E-6" layoutX="194.0" layoutY="56.0" startX="-120.00001525878906" startY="7.62939453125E-6" stroke="#1f97a2" />
-		<Line endX="83.60003662109375" endY="7.62939453125E-6" layoutX="273.0" layoutY="56.0" startX="30.400009155273438" startY="7.62939453125E-6" stroke="#1f97a2" />
 		<Line endX="186.79998779296875" layoutX="206.0" layoutY="204.0" startX="-120.00001525878906" startY="7.62939453125E-6" stroke="#1f97a2" />
 		<Label layoutX="85.0" layoutY="243.0" text="Genre" textFill="#bfbfbf">
 			<font>
