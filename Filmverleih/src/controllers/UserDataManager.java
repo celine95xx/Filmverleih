@@ -281,18 +281,18 @@ public class UserDataManager {
 	public static boolean checkValidBirthday(String dateOfBirth)
 	{
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.uuuu").withResolverStyle(ResolverStyle.STRICT);
-			try
-			{
-				LocalDate date = LocalDate.parse(dateOfBirth, dtf);
-				System.out.println("UDM - checkBirthday: Birthday valid");
-				return true;
-			}
-			catch(DateTimeException dte)
-			{
-				//dte.printStackTrace();
-				System.out.println("UDM - checkBirthday: Birthday invalid");
-				return false;
-			}
+		try
+		{
+			LocalDate date = LocalDate.parse(dateOfBirth, dtf);
+			System.out.println("UDM - checkBirthday: Birthday valid");
+			return true;
+		}
+		catch(DateTimeException dte)
+		{
+			//dte.printStackTrace();
+			System.out.println("UDM - checkBirthday: Birthday invalid");
+			return false;
+		}
 
 
 
@@ -310,21 +310,6 @@ public class UserDataManager {
 		return isAdult;
 	}
 
-//	public static boolean saveUserDataChanges(String name, String password) {
-//		boolean dataSuccessfullyChanged = false;
-//
-//		if (!checkUserInList(name)) {
-//			getCurrentUser().setName(name);
-//			getCurrentUser().setPasswort(password);
-//
-//			SaveLoadManager.saveUser(oldUserList);
-//
-//			dataSuccessfullyChanged = true;
-//		}
-//
-//		return dataSuccessfullyChanged;
-//	}
-	
 	public static boolean saveNewUserName(String newUserName) {
 		boolean nameSuccessfullyChanged = false;
 
@@ -337,18 +322,10 @@ public class UserDataManager {
 
 		return nameSuccessfullyChanged; 
 	}
-	
-	public static boolean saveNewPassword(String newPassword) {
-		boolean passwordSuccessfullyChanged = false;
 
-		if (!checkUserInList(newPassword)) {
-			getCurrentUser().setPasswort(newPassword);
-			SaveLoadManager.saveUser(oldUserList);
-
-			passwordSuccessfullyChanged = true;
-		}
-
-		return passwordSuccessfullyChanged; 
+	public static void saveNewPassword(String newPassword) {
+		getCurrentUser().setPasswort(newPassword);
+		SaveLoadManager.saveUser(oldUserList);
 	}
 
 	public static void checkUserFilmLists() {

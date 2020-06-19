@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Line;
 
 public class ProfileController implements Initializable {
 	@FXML
@@ -44,7 +45,7 @@ public class ProfileController implements Initializable {
 	private Button btnSave;
 
 	@FXML
-	private HBox boxNewPassword;
+	private AnchorPane boxNewPassword;
 
 	@FXML
 	private PasswordField txtNewPassword;
@@ -92,7 +93,14 @@ public class ProfileController implements Initializable {
 	private GridPane gpRentedFilms;
 
 	@FXML
-	private ScrollPane spRentedFilms;
+	private Line lineUsername;
+	
+	@FXML
+	private Line lineNewPassword;
+	
+	@FXML
+	private Line lineNewPasswordConfirmed;
+	
 
 	private static int rentedFilmPage;
 
@@ -158,31 +166,55 @@ public class ProfileController implements Initializable {
 		String changedPassword = txtNewPassword.getText();
 		String changedPasswordConfirmed = txtNewPasswordConfirmed.getText();
 
+		boolean allChangesValid = false;
+
 		//Username change
-		if(!changedUsername.equals(UserDataManager.getCurrentUser().getName())) //Wenn Name im Textfeld ungleich Username prüfe...
+		if(!UserDataManager.getCurrentUser().isAdmin())
 		{
-			if (!UserDataManager.validateUserName(changedUsername)) { //Wenn neuer Username invalid (wegen der Zeichen), bleibt der alte Name gleich
-				System.out.println("Changed Username invalid!");
-				changedUsername = UserDataManager.getCurrentUser().getName();
-				txtUsername.setText(changedUsername);
-			}
-			else {
-				if(UserDataManager.saveNewUserName(changedUsername))
-				{
-					System.out.println("PC - saveUserData: Username wurde geändert!");
+			if(!changedUsername.equals(UserDataManager.getCurrentUser().getName())) //Wenn Name im Textfeld ungleich Username prüfe...
+			{
+				if (!UserDataManager.validateUserName(changedUsername)) { //Wenn neuer Username invalid (wegen der Zeichen), bleibt der alte Name gleich
+					System.out.println("Changed Username invalid!");
+					changedUsername = UserDataManager.getCurrentUser().getName();
+					//txtUsername.setText(changedUsername);
+					lineUsername.setStyle("-fx-stroke: #DC1378");
+					allChangesValid = false;
 				}
 				else {
-					System.out.println("PC - saveUserData: Username schon vergeben");
-				}
+					if(UserDataManager.saveNewUserName(changedUsername))
+					{
+						System.out.println("PC - saveUserData: Username wurde geändert!");
+						lineUsername.setStyle("-fx-stroke: #30C9C4");
+						allChangesValid = true;
+					}
+					else {
+						System.out.println("PC - saveUserData: Username schon vergeben");
+						changedUsername = UserDataManager.getCurrentUser().getName();
+						//txtUsername.setText(changedUsername);
+						lineUsername.setStyle("-fx-stroke: #DC1378");
+						allChangesValid = false;
+					}
 
+				}
+			}
+			else
+			{
+				allChangesValid = true;
 			}
 		}
-
-		if(!changedPassword.equals(UserDataManager.getCurrentUser().getPasswort()) || !changedPasswordConfirmed.equals(UserDataManager.getCurrentUser().getPasswort()))
+		//Password change
+		else if(changedPassword.equals("") & changedPasswordConfirmed.equals(""))
+		{
+			allChangesValid = true;
+		}
+		else if(!changedPassword.equals(UserDataManager.getCurrentUser().getPasswort()) || !changedPasswordConfirmed.equals(UserDataManager.getCurrentUser().getPasswort()))
 		{
 			if(!changedPassword.equals(changedPasswordConfirmed))
 			{
 				System.out.println("PC - saveUserData: Passwörter stimmen nicht überein");
+				lineNewPassword.setStyle("-fx-stroke: #DC1378");
+				lineNewPasswordConfirmed.setStyle("-fx-stroke: #DC1378");
+				allChangesValid = false;
 			}
 			else
 			{
@@ -191,32 +223,30 @@ public class ProfileController implements Initializable {
 					UserDataManager.saveNewPassword(changedPassword);
 					txtNewPassword.setText(null);
 					txtNewPasswordConfirmed.setText(null);
+					System.out.println("PC - saveUserData: Passwort geändert");
+					lineNewPassword.setStyle("-fx-stroke: #30C9C4");
+					lineNewPasswordConfirmed.setStyle("-fx-stroke: #30C9C4");
+					allChangesValid = true;
 				}
 			}
-			
+
 		}
 
-			//		// Send valid data to UserDataManager
-			//		else if (txtNewPassword.getText().equals(txtNewPasswordConfirmed.getText())) {
-			//			if (!UserDataManager.saveUserDataChanges(txtUsername.getText(), txtNewPassword.getText())) {
-			//				System.out.println("Username already taken");
-			//				txtUsername.setText(UserDataManager.getCurrentUser().getName());
-			//			}
-			//		} 
-			//		else {
-			//			System.out.println("Neue Passwörter stimmen nicht überein");
-			//		}
 
-
-
-			// Change GUI elements
+		// Change GUI elements
+		if(allChangesValid)
+		{
+			lineUsername.setStyle("-fx-stroke: #30C9C4");
+			lineNewPassword.setStyle("-fx-stroke: #30C9C4");
+			lineNewPasswordConfirmed.setStyle("-fx-stroke: #30C9C4");
 			txtUsername.setDisable(true);
-		btnSave.setVisible(false);
-		boxNewPassword.setVisible(false);
+			btnSave.setVisible(false);
+			boxNewPassword.setVisible(false);
 
-		btnEdit.setStyle("-fx-background-color: #FFFFFF");
-		btnEdit.setOpacity(0.07);
-		btnEdit.setVisible(true);
+			btnEdit.setStyle("-fx-background-color: #FFFFFF");
+			btnEdit.setOpacity(0.07);
+			btnEdit.setVisible(true);
+		}
 
 	}
 
