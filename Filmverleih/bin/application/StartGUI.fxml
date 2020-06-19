@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -70,7 +69,6 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <DatePicker fx:id="datePicker" layoutX="60.0" layoutY="244.0" prefHeight="25.0" prefWidth="175.0" />
                   <PasswordField fx:id="txtNewUserPassword" layoutX="60.0" layoutY="283.0" promptText="Passwort" style="-fx-background-color: #121212;">
                      <font>
                         <Font size="14.0" />
@@ -102,6 +100,13 @@
                   <Line fx:id="lineNewPasswordConfirmed" endX="74.0" layoutX="160.0" layoutY="358.0" startX="-100.0" stroke="#30c9c4" />
                   <Button fx:id="errorNewUserName" layoutX="235.0" layoutY="208.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="18.0" prefWidth="18.0" style="-fx-background-color: #121212; -fx-background-image: url('images/error.PNG');" visible="false" />
                   <Button fx:id="errorNewPassword" layoutX="235.0" layoutY="291.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="18.0" prefWidth="18.0" style="-fx-background-color: #121212; -fx-background-image: url('images/error.PNG');" visible="false" />
+                  <Line fx:id="lineBirthday" endX="74.0" layoutX="160.0" layoutY="275.0" startX="-100.0" stroke="#30c9c4" />
+                  <TextField fx:id="txtBirthday" layoutX="60.0" layoutY="243.0" promptText="dd.mm.yyyy" style="-fx-background-color: #121212;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="errorBirthday" layoutX="235.0" layoutY="253.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="18.0" prefWidth="18.0" style="-fx-background-color: #121212; -fx-background-image: url('images/error.PNG');" visible="false" />
                </children>
             </AnchorPane>
          </children></Pane>

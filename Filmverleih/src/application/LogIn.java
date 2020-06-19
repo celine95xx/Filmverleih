@@ -33,6 +33,9 @@ public class LogIn {
 
 	@FXML
 	private TextField txtNewUserPassword;
+	
+	@FXML
+	private TextField txtBirthday;
 
 	@FXML
 	private TextField txtNewPasswordConfirmed;
@@ -51,6 +54,9 @@ public class LogIn {
 
 	@FXML
 	private Line lineNewUserName;
+	
+	@FXML
+	private Line lineBirthday;
 
 	@FXML
 	private Line lineNewPassword;
@@ -65,11 +71,11 @@ public class LogIn {
 	private AnchorPane paneRegistration;
 
 	@FXML
-	private DatePicker datePicker;
-
-	@FXML
 	private Button errorNewUserName;
 
+	@FXML
+	private Button errorBirthday;
+	
 	@FXML
 	private Button errorNewPassword;
 
@@ -105,7 +111,7 @@ public class LogIn {
 			errorPassword.setVisible(true);
 			errorPassword.setTooltip(new Tooltip("Passwort nicht korrekt."));
 		} else {
-			System.out.println("Anmeldung nicht möglich. !!!Prüfen");
+			System.out.println("Anmeldung nicht mï¿½glich. !!!Prï¿½fen");
 		}
 	}
 
@@ -125,36 +131,50 @@ public class LogIn {
 		lineNewUserName.setStroke(Color.web("#30C9C4"));
 		errorNewUserName.setVisible(false);
 		errorNewPassword.setVisible(false);
+		errorBirthday.setVisible(false);
+		lineBirthday.setStroke(Color.web("#30C9C4"));
+		lineNewPassword.setStroke(Color.web("#30C9C4"));
+		lineNewPasswordConfirmed.setStroke(Color.web("#30C9C4"));
 
-		String date = datePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); // https://stackoverflow.com/questions/33789307/how-to-convert-datepicker-value-to-string
-		if (!UserDataManager.validateUserName(txtNewUserName.getText())) // Username invalid (because of number or type
-																			// of characters)
+		//String date = datePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); //https://stackoverflow.com/questions/33789307/how-to-convert-datepicker-value-to-string
+		if(!UserDataManager.validateUserName(txtNewUserName.getText())) //Username invalid (because of number or type of characters)
 		{
 			lineNewUserName.setStroke(Color.web("#DC1378"));
 			errorNewUserName.setVisible(true);
 			errorNewUserName.setTooltip(new Tooltip(
-					"Benutzername ungültig. \nBitte wähle einen Namen mit 3 - 14 Buchstaben. \nGültige Zeichen: a-z, A-Z, 0-9, _-"));
+					"Benutzername ung\u00FCltig. \nBitte w\u00E4hle einen Namen mit 3 - 14 Buchstaben. \nG\u00FCltige Zeichen: a-z, A-Z, 0-9, _-"));
 		} else if (UserDataManager.checkUserInList(txtNewUserName.getText())) // Username already taken
 		{
 			lineNewUserName.setStroke(Color.web("#DC1378"));
 			errorNewUserName.setVisible(true);
 			errorNewUserName.setTooltip(new Tooltip("Benutzername bereits vergeben."));
-		} else if (date == null) {
-			System.out.println("Login - registrateUser: No Birthday input");
-		} else if (!txtNewUserPassword.getText().contentEquals(txtNewPasswordConfirmed.getText())) {
+		}
+		else if(!UserDataManager.checkValidBirthday(txtBirthday.getText()))
+		{
+			lineBirthday.setStroke(Color.web("#DC1378"));
+			errorBirthday.setVisible(true);
+			errorBirthday.setTooltip(new Tooltip("Ung\u00FCltiges Geburtsdatum."));
+		}
+		else if(!txtNewUserPassword.getText().contentEquals(txtNewPasswordConfirmed.getText()))
+		{
 			lineNewPassword.setStroke(Color.web("#DC1378"));
 			lineNewPasswordConfirmed.setStroke(Color.web("#DC1378"));
 			errorNewPassword.setVisible(true);
-			errorNewPassword.setTooltip(new Tooltip("Passwörter stimmen nicht überein."));
+			errorNewPassword.setTooltip(new Tooltip("Passw\u00F6rter stimmen nicht \u00FCberein."));
 		} else if (txtNewUserPassword.getText().equals("") && txtNewPasswordConfirmed.getText().equals("")) {
 			lineNewPassword.setStroke(Color.web("#DC1378"));
 			lineNewPasswordConfirmed.setStroke(Color.web("#DC1378"));
 			errorNewPassword.setVisible(true);
-			errorNewPassword.setTooltip(new Tooltip("Ungültiges Passwort."));
-		} else if (UserDataManager.calculateAge(date) < 16) {
-			System.out.println("Zu jung zur Registrierung");
-		} else if (UserDataManager.manageUserRegistration(txtNewUserName.getText(), txtNewUserPassword.getText(),
-				txtNewPasswordConfirmed.getText(), date)) {
+			errorNewPassword.setTooltip(new Tooltip("Ung\u00FCltiges Passwort."));
+		}
+		else if(UserDataManager.calculateAge(txtBirthday.getText()) < 16)
+		{
+			lineBirthday.setStroke(Color.web("#DC1378"));
+			errorBirthday.setVisible(true);
+			errorBirthday.setTooltip(new Tooltip("F\u00FCr die Registrierung musst du mindestens 16 Jahre alt sein."));
+		}
+		else if(UserDataManager.manageUserRegistration(txtNewUserName.getText(), txtNewUserPassword.getText(), txtNewPasswordConfirmed.getText(), txtBirthday.getText()))
+		{
 			Stage primaryStage2 = new Stage();
 			Parent root = FXMLLoader.load(getClass().getResource("/application/MainGUI.fxml"));
 			Scene scene = new Scene(root, 1400, 1000);

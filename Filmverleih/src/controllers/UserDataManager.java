@@ -1,10 +1,11 @@
 package controllers;
 
+import java.time.DateTimeException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +27,9 @@ public class UserDataManager {
 
 	public static void initializeUserList() {
 		oldUserList = SaveLoadManager.loadUser();
-		if (!checkUserInList("admin")) {
-			addUser("admin", "admin", "1995-05-23", 20, true);
+		if(!checkUserInList("admin"))
+		{
+			addUser("admin", "admin", "23.05.1995", 20, true);
 		}
 		SaveLoadManager.saveUser(oldUserList);
 
@@ -36,7 +38,7 @@ public class UserDataManager {
 
 	}
 
-	// Prüft, ob Registrierung möglich ist
+	// Prï¿½ft, ob Registrierung mï¿½glich ist
 	public static boolean manageUserRegistration(String name, String password, String passwordConfirmed,
 			String dateOfBirth) {
 		boolean approvedRegistration = false;
@@ -60,7 +62,7 @@ public class UserDataManager {
 		return approvedRegistration;
 	}
 
-	// Prüft, ob Login möglich ist über Kombination
+	// Prï¿½ft, ob Login mï¿½glich ist ï¿½ber Kombination
 	public static boolean manageLogin(String name, String password) {
 		oldUserList = SaveLoadManager.loadUser();
 		boolean loginSuccessful = false;
@@ -85,13 +87,13 @@ public class UserDataManager {
 		oldUserList.add(new UserData(name, password, dateOfBirth, age, isAdmin));
 	}
 
-	/// Prüft, ob Registrierung zulässig ist. Es wird überprüft, ob die beiden
-	/// eingegebenen Passwörter übereinstimmen,
+	/// Prï¿½ft, ob Registrierung zulï¿½ssig ist. Es wird ï¿½berprï¿½ft, ob die beiden
+	/// eingegebenen Passwï¿½rter ï¿½bereinstimmen,
 	// ob Username zu lang und Sonderzeichen
 	public static boolean checkRegistrationConditions(String name, String password, String passwordConfirmed, int age) {
 		boolean registrationPossible = false;
 
-		// Sind Password und PasswordConfirmed gleich? Ist Username zulässig?
+		// Sind Password und PasswordConfirmed gleich? Ist Username zulï¿½ssig?
 		if (!checkUserInList(name) && password.equals(passwordConfirmed) && validateUserName(name) && age >= 16) // GEBURTSTAG
 		{
 			registrationPossible = true;
@@ -105,7 +107,7 @@ public class UserDataManager {
 
 	// Quelle:
 	// https://www.javascan.com/226/validate-username-using-regular-expression-in-java
-	// Prüft Username auf Sonderzeichen und Länge mit Hilfe von Regular Expressions
+	// Prï¿½ft Username auf Sonderzeichen und Lï¿½nge mit Hilfe von Regular Expressions
 	public static boolean validateUserName(String userName) {
 		Matcher mtch = userNamePattern.matcher(userName);
 		boolean userNameIsValid;
@@ -120,7 +122,7 @@ public class UserDataManager {
 		return userNameIsValid;
 	}
 
-	// Prüft Username-Passwort-Kombination
+	// Prï¿½ft Username-Passwort-Kombination
 	public static boolean checkLoginDataCombination(String name, String password) {
 		boolean combinationCorrect = false;
 
@@ -154,7 +156,7 @@ public class UserDataManager {
 
 	public static boolean checkAdminLogIn(String name, String password) {
 		boolean isAdmin = false;
-		if (name.equals("admin") && password.equals("admin")) // Später ändern für andere Passwörter
+		if (name.equals("admin") && password.equals("admin")) // Spï¿½ter ï¿½ndern fï¿½r andere Passwï¿½rter
 		{
 			isAdmin = true;
 		}
@@ -195,7 +197,7 @@ public class UserDataManager {
 
 	public static void deleteFilmFromRentedList(int filmID) {
 		System.out.println("UDM-deleteFilmFromRentedList: " + FilmDataManager.getFilmPerID(filmID).getTitel()
-				+ " wurde aus der Rented Filmlist gelöscht.");
+				+ " wurde aus der Rented Filmlist gelï¿½scht.");
 		getCurrentUser().getRentedFilms().remove(Integer.valueOf(filmID));
 		getCurrentUser().getRentTimes().remove(filmID);
 		getCurrentUser().showRentedFilms();
@@ -259,12 +261,15 @@ public class UserDataManager {
 		return user;
 	}
 
-	// https://stackoverflow.com/questions/21393717/calculating-age-with-current-date-and-birth-date-in-java
-	public static int calculateAge(String dateOfBirth) {
-		String[] parts = dateOfBirth.split("-");
-		int year = Integer.parseInt(parts[0]);
+	//https://stackoverflow.com/questions/21393717/calculating-age-with-current-date-and-birth-date-in-java
+	public static int calculateAge(String dateOfBirth)
+	{
+		String[] parts = dateOfBirth.split("\\.");
+		System.out.println("UDM - calcAge - Parts Length: " +parts.length);
+		int day = Integer.parseInt(parts[0]);
 		int month = Integer.parseInt(parts[1]);
-		int day = Integer.parseInt(parts[2]);
+		int year = Integer.parseInt(parts[2]);
+
 
 		LocalDate birthday = LocalDate.of(year, month, day);
 		int age = (int) birthday.until(LocalDate.now(), ChronoUnit.YEARS);
@@ -273,10 +278,32 @@ public class UserDataManager {
 		return age;
 	}
 
-	public static boolean checkIfAdult() {
+	public static boolean checkValidBirthday(String dateOfBirth)
+	{
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.uuuu").withResolverStyle(ResolverStyle.STRICT);
+			try
+			{
+				LocalDate date = LocalDate.parse(dateOfBirth, dtf);
+				System.out.println("UDM - checkBirthday: Birthday valid");
+				return true;
+			}
+			catch(DateTimeException dte)
+			{
+				//dte.printStackTrace();
+				System.out.println("UDM - checkBirthday: Birthday invalid");
+				return false;
+			}
+
+
+
+	}
+
+	public static boolean checkIfAdult()
+	{
 		boolean isAdult = false;
 
-		if (calculateAge(getCurrentUser().getDateOfBirth()) >= 18) {
+		if(calculateAge(getCurrentUser().getDateOfBirth()) >= 18)
+		{
 			isAdult = true;
 		}
 
