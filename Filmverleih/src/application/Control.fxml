@@ -58,7 +58,7 @@
       </TableView>
       <TextField fx:id="search" layoutX="64.0" layoutY="204.0" prefHeight="25.0" prefWidth="201.0" promptText="Suche..." />
       <Button layoutX="1035.0" layoutY="395.0" mnemonicParsing="false" onAction="#addMovie" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #121212; -fx-background-image: url('images/add.PNG');" textFill="WHITE" />
-      <Button layoutX="1036.0" layoutY="445.0" mnemonicParsing="false" onAction="#deleteMovie" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #121212; -fx-background-image: url('images/delete.PNG');" textFill="WHITE" />
+      <Button layoutX="1036.0" layoutY="445.0" mnemonicParsing="false" onAction="#deleteMovie" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: #121212; -fx-background-image: url('images/delete_white.PNG');" textFill="WHITE" />
       <VBox layoutX="570.0" layoutY="650.0" prefHeight="350.0" prefWidth="500.0" />
       <AnchorPane layoutX="64.0" layoutY="685.0" prefHeight="250.0" prefWidth="500.0">
          <children>
