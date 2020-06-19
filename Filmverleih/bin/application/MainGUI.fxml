@@ -48,6 +48,12 @@
                   <Image url="@/images/person_white.PNG" />
                </image>
             </ImageView>
+            <Button layoutX="23.0" layoutY="573.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-background-image: url('images/logout_white.png');" />
+            <Button fx:id="logout" alignment="TOP_LEFT" layoutX="52.0" layoutY="562.0" mnemonicParsing="false" onAction="#logout" prefHeight="59.0" prefWidth="208.0" style="-fx-background-color: transparent;" text="Abmelden" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
          </children></Pane>
       <Pane fx:id="mainContent" layoutX="260.0" prefHeight="1000.0" prefWidth="1140.0">
          <children>

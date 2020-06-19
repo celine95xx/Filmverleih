@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class MainGUIController implements Initializable {
 
@@ -30,6 +31,9 @@ public class MainGUIController implements Initializable {
 
 	@FXML
 	private Pane mainContent;
+
+	@FXML
+	private Button logout;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -96,4 +100,9 @@ public class MainGUIController implements Initializable {
 		mainContent.getChildren().setAll(fxml);
 	}
 
+	public void logout(ActionEvent event) throws Exception {
+		// Close windows afterwards
+		Stage stg = (Stage) logout.getScene().getWindow();
+		stg.close();
+	}
 }
