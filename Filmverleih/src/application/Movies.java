@@ -84,7 +84,31 @@ public class Movies implements Initializable
 			return;
 		}
 		
-
+		if(txtID.getText() == null || txtID.getText().equals("")) 
+		{
+			txtID.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
+			return;
+		}
+		if(txtPrice.getText() == null || txtPrice.getText().equals("")) 
+		{
+			txtPrice.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
+			return;
+		}
+		if(txtBanner.getText() == null || txtBanner.getText().equals("")) 
+		{
+			txtBanner.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
+			return;
+		}
+		if(txtThumbnail.getText() == null || txtThumbnail.getText().equals("")) 
+		{
+			txtThumbnail.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
+			return;
+		}
+		if(txtDescription.getText() == null || txtDescription.getText().equals("")) 
+		{
+			txtDescription.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
+			return;
+		}
 		// Registrate Film
 		FilmDataManager.manageFilmRegistration(Integer.parseInt(txtID.getText()), txtTitle.getText(), cbGenre.getSelectionModel().getSelectedItem(), Double.parseDouble(txtPrice.getText()), cbFsk.getSelectionModel().getSelectedItem(), txtThumbnail.getText(), txtBanner.getText(), txtDescription.getText());
 
