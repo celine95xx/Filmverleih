@@ -35,12 +35,16 @@ public class FilmProfileController implements Initializable {
 
 	@FXML
 	private Button btnAddToWatchList;
+	
+	@FXML
+	private Button btnPlayFilm;
 
 	@FXML
 	private AnchorPane filmBanner;
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1) 
+	{
 		updateScene();
 		txtFilmTitle.setText(FilmDataManager.getFilm().getTitel());
 		txtGenre.setText(FilmDataManager.getFilm().getGenre());
@@ -55,12 +59,12 @@ public class FilmProfileController implements Initializable {
 			btnAddToWatchList.setDisable(true);
 		}
 
-		if (UserDataManager.checkWatchList(FilmDataManager.getFilm().getId())) {
-			btnAddToWatchList
-					.setStyle("-fx-background-color: #121212; -fx-background-image: url('images/bookmark_white.PNG')");
-		} else {
-			btnAddToWatchList
-					.setStyle("-fx-background-color: #121212; -fx-background-image: url('images/bookmark_border.PNG')");
+		if (UserDataManager.checkWatchList(FilmDataManager.getFilm().getId())) 
+		{
+			btnAddToWatchList.setStyle("-fx-background-color: #121212; -fx-background-image: url('images/bookmark_white.PNG')");
+		} else 
+		{
+			btnAddToWatchList.setStyle("-fx-background-color: #121212; -fx-background-image: url('images/bookmark_border.PNG')");
 		}
 
 		txtDescription.setText(FilmDataManager.getFilm().getDescription());
@@ -69,12 +73,15 @@ public class FilmProfileController implements Initializable {
 
 	public void updateScene() {
 		System.out.println("Update Scene. Rent status: ");
-		if (UserDataManager.checkRentedFilm(FilmDataManager.getFilm().getId())) {
+		if (UserDataManager.checkRentedFilm(FilmDataManager.getFilm().getId())) 
+		{
 			btnRentFilm.setStyle("-fx-background-color: #DC1378; -fx-font: 16 system");
 			btnRentFilm.setText("Ausgeliehen");
 			btnRentFilm.setDisable(true);
-			System.out.println("Is rented!!: " + btnRentFilm.getText());
-		} else {
+			btnPlayFilm.setVisible(true);
+			btnAddToWatchList.setStyle("-fx-background-color: #121212; -fx-background-image: url('images/bookmark_border.PNG')");
+		} else 
+		{
 			System.out.println("Not rented yet");
 		}
 	}

@@ -3,9 +3,11 @@ package application;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import controllers.FilmDataManager;
+import controllers.UserDataManager;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
@@ -14,15 +16,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import models.FilmData;
 
 public class Control implements Initializable {
@@ -81,26 +91,52 @@ public class Control implements Initializable {
 	public void addMovie(ActionEvent event) throws Exception {
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/application/Movies.fxml"));
-		Scene scene = new Scene(root, 1280, 720);
+		Scene scene = new Scene(root, 1000, 720);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
 
 	public void deleteMovie(ActionEvent event) throws Exception {
+
 		// Get selected film
-		int filmIndex = movies.getSelectionModel().getSelectedIndex(); // This index may be greater than the actual
-		// count of films in the list
-		if (filmIndex >= movies.getItems().size())
-			return; // FilmIndex is out of bounds
+		int filmIndex = movies.getSelectionModel().getSelectedIndex(); // This index may be greater than the actual count of films in the list
 
-		FilmData selectedFilm = movies.getItems().get(filmIndex);
+		if(movies.getSelectionModel().getSelectedItem() != null)
+		{
+			if (filmIndex >= movies.getItems().size())
+				return; // FilmIndex is out of bounds
 
-		// Also delete the selected film from the underlying "oldFilmList" in
-		// FilmDataManager
-		FilmDataManager.deleteMovie(selectedFilm);
+			FilmData selectedFilm = movies.getItems().get(filmIndex);
 
-		movies.refresh();
+			ImageView confirmIcon = new ImageView("/images/confirmation.PNG");
+			confirmIcon.setFitHeight(36);
+			confirmIcon.setFitWidth(36);
+
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Film löschen");
+			alert.setHeaderText("Soll der Film: " + selectedFilm.getTitel() + " unwiderruflich gelöscht werden?" );
+			alert.setContentText("Damit ist dieser Film nicht mehr für Nutzer verfügbar und alle Filmdaten gehen verloren.");
+			alert.initStyle(StageStyle.UNDECORATED);
+
+			DialogPane dialogPane = alert.getDialogPane();
+			dialogPane.getStylesheets().add(getClass().getResource("/styles/Buttons.css").toExternalForm());
+			dialogPane.getStyleClass().add("Buttons");
+			dialogPane.setGraphic(confirmIcon);
+
+			Optional<ButtonType> option = alert.showAndWait();
+			if(option.get() == ButtonType.OK)
+			{
+				// Also delete the selected film from the underlying "oldFilmList" in FilmDataManager
+				FilmDataManager.deleteMovie(selectedFilm);
+				UserDataManager.checkUserFilmLists();
+				FilmDataManager.deleteFromRecommendation(selectedFilm.getId());
+				showRecommendations();
+			}
+
+			movies.refresh();
+		}
+
 
 	}
 
@@ -117,29 +153,34 @@ public class Control implements Initializable {
 
 	public void addToRecommendation(ActionEvent event) throws Exception {
 		// Get selected film
-		int filmIndex = movies.getSelectionModel().getSelectedIndex(); // This index may be greater than the actual
-		// count of films in the list
-		if (filmIndex >= movies.getItems().size())
-			return; // FilmIndex is out of bounds
+		int filmIndex = movies.getSelectionModel().getSelectedIndex(); // This index may be greater than the actual count of films in the list
 
-		int selectedFilmID = movies.getItems().get(filmIndex).getId();
-		if (FilmDataManager.checkFilmInRecommendations(selectedFilmID)) {
-			FilmDataManager.deleteFromRecommendation(selectedFilmID);
-			btnRecom.setStyle("-fx-background-color: #121212; -fx-background-image: url('images/star_border.PNG')");
-		} else {
-			FilmDataManager.addRecommendedFilm(selectedFilmID);
+		if(movies.getSelectionModel().getSelectedItem() != null)
+		{
+			if (filmIndex >= movies.getItems().size())
+				return; // FilmIndex is out of bounds
+
+			int selectedFilmID = movies.getItems().get(filmIndex).getId();
+			if (FilmDataManager.checkFilmInRecommendations(selectedFilmID)) {
+				FilmDataManager.deleteFromRecommendation(selectedFilmID);
+				btnRecom.setStyle("-fx-background-color: #121212; -fx-background-image: url('images/star_border.PNG')");
+			} else {
+				FilmDataManager.addRecommendedFilm(selectedFilmID);
+			}
 		}
+
 		showRecommendations();
 
 	}
 
-	public void showRecommendations() {
+	public void showRecommendations() 
+	{
 		int numberRecommendations = FilmDataManager.getRecommendedFilms().size();
 
 		if (numberRecommendations <= 4) {
 			for (int i = 0; i < numberRecommendations; i++) {
 				recomLabelList.get(i)
-						.setText(FilmDataManager.getFilmPerID(FilmDataManager.getRecommendedFilms().get(i)).getTitel());
+				.setText(FilmDataManager.getFilmPerID(FilmDataManager.getRecommendedFilms().get(i)).getTitel());
 			}
 
 			for (int i = numberRecommendations; i < 4; i++) {
@@ -153,10 +194,11 @@ public class Control implements Initializable {
 		}
 	}
 
-	public void selectRecommendation(MouseEvent event) {
+	public void selectRecommendation(MouseEvent event) 
+	{
 		// Get selected film
-		int filmIndex = movies.getSelectionModel().getSelectedIndex(); // This index may be greater than the actual
-		// count of films in the list
+		int filmIndex = movies.getSelectionModel().getSelectedIndex(); // This index may be greater than the actual count of films in the list
+
 		if (filmIndex >= movies.getItems().size())
 			return; // FilmIndex is out of bounds
 

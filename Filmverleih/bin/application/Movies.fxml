@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight=" 720" maxWidth="1280" minHeight="720" minWidth="973.0" prefHeight="720" prefWidth="973.0" style="-fx-background-color: #121212;" stylesheets="@../styles/DropDown.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Movies">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1000.0" style="-fx-background-color: #121212;" stylesheets="@../styles/DropDown.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Movies">
 	<children>
 		<Label layoutX="74.0" layoutY="30.0" text="Film hinzufügen" textFill="WHITE">
 			<font>

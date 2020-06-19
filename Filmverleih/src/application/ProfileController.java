@@ -94,13 +94,13 @@ public class ProfileController implements Initializable {
 
 	@FXML
 	private Line lineUsername;
-	
+
 	@FXML
 	private Line lineNewPassword;
-	
+
 	@FXML
 	private Line lineNewPasswordConfirmed;
-	
+
 
 	private static int rentedFilmPage;
 
@@ -121,6 +121,7 @@ public class ProfileController implements Initializable {
 		txtPassword.setText(UserDataManager.getCurrentUser().getPasswort());
 
 		UserDataManager.checkRemainingRentTime();
+		UserDataManager.checkUserFilmLists();
 
 		// RENTED FILMS
 		rentedList.clear();

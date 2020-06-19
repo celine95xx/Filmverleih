@@ -15,43 +15,43 @@
          <children>
             <Button alignment="TOP_LEFT" layoutX="52.0" layoutY="246.0" mnemonicParsing="false" onAction="#showAllMovies" prefHeight="59.0" prefWidth="208.0" style="-fx-background-color: transparent;" text="Filme" textFill="WHITE">
                <font>
-                  <Font size="25.0" />
+                  <Font size="23.0" />
                </font>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets></Button>
             <Button alignment="TOP_LEFT" layoutX="52.0" layoutY="347.0" mnemonicParsing="false" onAction="#showProfile" prefHeight="59.0" prefWidth="208.0" style="-fx-background-color: transparent;" text="Profil" textFill="WHITE">
                <font>
-                  <Font size="25.0" />
+                  <Font size="23.0" />
                </font></Button>
             <Button fx:id="btnControlPanel" alignment="TOP_LEFT" layoutX="52.0" layoutY="453.0" mnemonicParsing="false" onAction="#showControlPanel" prefHeight="59.0" prefWidth="208.0" style="-fx-background-color: transparent;" text="Verwaltung" textFill="WHITE">
                <font>
-                  <Font size="25.0" />
+                  <Font size="23.0" />
                </font></Button>
             <Button id="FilmverleihSmall" layoutY="30.0" mnemonicParsing="false" onAction="#showWelcomePage" prefHeight="59.0" prefWidth="260.0" style="-fx-background-color: transparent;" stylesheets="@../styles/CustomFont.css" text="Filmverleih" textFill="WHITE">
                <font>
                   <Font size="40.0" />
                </font>
             </Button>
-            <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="23.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="23.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@/images/movie_white.PNG" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgControlPanel" fitHeight="36.0" fitWidth="36.0" layoutX="23.0" layoutY="461.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgControlPanel" fitHeight="30.0" fitWidth="30.0" layoutX="23.0" layoutY="464.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@/images/build_white.PNG" />
                </image>
             </ImageView>
-            <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="23.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="23.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@/images/person_white.PNG" />
                </image>
             </ImageView>
-            <Button layoutX="23.0" layoutY="960.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="36.0" style="-fx-background-color: transparent; -fx-background-image: url('images/logout_white.png');" />
+            <Button layoutX="23.0" layoutY="963.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent; -fx-background-image: url('images/logout_white.png');" />
             <Button fx:id="logout" alignment="TOP_LEFT" layoutX="52.0" layoutY="950.0" mnemonicParsing="false" onAction="#logout" prefHeight="59.0" prefWidth="208.0" style="-fx-background-color: transparent;" text="Abmelden" textFill="WHITE">
                <font>
-                  <Font size="25.0" />
+                  <Font size="23.0" />
                </font>
             </Button>
          </children></Pane>

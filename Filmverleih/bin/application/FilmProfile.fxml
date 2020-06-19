@@ -10,16 +10,17 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1140.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FilmProfileController">
    <children>
+      <Button fx:id="btnPlayFilm" layoutX="1020.0" layoutY="900.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="72.0" style="-fx-background-image: url('images/play.PNG'); -fx-background-color: transparent;" visible="false" />
       <VBox layoutY="450.0" prefHeight="550.0" prefWidth="1140.0">
          <padding>
             <Insets bottom="20.0" left="60.0" right="20.0" top="30.0" />
          </padding>
          <children>
-            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="81.0" prefWidth="1000.0" spacing="180.0">
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="81.0" prefWidth="1000.0">
                <children>
-                  <Label fx:id="txtFilmTitle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="78.0" prefWidth="658.0" text="[filmtitle]" textFill="WHITE">
+                  <Label fx:id="txtFilmTitle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="78.0" prefWidth="853.0" text="[filmtitel]" textFill="WHITE">
                      <font>
-                        <Font size="60.0" />
+                        <Font size="35.0" />
                      </font>
                      <padding>
                         <Insets bottom="-10.0" />

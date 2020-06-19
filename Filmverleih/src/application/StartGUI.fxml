@@ -60,7 +60,7 @@
                   <Line fx:id="linePassword" endX="74.0" layoutX="160.0" layoutY="280.0" startX="-100.0" stroke="#30c9c4" />
                   <Button fx:id="errorUserName" layoutX="235.0" layoutY="208.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="18.0" prefWidth="18.0" style="-fx-background-color: #121212; -fx-background-image: url('images/error.PNG');" visible="false" />
                   <Button fx:id="errorPassword" layoutX="235.0" layoutY="258.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="18.0" prefWidth="18.0" style="-fx-background-color: #121212; -fx-background-image: url('images/error.PNG');" visible="false" />
-                  <Button fx:id="close" layoutX="271.0" layoutY="-5.0" mnemonicParsing="false" onAction="#close" prefHeight="30.0" prefWidth="28.0" style="-fx-background-color: transparent; -fx-background-image: url('images/close.PNG');" />
+                  <Button fx:id="close" layoutX="262.0" layoutY="14.0" mnemonicParsing="false" onAction="#close" prefHeight="24.0" prefWidth="24.0" style="-fx-background-color: transparent; -fx-background-image: url('images/close.PNG');" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="paneRegistration" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="300.0" style="-fx-background-color: #121212;" visible="false">

@@ -168,6 +168,10 @@ public class UserDataManager {
 		LocalDateTime rentTime = LocalDateTime.now();
 		getCurrentUser().addRentedFilm(filmID);
 		getCurrentUser().getRentTimes().put(filmID, rentTime.toString());
+		if(checkWatchList(filmID))
+		{
+			deleteFilmFromWatchList(filmID);
+		}
 
 		SaveLoadManager.saveUser(oldUserList);
 
@@ -208,7 +212,8 @@ public class UserDataManager {
 		boolean isAlreadyRented = false;
 
 		// :::ArrayList-Version:::
-		for (Integer i : getCurrentUser().getRentedFilms()) {
+		for (Integer i : getCurrentUser().getRentedFilms()) 
+		{
 			if (i == filmID) {
 				isAlreadyRented = true;
 				break;

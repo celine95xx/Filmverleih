@@ -96,17 +96,17 @@ public class Movies implements Initializable {
 			linePrice.setStroke(Color.web("#DC1378"));
 			return;
 		}
-		if (txtBanner.getText() == null || txtBanner.getText().equals("")) {
-			txtBanner.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
-			lineBanner.setStroke(Color.web("#DC1378"));
-			return;
-		}
-		if (txtThumbnail.getText() == null || txtThumbnail.getText().equals("")) {
-			//txtThumbnail.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
-			lineThumbnail.setStroke(Color.web("#DC1378"));
-			
-			return;
-		}
+//		if (txtBanner.getText() == null || txtBanner.getText().equals("")) {
+//			txtBanner.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
+//			lineBanner.setStroke(Color.web("#DC1378"));
+//			return;
+//		}
+//		if (txtThumbnail.getText() == null || txtThumbnail.getText().equals("")) {
+//			//txtThumbnail.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
+//			lineThumbnail.setStroke(Color.web("#DC1378"));
+//			
+//			return;
+//		}
 		if (txtDescription.getText() == null || txtDescription.getText().equals("")) {
 			txtDescription.setStyle("-fx-border-color: #DC1378; -fx-background-color: #121212");
 			return;
